@@ -1,0 +1,23 @@
+= render partial: 'shared/page_entries_info', locals: {entries: @traders}
+    
+table.table-bordered
+  thead.result-head
+    tr
+      th.code = Trader.human_attribute_name(:code)
+      th.name1 = Trader.human_attribute_name(:name1)
+      th.kana = Trader.human_attribute_name(:kana)
+      th.edit-link = ''
+  tbody.result-body
+    - traders.each do |trader|
+      tr.result-row
+        td.code = trader.code
+        td.name1 = trader.name1
+        td.kana = trader.kana
+        - if search_kind == 'edit_or_delete'
+          td.edit-link = button_to t('general.label.edit'), polymorphic_url(trader, action: :edit), class: 'btn btn-default', type: 'button'
+        - else
+          - sites = DefaultPayableSite.of_traders(trader)
+          td class="#{sites.present? ? 'edit-link' : 'create-link'}"
+            button.btn.btn-default type='button' id="trader_default_payable_site_#{trader.id}" = t(sites.present? ? 'edit' : 'create', scope: 'general.label')
+
+= paginate @traders

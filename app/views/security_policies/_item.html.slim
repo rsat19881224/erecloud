@@ -1,0 +1,34 @@
+.row
+  .col-md-6 
+    div class='box box-primary'
+      .box-body
+      
+      div align="left"
+        = button_link_to t('general.label.edit'), edit_security_policy_path
+      br
+
+      - @security_policy.tap do |item|
+        - %w(min_characters).each do |attr|
+          .form-group
+            = SecurityPolicy.human_attribute_name(attr)
+            br
+            = item.read_attribute(attr)
+
+        - %w(included_three_kinds).each do |attr|
+          .form-group
+          - SecurityPolicy.human_attribute_name(attr)
+            br
+            = t("security_policies.#{attr}.#{item.read_attribute(attr) ? 'skip' : 'no_skip'}")
+    
+        - %w(included_account).each do |attr| 
+          .form-group
+            = SecurityPolicy.human_attribute_name(attr)
+            br
+            = t("security_policies.#{attr}.#{item.read_attribute(attr) ? 'permit' : 'no_permit'}")
+    
+        - %w(number_of_history_generations valid_period change_prohibition_period lockout_setting time_elapsed).each do |attr|
+          .form-group
+            = SecurityPolicy.human_attribute_name(attr)
+            br
+            = item.read_attribute(attr)
+      br

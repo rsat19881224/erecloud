@@ -1,0 +1,42 @@
+.row
+  .col-md-6 
+    div class='box box-primary'
+      .box-body
+        = form_for(object, url: polymorphic_path([object]), :html => {:class => "form-horizontal"}, method: (object.new_record? ? :post : :put)) do |f|
+          = render partial: 'shared/errors', locals: {errors: object.errors}
+          
+          div align="right"
+            = link_to t('.back'), polymorphic_path([object.class.name.constantize])
+          br
+          .form-group
+            = f.label :division_no, class: 'col-xs-3 form-control-static'
+            .col-xs-9
+              = f.text_field :division_no, class: "form-control", :readonly => true
+
+          .form-group
+            = f.label :name, class: 'col-xs-3 form-control-static'
+            .col-xs-9
+              = f.text_field :name, autofocus: true, class: "form-control"
+
+          .form-group
+            = f.label :abbreviation, class: 'col-xs-3 form-control-static'
+            .col-xs-9
+              = f.text_field :abbreviation, autofocus: true, class: "form-control"
+
+          .form-group
+            = f.label :input_division, class: 'col-xs-3 form-control-static'
+            .col-xs-9
+              - input_divisions = Settings.enumerize_options.analysis_division.input_divisions.map {|idiv| [t(idiv.human), idiv.value]}
+              = f.select :input_division, input_divisions, {}, class: 'form-control'
+
+          .form-group
+            = f.label :used, class: 'col-xs-3 form-control-static'
+            .col-xs-9
+              = f.radio_button :used, false, {:checked => true}
+              = t('analysis_divisions.used.no_use')
+              = f.radio_button :used, true 
+              = t('analysis_divisions.used.use')
+
+          div align="right"
+            = f.submit t(object.new_record? ? '.create' : '.update'), class: 'btn btn-primary'
+          br

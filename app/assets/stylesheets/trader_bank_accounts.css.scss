@@ -1,0 +1,111 @@
+$modalWidth: 1100px;
+$modalBodyPadding: 20px;
+$tableFormWidth: $modalWidth - $modalBodyPadding * 2;
+$trHeight: 32px;
+$thWidth: 150px;
+$thColor: #5bc0de;
+$tdWidth: $tableFormWidth - $thWidth;
+
+@mixin tableForm {
+    width: $tableFormWidth;
+
+    tbody {
+        tr {
+            border: 1px solid #ddd;
+            height: $trHeight;
+        }
+
+        th {
+            width: $thWidth;
+            display: table-cell;
+            vertical-align: middle;
+            padding-left: 5px;
+            background-color: $thColor;
+        }
+
+        td {
+            width: $tdWidth;
+            padding-left: 5px;
+
+            input[type='radio'] {
+                margin-left: 0px;
+                float: none;
+            }
+        }
+    }
+}
+
+#trader_bank_accounts {
+    .modal-dialog {
+        width: $modalWidth;
+    }
+
+    .modal-body {
+        padding: $modalBodyPadding;
+    }
+
+    .modal-footer {
+        margin-top: 0px;
+
+        button {
+            width: 100px;
+            margin-left: 10px;
+        }
+    }
+}
+
+#trader_bank_accounts_form_table {
+    @include tableForm;
+}
+@mixin fiItem($itemWidth, $labelWidth: 0, $inputWidth: 0) {
+    margin-left: 5px;
+    margin-right: 0px;
+    float: left;
+    width: $itemWidth;
+
+    label {
+        float: left;
+        @if $labelWidth != 0 {
+            width: $labelWidth;
+        }
+    }
+
+    @if $inputWidth != 0 {
+        input[type='text'] {
+            width: $inputWidth;
+        }
+    }
+}
+
+.fi-code {
+    @include fiItem(135px, 90px)
+}
+
+.fi-name {
+    @include fiItem(370px, 60px, 300px);
+}
+
+.fi-kana {
+    @include fiItem(370px, 70px, 300px);
+}
+
+.remove-link {
+    padding: 0px 20px 10px 20px;
+    text-align: right;
+
+    a, button {
+        float: right;
+        width: 100px;
+        margin: 10px 0px 0px 10px;
+    }
+}
+
+.field_with_errors {
+    input[type='text'], input[type='number'] {
+        background-color: #EA9FC3;
+    }
+}
+
+label.field_with_errors {
+    float: left;
+}

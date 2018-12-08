@@ -1,0 +1,66 @@
+.row
+  .col-md-6 
+    div class='box box-primary'
+      .box-body
+        = form_for date_bank_payment_path, :html => {:class => "form-horizontal"} do
+
+          div align="right"
+            = link_to t('.back'), date_bank_choice_path
+          br
+          
+          .form-group
+            = label :aggregate_date, t('date_bank_payments.index.aggregate_date'), class: 'col-xs-3 form-control-static'
+            .col-xs-4
+              = date_select :aggregate_date, '', discard_day: true, class: 'form-control'
+          br
+          
+          .form-group
+            = label :aggregate_criteria, t('date_bank_payments.index.aggregate_criteria'), class: 'col-xs-3 form-control-static'
+            .col-xs-2
+              = radio_button :aggregate_criteria, '', '', class: 'form-control', id: 'aggregate_criteria_plan'
+              = label :aggregate_criteria, '入金予定', for: 'aggregate_criteria_plan', class: 'form-control-static'
+            .col-xs-2
+              = radio_button :aggregate_criteria, '', 'false', class: 'form-control', id: 'aggregate_criteria_performance'
+              = label :aggregate_criteria, '入金実績', for: 'aggregate_criteria_performance', class: 'form-control-static'
+          br
+                      
+          .form-group
+            = label :aggregate_target, t('date_bank_payments.index.aggregate_target'), class: 'col-xs-3 form-control-static'
+            .col-xs-2
+              = check_box :aggregate_target, '', class: 'form-control', id: 'aggregate_target_pbill'
+              = label :aggregate_target, '手形', for: 'aggregate_target_pbill', class: 'form-control-static'
+            .col-xs-3
+              = check_box :aggregate_target, '', class: 'form-control', id: 'aggregate_target_ebill'
+              = label :aggregate_target, '電子記録債権', for: 'aggregate_target_ebill', class: 'form-control-static'
+          br
+          
+          .form-group
+            = label :facts, t('date_bank_payments.index.facts'), class: 'col-xs-3 form-control-static'
+            .col-xs-2
+              = check_box :facts, '', class: 'form-control', id: 'facts_discount'
+              = label :facts, '割引', for: 'facts_discount', class: 'form-control-static'
+            .col-xs-2
+              = check_box :facts, '', class: 'form-control', id: 'facts_settlement'
+              = label :facts, '決済', for: 'facts_settlement', class: 'form-control-static'
+          br
+          
+          .form-group
+            = label :company_bank_from, t('date_bank_payments.index.company_bank_from'), class: 'col-xs-3 form-control-static'
+            .col-xs-3
+              = text_field :company_bank_from, '', class: 'form-control'
+            .col-xs-6
+              = label :company_bank_from_nm, '', class: 'form-control'
+          .form-group
+            div align="right"
+              = label '', '〜', class: 'col-xs-3 form-control-static'
+            .col-xs-3
+              = text_field :company_bank_to, '', class: 'form-control'
+            .col-xs-6
+              = label :company_bank_to_nm, '', class: 'form-control'
+          br
+          
+          div align="right"
+            = button_to(t('general.label.search'), '', class: 'btn btn-primary controls')
+          br
+
+

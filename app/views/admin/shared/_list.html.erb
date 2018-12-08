@@ -1,0 +1,31 @@
+<table class="table table-striped">
+  <tbody>
+    <tr>
+      <th><%= params[:controller].split('/').last.singularize.camelize.constantize.human_attribute_name(:id) %></th>
+      <th><%= params[:controller].split('/').last.singularize.camelize.constantize.human_attribute_name(:name) %></th>
+      <th><%= params[:controller].split('/').last.singularize.camelize.constantize.human_attribute_name(:person_name_in_charge) %></th>
+      <th><%= params[:controller].split('/').last.singularize.camelize.constantize.human_attribute_name(:telephone_number) %></th>
+      <th><%= params[:controller].split('/').last.singularize.camelize.constantize.human_attribute_name(:email) %></th>
+      <th><%= params[:controller].split('/').last.singularize.camelize.constantize.human_attribute_name(:created_at) %></th>
+      <th></th>
+      <th></th>
+    </tr>
+
+<% objects.each do |object| %>
+    <tr<%= object.deleted? ? ' class=deleted' : '' %>>
+      <td width="80px"><%= object.id %></td>
+      <td width="120px"><%= object.name %></td>
+      <td width="120px"><%= object.person_name_in_charge %></td>
+      <td width="160px"><%= object.telephone_number %></td>
+      <td width="160px"><%= object.email %></td>
+      <td width="80px"><%= l(object.created_at, :format => :medium) %></td>
+      <td width="60px" align="center"><%= link_to t('general.label.edit'), polymorphic_path([:admin, object], pickup_param.merge(action: :edit)) %></td>
+      <td><% unless object.deleted? %><%= link_to t('general.label.delete'), polymorphic_path([:admin, object], pickup_param), :method => :delete, :data => {:confirm => t('general.message.confirm_delete')} %><% else %><%= t('general.label.deleted')  %><% end %></td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<div class="box-footer clearfix">
+  <%= paginate objects, remote: true %>
+</div>

@@ -1,0 +1,108 @@
+table#trader_bank_accounts_form_table
+  tbody
+    tr
+      th
+        = f.label '銀行'
+      td
+        .fi-code
+          = f.label :bank_code
+          = f.text_field :bank_code, maxlength: 4, autofocus: true
+        .fi-name
+          = f.label :bank_name
+          = f.text_field :bank_name, autofocus: true
+        .fi-kana
+          = f.label :bank_kana
+          = f.text_field :bank_kana, autofocus: true
+
+    tr
+      th
+        = f.label '本支店'
+      td
+        .fi-code
+          = f.label :branch_code
+          = f.text_field :branch_code, maxlength: 3, autofocus: true
+        .fi-name
+          = f.label :branch_name
+          = f.text_field :branch_name, autofocus: true
+        .fi-kana
+          = f.label :branch_kana
+          = f.text_field :branch_kana, autofocus: true
+
+    tr
+      th
+        = f.label :account_type
+      td
+        - Settings.enumerize_options.trader_bank_account.account_types.each do |at|
+          label.radio-inline
+            = f.radio_button :account_type, at.id, autofocus: true
+            = f.label t(at.name)
+
+    tr
+      th
+        = f.label :account_number
+      td
+        = f.text_field :account_number, maxlength: 7, autofocus: true
+
+    tr
+      th
+        = f.label :account_name_kana
+      td
+        = f.text_field :account_name_kana, class: 'account_name_kana'
+
+    tr
+      th
+        = f.label :edi_code1
+      td
+        = f.text_field :edi_code1, maxlength: 10, autofocus: true
+
+    tr
+      th
+        = f.label :edi_code2
+      td
+        = f.text_field :edi_code2, maxlength: 10, autofocus: true
+
+
+    tr
+      th
+        = f.label :densai_user_number
+      td
+        = f.text_field :densai_user_number, maxlength: 9, autofocus: true
+
+    tr
+      th
+        = f.label :densai_is_priority
+      td
+        .radio-inline
+          = f.radio_button :densai_is_priority, true, autofocus: true
+          = f.label '優先する'
+        .radio-inline
+          = f.radio_button :densai_is_priority, false, autofocus: true
+          = f.label '優先しない'
+    tr
+      th
+        = f.label :jemco_user_number
+      td
+        = f.text_field :jemco_user_number, maxlength: 9, autofocus: true
+
+    tr
+      th
+        = f.label :jemco_payment_number
+      td
+        = f.text_field :jemco_payment_number, maxlength: 4, autofocus: true
+
+    tr
+      th
+        = f.label :jemco_is_priority
+      td
+        label.radio-inline
+          = f.radio_button :jemco_is_priority, true, autofocus: true
+          = f.label '優先する'
+        label.radio-inline
+          = f.radio_button :jemco_is_priority, false, autofocus: false
+          = f.label '優先しない'
+
+.row.remove-link
+  = f.link_to_remove '削除', class: 'btn btn-danger'
+  button.btn.btn-primary(id="trader_bank_accounts_#{action_name}_#{f.index}_cancel" type='button') = t('general.label.cancel')
+
+div(id="data_trader_bank_account_#{f.index}" style='display: none' data-json="#{f.object.to_json}")

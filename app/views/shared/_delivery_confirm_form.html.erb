@@ -1,0 +1,12 @@
+<% if object.confirmed? %>
+  <%= content_tag(:span, "確認済", class: "label label-success") %>
+<% else %>
+  <% if object.registration_completed? %>
+    <%= form_for(object, url: polymorphic_path([object], pickup_param)) do |f| %>
+      <%= f.hidden_field(:confirmed, :value => true) %>
+      <%= f.submit("確認", class: "btn btn-danger") %>
+    <% end %>
+  <% else %>
+    <%= button_tag("確認", class: "btn btn-danger disabled") %>
+  <% end %>
+<% end %>

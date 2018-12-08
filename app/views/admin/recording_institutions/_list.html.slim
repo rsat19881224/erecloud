@@ -1,0 +1,29 @@
+table.table.table-striped
+  tbody
+    tr
+      th = RecordingInstitution.human_attribute_name(:code)
+      th = RecordingInstitution.human_attribute_name(:name)
+      th = RecordingInstitution.human_attribute_name(:abbreviation)
+      th = RecordingInstitution.human_attribute_name(:recording_number_digit)
+      th = RecordingInstitution.human_attribute_name(:user_number_digit)
+      th
+      th
+
+    - objects.each do |object|
+      tr class=('deleted' if object.deleted?)
+        td(width='120px') = object.code
+        td(width='300px') = object.name
+        td(width='300px') = object.abbreviation
+        td(width='120px') = object.recording_number_digit
+        td(width='160px') = object.user_number_digit
+
+        td(width='60px' align='center')
+          = link_to t('general.label.edit'), polymorphic_path([:admin, object], pickup_param.merge(action: :edit))
+        td
+          - unless object.deleted?
+            = link_to t('general.label.delete'), polymorphic_path([:admin, object], pickup_param), :method => :delete, :data => {:confirm => t('general.message.confirm_delete')}
+          - else
+            = t('general.label.deleted')
+
+div class='box-footer clearfix'
+  = paginate objects, remote: true

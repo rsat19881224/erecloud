@@ -1,0 +1,22 @@
+- unless local_assigns.has_key? :modalid
+  - modalid = 'search_department_modal_result'
+
+- url_options = { action: 'search_department' }
+- html_options = { remote: true, method: 'get' }
+- render partial: 'shared/page_entries_info', locals: {entries: @departments}
+table.table.table-hover
+  tr
+    th = sort_link(@department_q, :code, url_options, html_options)
+    th = sort_link(@department_q, :name, url_options, html_options)
+    th = t('general.label.select')
+    th(style='display: none')
+    - @departments.each do |d|
+      tr(id="#{modalid}_department_#{d.id}_tr")
+        td(width='120px') = d.code
+        td(width='240px') = d.name
+        td(width='70px')
+          button(class='btn btn-success btn-lg' type='button')
+        td(style='display: none' id="#{modalid}_department_#{d.id}_json")
+          = d.as_json(only: ['id', 'code', 'name', 'name_kana', 'abbreviation'])
+= paginate @departments, remote: true, params: url_options
+

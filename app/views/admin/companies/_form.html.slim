@@ -1,0 +1,84 @@
+.row
+  .col-md-6 
+    div class='box box-primary'
+      .box-body
+        = form_for(object, url: polymorphic_path([:admin, object]), :html => {:class => "form-horizontal"}, method: (object.new_record? ? :post : :put)) do |f|
+          = render partial: 'shared/errors', locals: {errors: object.errors}
+          
+          div align="right"
+            = link_to t('.back'), polymorphic_path([:admin, object.class.name.constantize])
+          br
+
+          .form-group
+            = f.label :management_division_id, class: 'col-xs-3 form-control-static'
+            .col-xs-9
+              = f.select :management_division_id, options_from_collection_for_select(ManagementDivision.all, :id, :name, f.object.management_division_id), {}, class: 'form-control'
+
+          .form-group
+            = f.label :number, class: 'col-xs-3 form-control-static'
+            .col-xs-4
+              = f.text_field :number, autofocus: true, class: "form-control"
+
+          .form-group
+            = f.label :affiliated, class: 'col-xs-3 form-control-static'
+            .col-xs-9
+              = f.text_field :affiliated, autofocus: true, class: "form-control"
+
+          .form-group
+            = f.label :group_number, class: 'col-xs-3 form-control-static'
+            .col-xs-4
+              = f.text_field :group_number, autofocus: true, class: "form-control"
+
+          .form-group
+            = f.label :demanded, class: 'col-xs-3 form-control-static'
+            .col-xs-9
+              = f.text_field :demanded, autofocus: true, class: "form-control"
+
+          .form-group
+            = f.label :name, class: 'col-xs-3 form-control-static'
+            .col-xs-9
+              = f.text_field :name, autofocus: true, class: "form-control"
+
+          .form-group
+            = f.label :postal_code, class: 'col-xs-3 form-control-static'
+            .col-xs-4
+              = f.text_field :postal_code, autofocus: true, class: "form-control"
+
+          .form-group
+            = f.label :prefecture, class: 'col-xs-3 form-control-static'
+            .col-xs-4
+              = f.select :prefecture, Company.prefecture.options, {}, class: 'form-control'
+
+          .form-group
+            = f.label :address, class: 'col-xs-3 form-control-static'
+            .col-xs-9
+              = f.text_field :address, autofocus: true, class: "form-control"
+
+          .form-group
+            = f.label :tel, class: 'col-xs-3 form-control-static'
+            .col-xs-4
+              = f.text_field :tel, autofocus: true, class: "form-control"
+
+          .form-group
+            = f.label :fax, class: 'col-xs-3 form-control-static'
+            .col-xs-4
+              = f.text_field :fax, autofocus: true, class: "form-control"
+
+          .form-group
+            = f.label :affiliated_post, class: 'col-xs-3 form-control-static'
+            .col-xs-9
+              = f.text_field :affiliated_post, autofocus: true, class: "form-control"
+
+          .form-group
+            = f.label :charge_name, class: 'col-xs-3 form-control-static'
+            .col-xs-9
+              = f.text_field :charge_name, autofocus: true, class: "form-control"
+
+          .form-group
+            = f.label :email, class: 'col-xs-3 form-control-static'
+            .col-xs-9
+              = f.text_field :email, autofocus: true, class: "form-control"
+
+          div align="right"
+            = f.submit t(object.new_record? ? '.create' : '.update'), class: 'btn btn-primary'
+          br

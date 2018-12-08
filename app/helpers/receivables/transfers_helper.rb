@@ -1,0 +1,2 @@
+module Receivables::TransfersHelper
+end

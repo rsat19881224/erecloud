@@ -1,0 +1,28 @@
+.row
+  .col-md-6 
+    div class='box box-primary'
+      .box-body
+        = form_for(object, url: polymorphic_path([object]), :html => {:class => "form-horizontal"}, method: (object.new_record? ? :post : :put)) do |f|
+          = render partial: 'shared/errors', locals: {errors: object.errors}
+          
+          div align="right"
+            = link_to t('.back'), polymorphic_path([object.class.name.constantize])
+          br
+
+          .form-group
+            = f.label :user_id, class: 'col-xs-3 form-control-static'
+            .col-xs-9
+              = f.select :user_id, options_from_collection_for_select(User.of_ours(@my_company), :id, :name), {}, class: 'form-control'
+
+          .form-group
+            = f.label :menu_id, Menu.human_attribute_name(:name), class: 'col-xs-3 form-control-static'
+            = menu_option_collections[0]
+
+          .form-group
+            = f.label :authority_type, class: 'col-xs-3 form-control-static'
+            .col-xs-4
+              = f.select :authority_type, MenuAuthority.authority_type.options, {:selected => "full"}, class: 'form-control'
+
+          div align="right"
+            = f.submit t(object.new_record? ? '.create' : '.update'), class: 'btn btn-primary'
+          br

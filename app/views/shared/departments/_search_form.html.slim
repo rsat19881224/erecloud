@@ -1,0 +1,28 @@
+- unless local_assigns.has_key? :modalid
+  - modalid = 'search_department_modal_form'
+
+- unless local_assigns.has_key? :resultid
+  - resultid = 'search_department_modal_result'
+
+.modal.fade id=(modalid)
+  .modal-dialog
+    .modal-content
+      .modal-header
+        h4(class='modal-title') = t('search_modal_titles.department')
+        = search_form_for @department_q, url: polymorphic_path([controller_name, 'search_department']), class: 'form-horizontal', remote: true do |f|
+          .form-group
+            = f.label :code, Department.human_attribute_name(:code), class: 'col-sm-2 control-label'
+            .col-sm-10
+              = f.search_field :code_cont, class: 'form-control'
+          .form-group
+            = f.label :name, Department.human_attribute_name(:name), class: 'col-sm-2 control-label'
+            .col-sm-10
+              = f.search_field :name_cont, class: 'form-control'
+          .form-group
+            .col-sm-offset-2.col-sm-10
+              = f.submit t('general.label.search'), class: 'btn btn-primary'
+      
+      .modal-body id=(resultid)
+        = render partial: 'shared/departments/search_result', locals: {modalid: '#' + resultid}
+      .modal-footer
+        button(type='button' class='btn btn-default' data-dismiss='modal') = t('general.label.close')

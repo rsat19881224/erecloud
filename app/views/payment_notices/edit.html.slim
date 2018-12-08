@@ -1,0 +1,35 @@
+table.table.table-striped
+  tbody
+
+    div align="right"
+      = link_to t('general.label.back'), new_payment_notice_path
+    br
+
+    tr
+      th = 'No'
+      th = '選択'
+      th = '支払先'
+      th = '手形件数'
+      th = '手形金額'
+      th = '電子記録債権件数'
+      th = '電子記録債権金額'
+      th = '合計件数'
+      th = '合計金額'
+
+
+    - if @employee
+      - @employee.each do |object|
+        td(width='20px') = object.No
+        td(width='20px') = check_box("print_check", "print_check")
+        td(width='100px') = object.trader
+        td(width='50px') = object.bill_count
+        td(width='70px') = object.bill_money
+        td(width='50px') = object.ebill_count
+        td(width='70px') = object.ebill_money
+        td(width='50px') = object.total_count
+        td(width='70px') = object.total_money
+br
+
+div align="right"
+  = button_to(t('general.label.print'), '', class: 'btn btn-primary controls')
+br

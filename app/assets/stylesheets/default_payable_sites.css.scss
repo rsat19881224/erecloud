@@ -1,0 +1,89 @@
+$modalWidth: 900px;
+$itemHaderColor: #5bc0de;
+$itemHeaderWidth: 110px;
+
+#default_payable_sites_modal_form {
+  .modal-dialog { width: 900px; }
+}
+
+#default_payable_site_form_table {
+  width: 100%;
+  tbody {
+    tr { border: 1px solid #ddd; }
+    th { width: $itemHeaderWidth; }
+    td { padding-left: 5px; }
+  }
+}
+
+.row { margin: 0px 0px 0px 5px; }
+.radio-inline {
+  float: left;
+  width: 205px;
+  padding-left: 0px;
+  input[type='radio'] { margin-left: 0px; }
+}
+
+#no_designation, #month_day, #after_day {
+  height: 30px;
+}
+
+@mixin dateAnnoation {
+  .date-annoation {
+    float: right;
+    display: inline-block;
+    margin: 0px;
+    padding: 0px;
+    vertical-align: middle;
+  }
+}
+
+#month_day {
+  .month-day-group {
+    float: left;
+
+    .month, .day {
+      float: left;
+      width: 170px;
+      @include dateAnnoation;
+
+      input[type='number'] {
+        float: left;
+        margin-right: 5px;
+      }
+    }
+  }
+}
+
+#after_day {
+  .after-day {
+    width: 170px;
+    margin-left: 170px;
+    float: left;
+    @include dateAnnoation;
+
+    input[type='number'] {
+      float: left;
+      margin-right: 5px;
+    }
+  }
+}
+
+#default_payable_site_function_bar {
+  margin: 10px 0px 10px 0px;
+  text-align: right;
+  input[type='submit'] {
+    width: 100px;
+    margin-right: 10px;
+  }
+}
+
+.item-header {
+  background-color: $itemHaderColor;
+  vertical-align: middle;
+}
+
+#default_payable_site_month,
+#default_payable_site_day,
+#default_payable_site_after_day {
+  width: 50px;
+}

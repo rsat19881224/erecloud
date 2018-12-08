@@ -1,0 +1,3 @@
+collection @instances
+
+extends 'show'

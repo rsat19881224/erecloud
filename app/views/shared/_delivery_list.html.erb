@@ -1,0 +1,41 @@
+<table class="table table-striped">
+  <tbody>
+    <tr>
+      <th><%= params[:controller].split('/').last.singularize.camelize.constantize.human_attribute_name(:deliverer_id) %></th>
+      <th><%= params[:controller].split('/').last.singularize.camelize.constantize.human_attribute_name(:payment_type) %></th>
+      <th><%= params[:controller].split('/').last.singularize.camelize.constantize.human_attribute_name(:destination_type) %></th>
+      <th><%= params[:controller].split('/').last.singularize.camelize.constantize.human_attribute_name(:slip_number) %></th>
+      <th><%= params[:controller].split('/').last.singularize.camelize.constantize.human_attribute_name(:number_of_pieces) %></th>
+      <th><%= params[:controller].split('/').last.singularize.camelize.constantize.human_attribute_name(:registered_pieces) %></th>
+      <th><%= params[:controller].split('/').last.singularize.camelize.constantize.human_attribute_name(:delivery_date) %></th>
+      <th><%= params[:controller].split('/').last.singularize.camelize.constantize.human_attribute_name(:billingable) %></th>
+      <th><%= params[:controller].split('/').last.singularize.camelize.constantize.human_attribute_name(:created_at) %></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+
+<% objects.each do |object| %>
+    <tr>
+      <td width="120px"><%= object.deliverer.name %></td>
+      <td width="160px"><%= object.payment_type.text %></td>
+      <td width="160px"><%= object.destination_type.text %></td>
+      <td width="120px"><%= object.slip_number %></td>
+      <td width="80px"><%= object.number_of_pieces %></td>
+      <td width="80px"><%= object.registered_pieces %></td>
+      <td width="80px"><%= object.delivery_date %></td>
+      <td width="80px"><%= params[:controller].split('/').last.singularize.camelize.constantize.human_attribute_name("billingable_#{object.billingable}".to_sym) %></td>
+      <td width="160px"><%= l(object.created_at, :format => :medium) %></td>
+      <td width="160px"><%= render :partial => "shared/delivery_confirm_form", :locals => {:object => object, :pickup_param => pickup_param} %></td>
+      <td width="60px" align="center"><%= link_to t('general.label.edit'), polymorphic_path([object], pickup_param.merge(action: :edit)) %></td>
+      <td width="60px" align="center"><%= link_to t('general.label.delete'), polymorphic_path([object], pickup_param), :method => :delete, :data => {:confirm => t('general.message.confirm_delete')} %></td>
+      <td width="80px" align="center"><%= object.confirmed? ? link_to(t('general.label.bundle.show'), polymorphic_path([object, :bundles])) : link_to(t(object.registered_pieces? ? 'general.label.bundle.update' : 'general.label.bundle.create'), polymorphic_path([object, :bundles], pickup_param.merge(action: object.registered_pieces? ? :edit : :new))) %><td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<div class="box-footer clearfix">
+  <%= paginate objects, remote: true %>
+</div>

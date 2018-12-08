@@ -1,0 +1,23 @@
+<table class="table table-striped">
+  <tbody>
+    <tr>
+      <th><%= OperatingDivisionSetting.human_attribute_name(:operating_division_id) %></th>
+      <th><%= OperatingDivisionSetting.human_attribute_name(:input_type) %></th>
+      <th></th>
+      <th></th>
+    </tr>
+
+<% objects.each do |object| %>
+    <tr<%= object.deleted? ? ' class=deleted' : '' %>>
+      <td width="100px"><%= OperatingDivision.find_by_id(object.operating_division_id).name %></td>
+      <td width="100px"><%= t(object.input_type, scope: 'enumerize.operating_division_setting.input_type') %></td>
+      <td width="60px" align="center"><%= link_to t('general.label.edit'), polymorphic_path([object], pickup_param.merge(action: :edit)) %></td>
+      <td><% unless object.deleted? %><%= link_to t('general.label.delete'), polymorphic_path([object], pickup_param), :method => :delete, :data => {:confirm => t('general.message.confirm_delete')} %><% else %><%= t('general.label.deleted')  %><% end %></td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<div class="box-footer clearfix">
+  <%= paginate objects, remote: true %>
+</div>

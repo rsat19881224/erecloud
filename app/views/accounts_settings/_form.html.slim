@@ -1,0 +1,78 @@
+.row
+  .col-md-6 
+    div class='box box-primary'
+      .box-body
+        = form_for(object, url: accounts_setting_path, :html => {:class => "form-horizontal"}, method: (object.new_record? ? :post : :put)) do |f|
+          = render partial: 'shared/errors', locals: {errors: object.errors}
+          
+          div align="right"
+            = link_to t('.back'), accounts_setting_path
+          br
+
+          .form-group
+            = f.label :endorsement_ac_used, class: 'col-xs-3 form-control-static'
+            .col-xs-9
+              = f.radio_button :endorsement_ac_used, true, {}
+              = t('accounts_settings.endorsement_ac_used.use')
+              = f.radio_button :endorsement_ac_used, false, {}
+              = t('accounts_settings.endorsement_ac_used.not_use')
+
+          .form-group
+            = f.label :discount_ac_used, class: 'col-xs-3 form-control-static'
+            .col-xs-9
+              = f.radio_button :discount_ac_used, true, {}
+              = t('accounts_settings.discount_ac_used.use')
+              = f.radio_button :discount_ac_used, false, {}
+              = t('accounts_settings.discount_ac_used.not_use')
+
+          .form-group
+            = f.label :abridgment_method, class: 'col-xs-3 form-control-static'
+            .col-xs-9
+              = f.select :abridgment_method, AccountsSetting.abridgment_method.options, {}, class: 'form-control'
+
+          .form-group
+            = f.label :remarks1_reflected, class: 'col-xs-3 form-control-static'
+            .col-xs-9
+              = f.radio_button :remarks1_reflected, true, {}
+              = t('accounts_settings.remarks1_reflected.display')
+              = f.radio_button :remarks1_reflected, false, {}
+              = t('accounts_settings.remarks1_reflected.not_display')
+
+          .form-group
+            = f.label :remarks2_reflected, class: 'col-xs-3 form-control-static'
+            .col-xs-9
+              = f.radio_button :remarks2_reflected, true, {}
+              = t('accounts_settings.remarks2_reflected.display')
+              = f.radio_button :remarks2_reflected, false, {}
+              = t('accounts_settings.remarks2_reflected.not_display')
+
+          .form-group
+            = f.label :remarks3_reflected, class: 'col-xs-3 form-control-static'
+            .col-xs-9
+              = f.radio_button :remarks3_reflected, true, {}
+              = t('accounts_settings.remarks3_reflected.display')
+              = f.radio_button :remarks3_reflected, false, {}
+              = t('accounts_settings.remarks3_reflected.not_display')
+
+          .form-group
+            = f.label :abridgment_method, class: 'col-xs-3 form-control-static'
+            .col-xs-9
+              = f.select :payment_type, AccountsSetting.payment_type.options, {}, class: 'form-control'
+
+          .form-group
+            = f.label :notice_journal_made, class: 'col-xs-3 form-control-static'
+            .col-xs-9
+              = f.radio_button :notice_journal_made, true, {}
+              = t('accounts_settings.notice_journal_made.use')
+              = f.radio_button :notice_journal_made, false, {}
+              = t('accounts_settings.notice_journal_made.not_use')
+
+          div align="right"
+            = f.submit t(object.new_record? ? '.create' : '.update'), class: 'btn btn-primary'
+          br
+
+
+
+
+
+              

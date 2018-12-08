@@ -1,0 +1,12 @@
+= form_tag admin_financial_institutions_import_path, multipart: true do
+  = label_tag :import_file, t('admin.financial_institutions.index.import_file'), class: 'control-label'
+  .input-group.input-group-sm
+    = file_field_tag :import_file, class: 'form-control', style: 'display: none'
+    = text_field_tag '', '', placeholder: t('admin.financial_institutions.index.please_select_file'),  readonly: true, class: 'form-control', id: 'import-file-name'
+    span(class='input-group-btn')
+      button(class='btn bg-orange btn-flat fa fa-folder' type='button' id='file-selection')
+        = ' ' + t('general.label.select')
+    = submit_tag ' upload', class: 'form-control', id: 'import', style: 'display: none'
+    span(class='input-group-btn')
+      button(class='btn btn-primary btn-flat fa fa-cloud-upload' type='button' id='import-btn')
+        = ' '+ t('general.label.import')

@@ -1,0 +1,28 @@
+table.table.table-striped
+  tbody
+    tr
+      th = params[:controller].split('/').last.singularize.camelize.constantize.human_attribute_name(:tax_type)
+      th = params[:controller].split('/').last.singularize.camelize.constantize.human_attribute_name(:tax)
+      th = params[:controller].split('/').last.singularize.camelize.constantize.human_attribute_name(:above_Par)
+      th = params[:controller].split('/').last.singularize.camelize.constantize.human_attribute_name(:below_Par)
+      th = params[:controller].split('/').last.singularize.camelize.constantize.human_attribute_name(:enforced_on)
+      th
+      th
+    - objects.each do |object|
+      tr class=('deleted' if object.deleted?)
+        td(width='120px') = object.tax_type.text
+        td(width='120px') = object.tax
+        td(width='120px') = object.above_Par
+        td(width='120px') = object.below_Par
+        td(width='120px') = object.enforced_on 
+
+        td(width='60px' align='center')
+          = link_to t('general.label.edit'), polymorphic_path([:admin, object], pickup_param.merge(action: :edit))
+        td
+          - unless object.deleted?
+            = link_to t('general.label.delete'), polymorphic_path([:admin, object], pickup_param), :method => :delete, :data => {:confirm => t('general.message.confirm_delete')}
+          - else
+            = t('general.label.deleted')
+
+div class='box-footer clearfix'
+  = paginate objects, remote: true

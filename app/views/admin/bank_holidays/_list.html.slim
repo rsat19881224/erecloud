@@ -1,0 +1,22 @@
+table.table.table-striped
+  tbody
+    tr
+      th = BankHoliday.human_attribute_name(:holiday)
+      th
+      th
+      
+    - objects.each do |object|
+      tr class=('deleted' if object.deleted?)
+        td(width='150px')
+          = object.holiday.strftime(@date_format ||= t('date.formats.long'))
+
+        td(width='60px' align='center')
+          = link_to t('general.label.edit'), polymorphic_path([:admin, object], pickup_param.merge(action: :edit))
+        td
+          - unless object.deleted?
+            = link_to t('general.label.delete'), polymorphic_path([:admin, object], pickup_param), :method => :delete, :data => {:confirm => t('general.message.confirm_delete')}
+          - else
+            = t('general.label.deleted')
+
+div class='box-footer clearfix'
+  = paginate objects, remote: true

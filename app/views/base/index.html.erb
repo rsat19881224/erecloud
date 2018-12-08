@@ -1,0 +1,15 @@
+<div class="col-xs-12">
+  <div class="box">
+    <div class="box-header">
+      <div class="box-tools">
+        <%= button_link_to t('.create'), (polymorphic_path([params[:controller].gsub('/', '_').singularize.to_sym], action: :new) rescue url_for(action: :new)) %><br />
+
+        <%= render :partial => "shared/page_entries_info", :locals => {:entries => instance_variable_get("@#{params[:controller].split('/').last}") } %>
+      </div>
+    </div>
+
+    <div class="box-body table-responsive no-padding" id="<%= "#{params[:controller].split('/').last.singularize}-list" %>">
+      <%= render :partial => lookup_context.exists?("list", params[:controller], true) ? "list" : "shared/list", :locals => {:objects => instance_variable_get("@#{params[:controller].split('/').last}"), :pickup_param => @pickup_param} %>
+    </div>
+  </div>
+</div>

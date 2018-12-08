@@ -1,0 +1,22 @@
+- unless local_assigns.has_key? :modalid
+  - modalid = '#search_bank_modal_result'
+
+- url_options = { action: 'search_bank', reviewed: {modalid: modalid} }
+- html_options = { remote: true, method: 'get' }
+= render partial: 'shared/page_entries_info', locals: {entries: @banks}
+table.table.table-hover
+  tr
+    th = sort_link(@bank_q, :code, url_options, html_options)
+    th = sort_link(@bank_q, :name, url_options, html_options)
+    th = sort_link(@bank_q, :kana, url_options, html_options)
+    th = t('general.label.select')
+  - @banks.each do |bank|
+    tr(id="#{modalid}_bank_#{bank.id}_tr")
+      td(width='120px') = bank.code
+      td(width='220px') = bank.name
+      td(width='220px') = bank.kana
+      td(width='70px')
+        button(class='btn btn-success btn-lg' type='button')
+      td(id="#{modalid}_bank_#{bank.id}_json" style='display: none')
+        = bank.as_json(only: ['id', 'code', 'name', 'kana'])
+= paginate @banks, remote: true, params: url_options

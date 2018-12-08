@@ -1,0 +1,31 @@
+table.table.table-striped
+  tbody
+    tr
+      th = StateCode.human_attribute_name(:code)
+      th = StateCode.human_attribute_name(:division)
+      th = StateCode.human_attribute_name(:bill)
+      th = StateCode.human_attribute_name(:ebill)
+      th = StateCode.human_attribute_name(:factoring)
+      th = StateCode.human_attribute_name(:cash_payment)
+      th
+      th
+      
+    - objects.each do |object|
+      tr class=('deleted' if object.deleted?)
+        td(width='120px') = object.code
+        td(width='120px') = object.division == 1 ? '債権' : '債務'
+        td(width='120px') = object.bill 
+        td(width='140px') = object.ebill 
+        td(width='130px') = object.factoring 
+        td(width='130px') = object.cash_payment
+
+        td(width='60px' align='center')
+          = link_to t('general.label.edit'), polymorphic_path([:admin, object], pickup_param.merge(action: :edit))
+        td
+          - unless object.deleted?
+            = link_to t('general.label.delete'), polymorphic_path([:admin, object], pickup_param), :method => :delete, :data => {:confirm => t('general.message.confirm_delete')}
+          - else
+            = t('general.label.deleted')
+
+div class='box-footer clearfix'
+  = paginate objects, remote: true

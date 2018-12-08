@@ -1,0 +1,12 @@
+= stylesheet_link_tag "receivables/stages", media: :all
+ol.stage
+  - t("stage.#{params[:controller].gsub('/', '.')}").each.with_index(1) do |(key, val), i|
+    - if params[:action] == key.to_s
+      li.active
+        = val
+    - else
+      li
+        = val
+    - unless i == t("stage.#{params[:controller].gsub('/', '.')}").size()
+      li.arrow
+        = content_tag(:i, '', class: 'fa fa-arrow-right')

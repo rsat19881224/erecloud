@@ -1,0 +1,24 @@
+.row
+  .col-md-6 
+    div class='box box-primary'
+      .box-body
+        = form_for(object, url: polymorphic_path([object]), :html => {:class => "form-horizontal"}, method: (object.new_record? ? :post : :put)) do |f|
+          = render partial: 'shared/errors', locals: {errors: object.errors}
+          
+          div align="right"
+            = link_to t('.back'), polymorphic_path([object.class.name.constantize])
+          br
+
+          .form-group
+            = f.label :user_id, class: 'col-xs-3 form-control-static'
+            .col-xs-9
+              = f.select :user_id, options_from_collection_for_select(User.of_ours(@my_company), :id, :name), {}, class: 'form-control'
+
+          .form-group
+            = f.label :license_id, class: 'col-xs-3 form-control-static'
+            .col-xs-4
+              = f.select :license_id, options_from_collection_for_select(license_collection.map {|l| Product.find_by_id(l.product_id) }, :id, :name), {}, class: 'form-control'
+
+          div align="right"
+            = f.submit t(object.new_record? ? '.create' : '.update'), class: 'btn btn-primary'
+          br

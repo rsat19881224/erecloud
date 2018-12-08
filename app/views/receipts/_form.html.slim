@@ -1,0 +1,162 @@
+.row
+  .col-md-6 
+    div class='box box-primary'
+      .box-body
+        = form_for(object, url: polymorphic_path([object]), :html => {:class => "form-horizontal"}, method: (object.new_record? ? :post : :put)) do |f|
+          = render partial: 'shared/errors', locals: {errors: object.errors}
+          
+          div align="right"
+            = link_to t('.back'), polymorphic_path([object.class.name.constantize])
+          br
+
+          .form-group
+            = f.label :receipt_number, class: 'col-xs-3 form-control-static'
+            .col-xs-4
+              = f.text_field :receipt_number, autofocus: true, class: "form-control"
+
+          .form-group
+            = f.label :trader_id, class: 'col-xs-3 form-control-static'
+            .col-xs-9
+              = f.select :trader_id,  options_from_collection_for_select(Trader.all, :id, :name1), {}, autofocus: true, class: 'form-control'
+
+          .form-group
+            = f.label :corporation_number, class: 'col-xs-3 form-control-static'
+            .col-xs-4
+              = f.text_field :corporation_number, autofocus: true, class: "form-control"
+
+          .form-group
+            = f.label :trader_name1, class: 'col-xs-3 form-control-static'
+            .col-xs-9
+              = f.text_field :trader_name1, autofocus: true, class: "form-control"
+
+          .form-group
+            = f.label :trader_name2, class: 'col-xs-3 form-control-static'
+            .col-xs-9
+              = f.text_field :trader_name2, autofocus: true, class: "form-control"
+
+          .form-group
+            = f.label :received_on, class: 'col-xs-3 form-control-static'
+            .col-xs-4
+              = f.text_field :received_on, autofocus: true, class: "form-control"
+
+          .form-group
+            = f.label :printed_on, class: 'col-xs-3 form-control-static'
+            .col-xs-4
+              = f.text_field :printed_on, autofocus: true, class: "form-control"
+
+          .form-group
+            = f.label :total_amount, class: 'col-xs-3 form-control-static'
+            .col-xs-4
+              = f.text_field :total_amount, autofocus: true, class: "form-control"
+
+          .form-group
+            = f.label :tax_8, class: 'col-xs-3 form-control-static'
+            .col-xs-4
+              = f.text_field :tax_8, autofocus: true, class: "form-control"
+
+          .form-group
+            = f.label :tax_10, class: 'col-xs-3 form-control-static'
+            .col-xs-4
+              = f.text_field :tax_10, autofocus: true, class: "form-control"
+
+          .form-group
+            = f.label :tax1, class: 'col-xs-3 form-control-static'
+            .col-xs-4
+              = f.text_field :tax1, autofocus: true, class: "form-control"
+
+          .form-group
+            = f.label :tax2, class: 'col-xs-3 form-control-static'
+            .col-xs-4
+              = f.text_field :tax2, autofocus: true, class: "form-control"
+
+          .form-group
+            = f.label :stamp_duty, class: 'col-xs-3 form-control-static'
+            .col-xs-4
+              = f.text_field :stamp_duty, autofocus: true, class: "form-control"
+
+          .form-group
+            = f.label :detail_cash, class: 'col-xs-3 form-control-static'
+            .col-xs-4
+              = f.text_field :detail_cash, autofocus: true, class: "form-control"
+
+          .form-group
+            = f.label :check, class: 'col-xs-3 form-control-static'
+            .col-xs-4
+              = f.text_field :check, autofocus: true, class: "form-control"
+
+          .form-group
+            = f.label :bank_transfer, class: 'col-xs-3 form-control-static'
+            .col-xs-4
+              = f.text_field :bank_transfer, autofocus: true, class: "form-control"
+
+          .form-group
+            = f.label :bill, class: 'col-xs-3 form-control-static'
+            .col-xs-4
+              = f.text_field :bill, autofocus: true, class: "form-control"
+
+          .form-group
+            = f.label :bill_count, class: 'col-xs-3 form-control-static'
+            .col-xs-4
+              = f.text_field :bill_count, autofocus: true, class: "form-control"
+
+          .form-group
+            = f.label :offset, class: 'col-xs-3 form-control-static'
+            .col-xs-4
+              = f.text_field :offset, autofocus: true, class: "form-control"
+
+          .form-group
+            = f.label :detail_others1, class: 'col-xs-3 form-control-static'
+            .col-xs-4
+              = f.text_field :detail_others1, autofocus: true, class: "form-control"
+
+          .form-group
+            = f.label :detail_others2, class: 'col-xs-3 form-control-static'
+            .col-xs-4
+              = f.text_field :detail_others2, autofocus: true, class: "form-control"
+
+          .form-group
+            = f.label :provision, class: 'col-xs-3 form-control-static'
+            .col-xs-9
+              = f.text_field :provision, autofocus: true, class: "form-control"
+
+          .form-group
+            = f.label :remarks, class: 'col-xs-3 form-control-static'
+            .col-xs-9
+              = f.text_field :remarks, autofocus: true, class: "form-control"
+
+          .form-group
+            = f.label :divided, class: 'col-xs-3 form-control-static'
+            .col-xs-4
+              = f.select :divided, Receipt.divided.options, {}, class: 'form-control'
+
+          .form-group
+            = f.label :receipt_id, class: 'col-xs-3 form-control-static'
+            .col-xs-4
+              = f.select :receipt_id,  options_from_collection_for_select(Receipt.all, :id, :receipt_number), {}, autofocus: true, class: 'form-control'
+
+          .form-group
+            = f.label :partingl_number, class: 'col-xs-3 form-control-static'
+            .col-xs-4
+              = f.text_field :partingl_number, autofocus: true, class: "form-control"
+
+          .form-group
+            = f.label :bill_made, class: 'col-xs-3 form-control-static'
+            .col-xs-4
+              = f.select :bill_made, Receipt.bill_made.options, {}, class: 'form-control'
+
+          .form-group
+            = f.label :receipt_issued, class: 'col-xs-3 form-control-static'
+            .col-xs-9
+              = f.radio_button :receipt_issued, true, {:checked => true}
+              = t('receipts.receipt_issued.issue')
+              = f.radio_button :receipt_issued, false
+              = t('receipts.receipt_issued.no_issue')
+
+          .form-group
+            = f.label :approved, class: 'col-xs-3 form-control-static'
+            .col-xs-4
+              = f.select :approved, Receipt.approved.options, {}, class: 'form-control' 
+
+          div align="right"
+            = f.submit t(object.new_record? ? '.create' : '.update'), class: 'btn btn-primary'
+          br

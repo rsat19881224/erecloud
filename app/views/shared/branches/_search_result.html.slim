@@ -1,0 +1,24 @@
+- unless local_assigns.has_key? :modalid
+  - modalid = 'search_branch_modal_result'
+
+- url_options = { action: 'search_branch' }
+- html_options = { remote: true, method: 'get' }
+= render partial: 'shared/page_entries_info', locals: {entries: @branches}
+table.table.table-hover
+  tr
+    th = Bank.human_attribute_name(:name)
+    th = sort_link(@branch_q, :code, url_options, html_options)
+    th = sort_link(@branch_q, :name, url_options, html_options)
+    th = sort_link(@branch_q, :kana, url_options, html_options)
+    th = t('general.label.select')
+  - @branches.each do |branch|
+    tr(id="#{modalid}_branch_#{branch.id}_tr")
+      td(width='200px') = Bank.where(id: branch.bank_id).first.name
+      td(width='120px') = branch.code
+      td(width='200px') = branch.name
+      td(width='200px') = branch.kana
+      td(width='70px')
+        button(class='btn btn-success btn-lg' type='button')
+      td(id="#{modalid}_branch_#{branch.id}_json" style='display: none')
+        = branch.as_json(only: ['id', 'bank_id', 'code', 'name', 'kana'])
+= paginate @branches, remote: true, params: {action: 'search_branch'}

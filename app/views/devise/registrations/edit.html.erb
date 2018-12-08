@@ -1,0 +1,39 @@
+<div class="row"><div class="col-md-6">
+
+<div class="box box-primary">
+<div class="box-body">
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= render :partial => "shared/errors", :locals => {:errors => resource.errors} -%>
+
+  <div class="form-group">
+    <%= f.label :name %><br />
+    <label class="text"><%= resource.name %></label>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :email %><br />
+    <label class="text"><%= resource.email %></label>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :password %> <br />
+    <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %></div>
+
+  <div class="form-group">
+    <%= f.label :current_password %><br />
+    <%= f.password_field :current_password, autocomplete: "off", class: "form-control" %>
+  </div>
+
+  <div><%= f.submit t('.update'), class: 'btn btn-primary' %></div>
+<% end %><br />
+
+<%= link_to t('.back'), (Devise::Mapping.find_scope!(resource) == :user ? root_path : admin_root_path) %>
+
+</div></div>
+
+</div></div>

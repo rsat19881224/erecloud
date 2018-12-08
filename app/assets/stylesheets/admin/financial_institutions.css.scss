@@ -1,0 +1,27 @@
+.input-group.input-group-sm {
+  width: 50%;
+  margin: 5px 0px 15px 10px;
+
+  .input-group-btn {
+    button {
+      width: 80px;
+      height: 30px;
+    }
+
+    button[type='button'] {
+      border-radius: 0;
+    }
+  }
+}
+
+#import-btn {
+  border-radius: 0px 3px 3px 0px;
+}
+
+.control-label {
+  margin: 10px 0px 0px 10px;
+}
+
+.label-text {
+  margin: 5px 0px 0px 5px;
+}

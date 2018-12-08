@@ -1,0 +1,25 @@
+- if params_id.present?
+  = form_tag({controller: "analysis_items", action: "index"}, method: "post", class: "form-horizontal") do 
+    .controls.col-xs-4
+      = collection_select(:select,:division_no,AnalysisDivision.where("used='true'"),:id,:name,{},{class: "form-control"})
+      br
+  .col-xs-12
+    .box
+      .box-header
+        .box-tools
+          = button_link_to t('.create'), (polymorphic_path([params[:controller].gsub('/', '_').singularize.to_sym], action: :new, :division_no => 1) rescue url_for(action: :new))
+          br
+          = render :partial => "shared/page_entries_info", :locals => {:entries => instance_variable_get("@#{params[:controller].split('/').last}") }
+
+      div class="box-body table-responsive no-padding" id="#{params[:controller].split('/').last.singularize}-list"
+        = render :partial => lookup_context.exists?("list", params[:controller], true) ? "list" : "shared/list", :locals => {:objects => instance_variable_get("@#{params[:controller].split('/').last}"), pickup_param: @pickup_param, analysises: analysises}
+- else
+  .col-xs-12
+    .box
+      .box-header
+        .box-tools
+          br
+          .alert.alert-info.alert-dismissable
+            = t('利用可能な拡張補助が設定されていません。')
+            i.fa.fa-info
+              

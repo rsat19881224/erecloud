@@ -1,0 +1,47 @@
+.row
+  .col-md-6 
+    div class='box box-primary'
+      .box-body
+        = form_for(object, url: polymorphic_path([:admin, object]), :html => {:class => "form-horizontal"}, method: (object.new_record? ? :post : :put)) do |f|
+          = render partial: 'shared/errors', locals: {errors: object.errors}
+          
+          div align="right"
+            = link_to t('.back'), polymorphic_path([:admin, object.class.name.constantize])
+          br
+
+          .form-group
+            = f.label :code, class: 'col-xs-3 form-control-static'
+            .col-xs-4
+              = f.text_field :code, autofocus: true, class: "form-control"
+
+          .form-group
+            = f.label :division, class: 'col-xs-3 form-control-static'
+            .col-xs-9
+              = f.radio_button :division, '1', {}
+              = t('債権')
+              = f.radio_button :division, '2', {}
+              = t('債務')
+
+          .form-group
+            = f.label :bill, class: 'col-xs-3 form-control-static'
+            .col-xs-9
+              = f.text_field :bill, autofocus: true, class: "form-control" 
+
+          .form-group
+            = f.label :ebill, class: 'col-xs-3 form-control-static'
+            .col-xs-9
+              = f.text_field :ebill, autofocus: true, class: "form-control"
+
+          .form-group
+            = f.label :factoring, class: 'col-xs-3 form-control-static'
+            .col-xs-9
+              = f.text_field :factoring, autofocus: true, class: "form-control"
+
+          .form-group
+            = f.label :cash_payment, class: 'col-xs-3 form-control-static'
+            .col-xs-9
+              = f.text_field :cash_payment, autofocus: true, class: "form-control"
+
+          div align="right"
+            = f.submit t(object.new_record? ? '.create' : '.update'), class: 'btn btn-primary'
+          br

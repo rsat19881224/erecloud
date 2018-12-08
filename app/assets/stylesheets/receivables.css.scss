@@ -1,0 +1,379 @@
+@import "bootstrap";
+@import "bootstrap/variables";
+
+/* columns of same height styles */
+.row-full-height {
+  height: 100%;
+}
+.col-full-height {
+  height: 100%;
+  vertical-align: middle;
+}
+.row-same-height {
+  display: table;
+  width: 100%;
+  /* fix overflow */
+  table-layout: fixed;
+}
+.col-xs-height {
+  display: table-cell;
+  float: none !important;
+}
+
+@media (min-width: 768px) {
+  .col-sm-height {
+    display: table-cell;
+    float: none !important;
+  }
+}
+@media (min-width: 992px) {
+  .col-md-height {
+    display: table-cell;
+    float: none !important;
+  }
+}
+@media (min-width: 1200px) {
+  .col-lg-height {
+    display: table-cell;
+    float: none !important;
+  }
+}
+
+body {
+    min-width: 768px;
+}
+
+%basetable {
+    @extend .table;
+    @extend .table-bordered;
+    outline: 1px solid $table-border-color;
+    dl {
+	@extend .row;
+	margin: 0;
+	& > dt {
+	    outline: 2px solid $table-border-color;
+	    display:table-cell;
+	}
+
+	& > dd {
+      padding: 0px;
+	    outline: 1px solid $table-border-color;
+	    display:table-cell;
+	}
+    }
+}
+
+.dtable {
+    @extend %basetable;
+    border: 2px solid $table-border-color;
+    & > dl {
+        height: 26px;
+	& > dt {
+	    @extend .label-info;
+	    @extend .col-xs-2;
+        height: inherit;
+        outline: 2px solid $table-border-color;
+	}
+        & > dt:before {
+            content: " ";
+            display: inline-block;
+            height: inherit;
+            vertical-align: middle;
+        }
+	& > dd {
+	    @extend .col-xs-10;
+            height: inherit;
+            outline: 1px solid $table-border-color;
+	    & > #receivable_recording_number {
+		width: 25%;
+	    }
+            & > * {
+                height: inherit;
+            }
+	}
+    }
+    & div.row > dl > dd {
+        outline: 2px solid $table-border-color;
+    }
+    & .dtable2 {
+        height: 100%;
+        border: 0;
+    }
+}
+
+.dtable2 {
+    @extend %basetable;
+    margin-bottom: 0;
+    & > dl {
+        height: 26px;
+	& > dt {
+	    @extend .col-xs-3;
+            height: inherit;
+            outline: 1px solid $table-border-color;
+            &:before {
+                content: " ";
+                display: inline-block;
+                height: inherit;
+                vertical-align: middle;
+            }
+	}
+	& > dd {
+	    @extend .col-xs-9;
+            height: inherit;
+
+            .row {
+                margin-left: 0px;
+                margin-right: 0px;
+                & > label:before {
+                    content: " ";
+                    display: inline-block;
+                    height: inherit;
+                    vertical-align: middle;
+                }
+            }
+            & * {
+                height: inherit;
+            }
+            & .bank_row input {
+                width: 100%;
+            }
+
+	    & > #receivable_debtor_trader_name1,
+	    & > #receivable_debtor_trader_name,
+	    & > #receivable_assignor_name1,
+	    & > #receivable_assignor_name,{
+		width: 100%;
+	    }
+	}
+    }
+}
+.dtable3 {
+    @extend %basetable;
+    & > dl {
+        height: 26px;
+	& > dt {
+	    @extend .label-info;
+            height: inherit;
+            &:before {
+                content: " ";
+                display: inline-block;
+                height: inherit;
+                vertical-align: middle;
+            }
+	}
+
+	& > dd {
+            height: inherit;
+	    @for $i from 1 through 3 {
+		& > #receivable_debtors_remark#{$i} {
+		    width: 100%;
+		}
+	    }
+	    & > #receivable_ref_no {
+		width: 100%;
+	    }
+            & > * {
+                height: inherit;
+            }
+	}
+    }
+}
+
+.dtable4 {
+    @extend %basetable;
+    border: 0;
+
+    & > .row, & > .fields > .row {
+	height: 26px;
+	& > .no {
+	    height: 26px;
+	}
+	& > .term {
+	    @extend .label-info;
+	    outline: 2px solid $table-border-color;
+	    display:table-cell;
+            height: inherit;
+            &:before {
+                content: " ";
+                display: inline-block;
+                height: inherit;
+                vertical-align: middle;
+            }
+	}
+	& > .descp {
+	    outline: 2px solid $table-border-color;
+	    display:table-cell;
+            height: inherit;
+	    & > input#receivable_issue_money {
+		width: 100%;
+	    }
+	}
+    }
+    & > .row > .descp > input {
+        width: 100%;
+        height: inherit;
+    }
+    select {
+        height: inherit;
+    }
+}
+.killpadding {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.killmargin {
+    margin: 0 !important;
+}
+
+.killborder {
+    border: 0 !important;
+}
+
+.margin-auto {
+    margin: auto !important;
+}
+
+.widthmax{
+  width: 100%;
+}
+
+.background-white{
+  background-color: #ffffff;
+}
+dl.all{
+  width: 800px;
+}
+dl.all2{
+  width: 400px;
+}
+dl.chunk{
+  margin: 0px;
+}
+dt.base{
+  height: 30px;
+  width: 100px;
+  float: left;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #A9A9A9;
+  background-color: #87CEFA;
+  margin: 0px;
+}
+dt.sub{
+  height: 30px;
+  width: 100px;
+  float: left;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #A9A9A9;
+  margin: 0px;
+}
+dt.base2{
+  height: 120px;
+  width: 100px;
+  float: left;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #A9A9A9;
+  background-color: #87CEFA;
+  margin: 0px;
+}
+dd.migi{
+  padding-top: 2px;
+  height: 30px;
+  margin-top: 0px;
+  margin-left: 100px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #A9A9A9;
+}
+dd.migi2{
+  padding-top: 2px;
+  height: 30px;
+  float: left;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #A9A9A9;
+}
+.kiroku{
+  width: 300px;
+}
+div.radio-inline{
+  margin-left: -20px;
+  margin-right: 30px;
+}
+.longarea{
+  width: 596px;
+}
+.refarea{
+  width: 300px;
+}
+.longarea2{
+  width: 696px;
+}
+
+.calendar {
+    z-index: 1040 !important;
+}
+
+/* FIXME: bootstrapのtooltipが有効になったら、この記述を削除する*/
+.ui-tooltip{
+  @extend .tooltip-inner;
+}
+
+.account-events{
+  min-width: 70px;
+}
+
+label.user-number{
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
+a.back-button{
+  margin: 0 15px 15px 0;
+}
+
+#particulars-specified, #recording-institutions-specified{
+  display:none;
+}
+
+.mb20 {
+  margin-bottom: 20px;
+}
+.mr15 {
+  margin-right: 15px;
+}
+.search_container .row {
+  margin-bottom: 20px;
+}
+.search_container .row.title_row {
+  margin-bottom: 0px;
+}
+.margin_lr {
+  margin: 0 10px;
+}
+input[type=number] {
+    padding-right: 0px;
+}
+
+.valign_middle:before {
+    content: " ";
+    display: inline-block;
+    height: inherit;
+    vertical-align: middle;
+}
+.tail_button_area {
+    margin: 0;
+}
+.table > thead:first-child > tr:first-child > th.border-none,
+.table-bordered > tbody > tr > td.border-none{
+  border-right-style: hidden;
+  border-top-style: hidden;
+  border-bottom-style: hidden;
+}
+.table > thead:first-child > tr:first-child > th.border-bottom-none,
+.table-bordered > tbody > tr > td.border-bottom-none{
+  border-bottom-style: hidden;
+}

@@ -1,0 +1,31 @@
+table.table.table-striped
+  tbody
+    tr
+      th = Menu.human_attribute_name(:code)
+      th = Menu.human_attribute_name(:name)
+      th = Menu.human_attribute_name(:product_category)
+      th = Menu.human_attribute_name(:manager_division)
+      th = Menu.human_attribute_name(:approval_setting_used)
+      th = Menu.human_attribute_name(:extend_type)
+      th
+      th
+
+    - objects.each do |object|
+      tr class=('deleted' if object.deleted?)
+        td(class='menu_name' width='160px') = object.code
+        td(class='menu_name' width='160px') = object.name
+        td(class='product_category' width='120px') = t(object.product_category, scope: 'enumerize.menu.product_category')
+        td(class='manager_division' width='120px') = t(object.manager_division, scope: 'enumerize.menu.manager_division')
+        td( width='140px') = object.approval_setting_used ? t('admin.menus.index.used') : t('admin.menus.index.not_used')
+        td(class='manager_division' width='120px') = t(object.extend_type, scope: 'enumerize.menu.extend_type') 
+
+        td(width='60px' align='center')
+          = link_to t('general.label.edit'), polymorphic_path([:admin, object], pickup_param.merge(action: :edit))
+        td
+          - unless object.deleted?
+            = link_to t('general.label.delete'), polymorphic_path([:admin, object], pickup_param), :method => :delete, :data => {:confirm => t('general.message.confirm_delete')}
+          - else
+            = t('general.label.deleted')
+
+div class='box-footer clearfix'
+  = paginate objects, remote: true

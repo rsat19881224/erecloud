@@ -1,0 +1,2056 @@
+ja:
+  date:
+    abbr_day_names:
+    - 日
+    - 月
+    - 火
+    - 水
+    - 木
+    - 金
+    - 土
+    day_names:
+    - 日曜日
+    - 月曜日
+    - 火曜日
+    - 水曜日
+    - 木曜日
+    - 金曜日
+    - 土曜日
+    formats:
+      default: ! '%Y/%m/%d'
+      long: ! '%Y年%m月%d日(%a)'
+      short: ! '%m/%d'
+      by: ! '%Y年%m月%d日(%a)迄'
+      yearmonth: ! '%Y%m'
+      monthday: ! '%m%d'
+    month_names:
+    -
+    - 1月
+    - 2月
+    - 3月
+    - 4月
+    - 5月
+    - 6月
+    - 7月
+    - 8月
+    - 9月
+    - 10月
+    - 11月
+    - 12月
+    order:
+    - :year
+    - :month
+    - :day
+  datetime:
+    prompts:
+      year: 年
+      month: 月
+      day: 日
+      hour: 時
+      minute: 分
+      second: 秒
+  errors: &errors
+    format: ! '%{attribute}%{message}'
+    messages:
+      accepted: "%{attribute}を受諾してください。"
+      blank: "%{attribute}を入力してください。"
+      tel_blank: "%{attribute}を半角数字で入力してください。"
+      tel_invalid: "正しい%{attribute}を入力してください。"
+      present: "%{attribute}は入力しないでください。"
+      confirmation: "%{attribute}の入力が一致しません。"
+      empty: "%{attribute}を入力してください。"
+      not_select: "%{attribute}を選択してください。"
+      equal_to: "%{attribute}は%{count}にしてください。"
+      even: "%{attribute}は偶数にしてください。"
+      exclusion: "%{attribute}は予約されています。"
+      greater_than: "%{attribute}は%{count}より大きい値にしてください。"
+      greater_than_or_equal_to: "%{attribute}は%{count}以上の値にしてください。"
+      inclusion: "%{attribute}は一覧にありません。"
+      invalid: "%{attribute}は不正な値です。"
+      email_invalid: "%{attribute}が正しくありません。"
+      password_invalid: "%{attribute}は半角英数字8文字以上で入力してください。"
+      less_than: "%{attribute}は%{count}より小さい値にしてください。"
+      less_than_or_equal_to: "%{attribute}は%{count}以下の値にしてください。"
+      not_a_number: "%{attribute}は数値で入力してください。"
+      not_an_integer: "%{attribute}は整数で入力してください。"
+      odd: "%{attribute}は奇数にしてください。"
+      record_invalid: バリデーションに失敗しました。 %{errors}
+      restrict_dependent_destroy:
+        one: "%{record}が存在しているので削除出来ません。"
+        many: "%{record}が存在しているので削除出来ません。"
+        other:
+      taken: "この%{attribute}は既に使用されています。"
+      too_long: "%{attribute}は%{count}文字以内で入力してください。"
+      too_short: "%{attribute}は%{count}文字以上で入力してください。"
+      password_too_long: "%{attribute}は半角英数%{count}文字以内で入力してください。"
+      password_too_short: "%{attribute}は半角英数%{count}文字以上で入力してください。"
+      nickname_too_long: "%{attribute}は%{count}文字以内で入力してください。"
+      nickname_too_short: "%{attribute}は%{count}文字以上で入力してください。"
+      wrong_length: "%{attribute}は%{count}文字で入力してください。"
+      other_than: "%{attribute}は%{count}以外の値にしてください。"
+      start_at_uniqueness: "日付が重複しています。"
+      uniqueness: "%{attribute}が重複しています。"
+      greater_than_today_start_at: "%{attribute}は%{date}以降にしてください。"
+      incorrect: "%{attribute}が正しくありません。"
+      not_valid_datetime: "%{attribute}は日付の形式ではありません"
+      not_valid_email: "%{attribute}はメールアドレスの形式ではありません"
+      not_valid_kana: "%{attribute}は全角カナではありません"
+      not_valid_hiragana: "%{attribute}は平仮名ではありません"
+      not_valid_telephonenumber: "%{attribute}は電話番号の形式ではありません"
+      not_valid_mobilephonenumber: "%{attribute}は携帯電話番号の形式ではありません"
+    template:
+      body: 次の項目を確認してください。
+      header:
+        one: ! '%{model}にエラーが発生しました。'
+        other: ! '%{model}に%{count}個のエラーが発生しました。'
+  helpers:
+    select:
+      prompt: 選択してください
+      include_blank: 選択してください
+  number:
+    currency:
+      format:
+        delimiter: ! ','
+        format: ! '%n%u'
+        precision: 0
+        separator: .
+        significant: false
+        strip_insignificant_zeros: false
+        unit: 円
+    format:
+      delimiter: ! ','
+      precision: 3
+      separator: .
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      decimal_units:
+        format: ! '%n %u'
+        units:
+          billion: 十億
+          million: 百万
+          quadrillion: 千兆
+          thousand: 千
+          trillion: 兆
+          unit: ''
+      format:
+        delimiter: ''
+        precision: 3
+        significant: true
+        strip_insignificant_zeros: true
+      storage_units:
+        format: ! '%n%u'
+        units:
+          byte: バイト
+          gb: ギガバイト
+          kb: キロバイト
+          mb: メガバイト
+          tb: テラバイト
+    percentage:
+      format:
+        delimiter: ''
+        format: "%n%"
+    precision:
+      format:
+        delimiter: ''
+  support:
+    array:
+      last_word_connector: と
+      two_words_connector: と
+      words_connector: と
+  time:
+    am: 午前
+    formats:
+      default: ! '%Y/%m/%d %H:%M:%S'
+      long: ! '%Y年%m月%d日(%a) %H時%M分%S秒 %z'
+      short: ! '%y/%m/%d %H:%M'
+      medium: ! '%Y-%m-%d %H:%M'
+      date: ! '%Y/%m/%d'
+      date_without_delimiter: ! '%Y%m%d'
+      year_week_without_delimiter: ! '%Y%W'
+      year_month_without_delimiter: ! '%Y%m'
+      year: ! '%Y'
+    pm: 午後
+
+  activemodel:
+    errors:
+      <<: *errors
+    attributes:
+      transfer:
+        recording_institution_id: 記録機関
+        company_bank_id: 自社取引銀行
+        transferred_on: 譲渡日付
+        guaranteed: 譲渡時保証
+      transfer/trader:
+        name: 名称
+        kana: カナ
+        bank_code: 銀行コード
+        bank_name: 銀行
+        branch_code: 銀行本支店
+        branch_name: 銀行本支店
+        account_type: 口座種別
+        account_number: 種目・口座番号
+        user_number: 利用者番号
+      receivable/trader:
+        name: 名称
+        kana: カナ
+        bank_code: 銀行コード
+        bank_name: 銀行
+        branch_code: 銀行本支店
+        branch_name: 銀行本支店
+        account_type: 口座種別
+        account_number: 種目・口座番号
+        user_number: 利用者番号
+      receivable:
+        recording_institution_id: 記録機関
+        recording_number: 記録番号
+        accrual_type: 取引区分
+        trader_id: 請求先
+        trader: 債務者情報
+        opt_trader: 譲渡人情報
+        occurred_on: 発生日付
+        settled_on: 支払日付
+        last_transferred_on: 譲受日付
+        company_bank_id: 自社取引銀行
+        ref_no: Ref.No
+        transfer_restricted: 譲渡制限
+        debtors_department_id: 部門
+        site_division: サイト区分
+        remark1: 備考
+        remark2: メモ1
+        remark3: メモ2
+        operating_item_id: 拡張伝票区分
+        due_become_on: 支払期日
+        issue_money: 金額
+  activerecord:
+    timestamps: &timestamps
+      created_at: 作成日
+      updated_at: 最終更新日
+      deleted_at: 削除日
+    errors:
+      <<: *errors
+    models:
+      user: ユーザ
+      administrator: 管理者
+      bank: 金融機関
+      recording_institution: 電子債権記録機関
+      company: 契約会社
+      management_division: 管理区分
+      company_bank: 自社取引銀行
+      department: 部門
+      bank: 銀行情報
+      branch: 銀行本支店情報
+      debtor_number: 利用者番号
+      menu_group: メニューグループ
+      menu: メニュー
+      product: 製品
+      license: 契約製品情報
+      authority: メニュー権限
+      access_control: メニュー権限登録
+      payable: 電子記録債権債務
+      ebill: 電子記録債権債務
+      ebill_state_history: 電子記録債権てん末履歴
+      ebill_section_breakdown: 部門内訳金額情報
+      guarantor: 保証人情報
+      state_code: てん末コード
+      approval_setting: 承認設定
+      remark: 備考
+      business_division: 事業区分
+      bank_holiday: 銀行休日
+      stamp_tax: 印紙税
+      tax_division: 税区分
+      tax_rate: 税率
+      license_allotment: ライセンス割当
+      abridgment: 摘要
+      management_item: 管理項目
+      menu_authority: メニュー権限
+      default_payable_site: 期日サイト既定値
+      approver: 承認者
+      trader: 取引先
+      trader_bank_account: 取引先口座情報
+      slip_division: 伝票区分
+      account: 勘定科目
+      sub_account: 補助科目
+      use_accounts: 科目別入力設定
+      analysis_item: 拡張補助マスター
+      analysis_division: 拡張補助区分
+      operating_division: 拡張伝票区分
+      operating_division_setting: 拡張伝票区分入力設定
+      operating_item: 拡張伝票マスター
+      info: お知らせ情報
+      receipt: 領収証
+      initial_representation_of_data: 取引先初期表示設定
+      date_bank_payment: 期日別銀行別入金集計表
+      date_bank_settlement: 期日別銀行別決済集計表
+
+    attributes:
+      user:
+        email: ログイン用メールアドレス
+        password: 利用者パスワード
+        code: 利用者コード
+        user_type: 利用者権限区分
+        password_unlimited: パスワード無制限有無
+        next_login_time_password_changed: 次回パスワード変更有無
+        locked: ロックアウト有無
+        lockout_time: ロックアウト時間
+        name: 利用者名
+        contact_mail: 連絡用メールアドレス
+        password: パスワード
+        password_confirmation: 確認用パスワード
+        current_password: 現在のパスワード
+        reset_password_token: パスワードリセット用トークン
+        reset_password_sent_at: パスワードリセット用トークン送信日時
+        remember_created_at: リメンバートークン登録日時
+        sign_in_count: ログイン回数
+        current_sign_in_at: 現ログイン日時
+        last_sign_in_at: 最終ログイン日時
+        current_sign_in_ip: 現ログインIPアドレス
+        last_sign_in_ip: 最終ログインIPアドレス
+        <<: *timestamps
+      administrator:
+        name: 名前
+        email: メールアドレス
+        administrator_type: UNIONユーザー区分
+        password: パスワード
+        password_confirmation: 確認用パスワード
+        current_password: 現在のパスワード
+        reset_password_token: パスワードリセット用トークン
+        reset_password_sent_at: パスワードリセット用トークン送信日時
+        remember_created_at: リメンバートークン登録日時
+        sign_in_count: ログイン回数
+        current_sign_in_at: 現ログイン日時
+        last_sign_in_at: 最終ログイン日時
+        current_sign_in_ip: 現ログインIPアドレス
+        last_sign_in_ip: 最終ログインIPアドレス
+        <<: *timestamps
+      bank:
+        bank_code: コード
+        name: 名称
+        name_kana: 名称カナ
+        <<: *timestamps
+      recording_institution:
+        code: コード
+        name: 名称
+        abbreviation: 表示用名称
+        recording_number_digit: 記録番号桁数
+        user_number_digit: 利用者番号桁数
+        <<: *timestamps
+      company:
+        management_division_id: 管理区分
+        number: 管理番号
+        affiliated: グループ区分
+        affiliated_true: グループ
+        affiliated_false: 非グループ
+        group_number: グループ管理番号
+        demanded: 請求区分
+        demanded_true: 請求可
+        demanded_false: 請求不可
+        name: 企業名
+        postal_code: 郵便番号
+        prefecture: 都道府県
+        address: 住所
+        tel: 電話番号
+        fax: FAX番号
+        affiliated_post: 担当者部署
+        charge_name: 担当者名
+        email: メールアドレス
+        <<: *timestamps
+      management_division:
+        code: 管理区分コード
+        name: 管理区分名
+        <<: *timestamps
+      license:
+        company_id: 契約会社
+        product_id: 製品
+        number_of_license: ライセンス数
+        period_of_service: 使用期間
+        use_starting_date: 使用開始日
+        use_end_date: 使用終了日
+        license_type: ライセンスタイプ
+        <<: *timestamps
+      operative_setting:
+        company_id: 契約企業ID
+        company_name1: 会社名１
+        company_name2: 会社名２
+        postal_code: 郵便番号
+        address1: 住所１
+        address2: 住所２
+        company_number: 法人番号
+        representative_name: 代表者名
+        representative_official_title: 代表者役職名
+        person_in_charge_name: 担当者名
+        person_in_charge_official_title: 担当者部署
+        date_display_format: 暦表示方法
+        is_transfer_fixed_date: 期日振替
+        is_use_valuation_account_of_bill: 受取手形評価勘定使用有無
+        is_use_valuation_account_of_ebill: 電子記録債権評価勘定使用有無
+        is_use_section_authority: 部門権限
+        <<: *timestamps
+      company_bank:
+        company_id: 契約企業ID
+        code: 自社取引銀行コード
+        name: 自社取引銀行名称
+        bank_code: 銀行コード
+        bank_name: 銀行名
+        bank_kana: 銀行名カナ
+        branch_code: 本支店コード
+        branch_name: 本支店名
+        branch_kana: 本支店カナ
+        account_type: 預金種目
+        account_number: 口座番号
+        account_name_kana: 口座名義カナ
+        limit_discount_money : 割引限度額
+        client_code: 依頼人コード
+        densai_user_number: でんさい利用者番号
+        jemco_user_number: 電手お客様番号
+        jemco_discount_financial_institution_user_number: 電手割引銀行お客様番号
+        jemoco_is_indicate_present_guarantee: 電手譲渡時保証初期表示
+        mizuho_user_number: 電ペイ利用者番号
+        smbc_user_number: SMBC電子債権利用者番号
+        record_length: レコード長
+        record_type: コード区分
+        is_use_lf_code: 改行コード
+        is_use_eof_code: 終端コード
+        <<: *timestamps
+      department:
+        company_id: 契約企業ID
+        code: コード
+        name: 名称
+        name_kana: 名称カナ
+        abbreviation: 略称
+        <<: *timestamps
+      bank:
+        code: 銀行コード
+        name: 銀行名
+        kana: 銀行名カナ
+        <<: *timestamps
+      branch:
+        bank_id: 銀行ID
+        code: 支店コード
+        name: 支店名
+        kana: 支店名カナ
+        <<: *timestamps
+      debtor_number:
+        company_id: 契約企業ID
+        type: 区分
+        trader_id: 取引先ID
+        recording_institution_id: 電子債権記録機関ID
+        user_number: 利用者番号
+        <<: *timestamps
+      trader:
+        company_id: 企業ID
+        code: 取引先コード
+        corporation_number: 法人番号
+        name1: 取引先名１
+        name2: 取引先名２
+        kana: 取引先カナ
+        short_name: 取引先略称
+        postal_code: 郵便番号
+        address1: 住所１
+        address2: 住所２
+        person_in_charge_official_title: 担当部署
+        person_in_charge_name: 担当者名
+        tel: 電話番号
+        fax: ファックス番号
+        email: メールアドレス
+        reference_type: 参照区分
+        customer_code: 得意先コード
+        vendor_code: 支払先コード
+        is_make_journalizing: 取引先仕訳作成有無
+        <<: *timestamps
+      trader_bank_account:
+        company_id: 企業ID
+        trader_id: 取引先ID
+        bank_code: 銀行コード
+        bank_name: 銀行名
+        bank_kana: 銀行名カナ
+        branch_code: 本支店コード
+        branch_name: 本支店名
+        branch_kana: 本支店カナ
+        account_type: 預金種目
+        account_number: 口座番号
+        account_name_kana: 口座名義カナ
+        edi_code1: 顧客コード１
+        edi_code2: 顧客コード２
+        densai_user_number: でんさい利用者番号
+        densai_is_priority: でんさい優先銀行
+        jemco_user_number: 電手お客様番号
+        jemco_payment_number: 電手支払企業ID
+        jemco_is_priority: 電手優先銀行
+        <<: *timestamps
+      menu_group:
+        code: メニューグループコード
+        name: メニューグループ
+        <<: *timestamps
+      menu:
+        code: メニューコード
+        name: メニュー名
+        product_category: 製品種別
+        manager_division: 管理者区分
+        approval_setting_used: 承認設定使用可否
+        extend_type: 拡張タイプ
+        <<: *timestamps
+      product:
+        code: 製品コード
+        name: 製品名
+        bill_credit_used: 受取手形有無
+        bill_debit_used: 支払手形有無
+        ebill_credit_used: 電子記録債権有無
+        ebill_debit_used: 電子記録債務有無
+        factoring_credit_used: ファクタリング債権有無
+        factoring_debit_used: ファクタリング債務有無
+        account_receivable_used: 売掛金有無
+        account_payable_used: 買掛金有無
+        print_option_used: 印刷オプション有無
+        extended: 拡張有無
+        <<: *timestamps
+      authority:
+        code: コード
+        name: 名称
+        <<: *timestamps
+      access_control:
+        user_id: ユーザーID
+        menu_id: メニューID
+        authoritie_id: メニュー権限ID
+        <<: *timestamps
+      ebill: &ebill
+        company_id: 契約企業ID
+        company_type: 企業区分
+        counterparty_company_id: 相手方契約企業ID
+        data_type: 債権種類
+        settlement_type: 一括決済区分
+        factor_id: 一括決済機関
+        control_number: 管理番号
+        recording_institution_id: 記録機関ID
+        recording_number: 記録番号
+        accrual_type: 発生区分
+        transferred: 譲渡有無
+        occurrence_type: 発生日区分
+        occurred_on: 発生日
+        due_become_on: 支払期日
+        issue_money: 金額
+        transfer_restricted: 譲渡制限有無
+        ref_no: （依頼人）Ref.No
+        debtor_user_number: 債務者利用者番号
+        creditor_user_number: 債権者利用者番号
+        trader_id: 債権者 取引先ID
+        creditor_type: 債権者種類
+        creditor_name: 債権者名カナ
+        creditor_bank_code: 債権者銀行コード
+        creditor_bank_kana: 債権者銀行カナ
+        creditor_branch_code: 債権者本支店コード
+        creditor_branch_kana: 債権者本支店カナ
+        creditor_account_type: 債権者口座種別
+        creditor_account_number: 債権者口座番号
+        debtors_company_bank_id: 債務者取引銀行ID
+        debtors_department_id: 債務者部門ID
+        debtors_remarks: 債務者備考
+        drawing_Journal_made: 振出仕訳作成フラグ
+        transferor_user_number: 譲渡人利用者番号
+        assignor_name: 譲渡人名カナ
+        assignor_bank_code: 譲渡人銀行コード
+        assignor_bank_kana: 譲渡人銀行カナ
+        assignor_branch_code: 譲渡人本支店コード
+        assignor_branch_kana: 譲渡人本支店カナ
+        assignor_account_type: 譲渡人口座種別
+        assignor_account_number: 譲渡人口座番号
+        debtor_trader_name: 債務者カナ
+        debtor_bank_code: 債務者銀行コード
+        debtor_bank_kana: 債務者銀行カナ
+        debtor_branch_code: 債務者本支店コード
+        debtor_branch_kana: 債務者本支店カナ
+        debtor_account_type: 債務者口座種別
+        debtor_account_number: 債務者口座番号
+        residual_money: 残高
+        record_settled: 記録確定ステータス
+        approver_type: 承認者区分
+        approved: 承認フラグ
+        up_load_made: 集信１作成フラグ
+        payment_data_made: 支払データ作成フラグ
+        payment_guidance_issued: 支払通知書発行区分
+        settled_on: 決済支払日
+        settlement_Journal_made: 債務者決済仕訳作成フラグ
+        debt_state_division: ＊債務状態区分
+        insolvency_presence: ＊支払不能有無
+        returned_on: 債務者組戻日付
+        return_state: 債務者組戻てん末名
+        return_remarks: 債務者組戻備考
+        debtor_deleted: 債務者企業データ削除フラグ
+        record_type: 登録区分
+        created_user_id: 債務者企業新規登録ユーザー
+        update_user_id: 債務者企業更新ユーザー
+        <<: *timestamps
+      ebill_state_history: &ebill_state_history
+        ebill_id: 電子記録債権ID
+        state_type: てん末区分
+        trader_id: 取引先
+        last_transferred_on: 譲受日付
+        amount_money: 異動金額
+        settled_on: 債権者決済入金日
+        company_bank_id: 債権者取引銀行ID
+        department_id: 債権者部門ID
+        receipt_data_made: 入金データ作成フラグ
+        division_type: 分割区分
+        division_recording_number: 分割記録番号
+        record_settled: 記録確定ステータス
+        transferee_user_number: 譲渡先利用者番号
+        transferee_kana: 譲渡先名カナ
+        transferee_bank_code: 譲渡先銀行コード
+        transferee_bank_kana: 譲渡先銀行名カナ
+        transferee_branch_code: 譲渡先本支店コード
+        transferee_branch_kana: 譲渡先本支店名カナ
+        transferee_account_type: 譲渡先口座種別
+        transferee_account_number: 譲渡先口座番号
+        guaranteed: 譲渡時保証有無
+        discount_charge: 割引手数料
+        bank_transfer_fee: 振込手数料
+        own_state_id: 自社てん末ID
+        Journal_made: てん末仕訳作成フラグ
+        discount_guidance_issued: 割引案内書発行区分
+        return_state: 組戻てん末名
+        ref_no: 依頼人Ref.No.
+        remarks: 債権者備考
+        record_type: 登録区分
+        creditor_deleted: 債権者企業削除フラグ
+        created_user_id: 債権者企業新規登録ユーザー
+        update_user_id: 債権者企業更新ユーザー
+        <<: *timestamps
+      ebill_section_breakdown: &ebill_section_breakdown
+        ebill_id: 電子記録債権ID
+        company_id: 契約企業ID
+        type: 債権債務区分
+        department_id: 部門ID
+        department_money: 部門金額
+        segment_id: 管理区分
+        remarks: 備考
+        <<: *timestamps
+      receivable:
+        <<: *ebill_state_history
+        <<: *ebill
+        recording_institution_id: 記録機関
+        accrual_type: 取引区分
+        trader_id: 請求先
+        debtor_trader_name1: 名称
+        debtor_trader_name: カナ
+        debtor_bank_code: 銀行コード
+        debtor_bank_kana: 銀行カナ
+        debtor_branch_code: 銀行本支店
+        debtor_branch_kana: 銀行本支店カナ
+        debtor_account_type: 口座種別
+        debtor_account_number: 種目・口座番号
+        debtor_user_number: 利用者番号
+        transferor_user_number: 利用者番号
+        assignor_name1: 名称
+        assignor_name: カナ
+        assignor_bank_code: 銀行コード
+        assignor_bank_kana: 銀行カナ
+        assignor_branch_code:  銀行本支店
+        assignor_branch_kana: 銀行本支店カナ
+        assignor_account_type: 口座種別
+        assignor_account_number: 種目・口座番号
+        assignor_user_number: 利用者番号
+        occurred_on: 発生日付
+        settled_on: 支払日付
+        company_bank_id: 自社取引銀行
+        ref_no: Ref.No
+        transfer_restricted: 譲渡制限
+        debtors_department_id: 部門
+        site_division: サイト区分
+        debtors_remarks1: 備考1
+        debtors_remarks2: 備考2
+        debtors_remarks3: 備考3
+        operating_item_id: 拡張伝票区分
+      receivable_search:
+        occurred_on: 発生日付
+        transferred_on: 譲受日付
+        matured_on: 支払期日
+        settled_on: 支払日付
+        traders_code: 請求先
+        company_banks_code: 自社取引銀行
+        company_bank_id: 自社取引銀行
+        debtor_name: 債務者名
+        assignor_name: 譲渡人名
+        residual_money: 債権残高
+        transfer_date: 譲渡日付
+        discount_date: 割引日付
+        transferee_name: 譲渡先名
+        transferee_code: 譲渡先
+        discount_bank_code: 割引銀行
+        recording_institution_id: 記録機関
+        recording_institution_code: 記録番号
+        acquisition_division: 発生区分
+        state_code: てん末指定
+        discount_requested_on: 割引申込日
+        guaranteed: 譲渡時保証
+      section_breakdown:
+        <<: *ebill_section_breakdown
+        department_code: コード
+        department_name: 部門名
+        department_money: 内訳金額
+      guarantor:
+        ebill_id: 電子記録債権ID
+        user_number: 保証人利用者番号
+        guarantor_name: 保証人名称
+        guarantor_name_kana: 保証人名カナ
+        bank_code: 保証人銀行コード
+        bank_kana: 保証人銀行名カナ
+        branch_code: 保証人本支店コード
+        branch_kana: 保証人本支店名カナ
+        account_type: 保証人口座種別
+        account_number: 口座番号
+        guaranty_recorded_on: 保証記録年月日
+        <<: *timestamps
+      state_code:
+        code: てん末コード
+        division: 債権・債務区分
+        bill: 手形名称
+        ebill: 電子記録債権名称
+        factoring: ファクタリング名称
+        cash_payment: 掛入金・支払名称
+      approval_setting:
+        company_id: 会社ID
+        menu_id: メニューID
+        approval_type: 承認タイプ
+        one_phase_approval_skiped: １段階認証
+      remark:
+        company_id: 会社ID
+        code: 備考コード
+        content: 備考内容
+      business_division:
+        code: コード
+        name: 名前
+      bank_holiday:
+        holiday: 休日
+      stamp_tax:
+        tax_type: 種類
+        tax: 税額
+        above_Par: 開始額面
+        below_Par: 終了額面
+        enforced_on: 施行日
+      tax_division:
+        code: コード
+        name: 名称
+        indication_name: 表示名称
+        taxed: 課税有無
+      tax_rate:
+        code: コード
+        name: 名称
+        rate: 税率
+        executed_on: 施行日
+        used: 使用有無
+      license_allotment:
+        company_id: 企業ID
+        user_id: ユーザーID
+        license_id: ライセンスID
+      abridgment:
+        code: コード
+        contents: 摘要内容
+      management_item:
+        code: コード
+        name: 名称
+      menu_authority:
+        company_id: 企業ID
+        user_id: ユーザーID
+        menu_id: メニューID
+        authority_type: 権限種別
+      default_payable_site:
+        company_id: 企業ID
+        date_designation_division: 日付指定区分
+        contract_credit_category: 項目区分
+        site_designation_method: サイト指定方法
+        month: 月指定
+        day: 日指定
+        after_day: 日後・日数
+        holiday_transfer_method: 休日振替区分
+      approver:
+        company_id: 企業ID
+        user_id: ユーザーID
+        menu_id: メニューID
+        approver_type: 承認者区分
+        mail_delivered: メール配信有無
+      security_policy:
+        company_id: 契約企業ID
+        min_characters: パスワード最小文字数
+        included_three_kinds: 英数字混在3種類以上の必要性
+        included_account: アカウントを含むパスワードの許可
+        number_of_history_generations: 履歴世代管理
+        valid_period: パスワード有効期間日数
+        change_prohibition_period: パスワード変更禁止期間
+        lockout_setting: ロックアウト設定
+        time_elapsed: ロックアウト自動解除時間
+      slip_division:
+        code: コード
+        name: 名称
+      accounts_title:
+        company_id: 企業ID
+        code: 勘定科目コード
+        name: 勘定科目名
+        kana: 勘定科目カナ
+        tax_division_id: 税区分
+        tax_rate_id: 税率区分
+        tax_display_type: 消費税表示方法
+        round_type: 端数処理方法
+        business_division_id: 事業区分
+        fund_subject_division: 資金科目区分
+        trader_apply_type: 取引先・補助適用区分
+        department_inputed: 部門入力有無
+        analysis1_inputed: 拡張補助１入力有無
+        analysis2_inputed: 拡張補助２入力有無
+        analysis3_inputed: 拡張補助３入力有無
+        analysis4_inputed: 拡張補助４入力有無
+        analysis5_inputed: 拡張補助５入力有無
+        analysis6_inputed: 拡張補助６入力有無
+        analysis7_inputed: 拡張補助７入力有無
+        analysis8_inputed: 拡張補助８入力有無
+        analysis9_inputed: 拡張補助９入力有無
+        analysis10_inputed: 拡張補助１０入力有無
+      account:
+        company_id: 企業ID
+        code: 勘定科目コード
+        name: 勘定科目名
+        kana: 勘定科目カナ
+        tax_division_id: 税区分
+        tax_rate_id: 税率区分
+        tax_display: 消費税表示方法
+        round: 端数処理方法
+        business_division_id: 事業区分
+        fund_division: 資金科目区分
+        department_input: 部門入力有無
+        trader_shared: 取引先・補助適用区分
+        tax_subject_division: 消費税科目区分
+        trader_input_division: 取引先入力区分
+        analysis1_input: 拡張補助１入力有無
+        analysis2_input: 拡張補助２入力有無
+        analysis3_input: 拡張補助３入力有無
+        analysis4_input: 拡張補助４入力有無
+        analysis5_input: 拡張補助５入力有無
+        analysis6_input: 拡張補助６入力有無
+        analysis7_input: 拡張補助７入力有無
+        analysis8_input: 拡張補助８入力有無
+        analysis9_input: 拡張補助９入力有無
+        analysis10_input: 拡張補助１０入力有無
+      sub_account:
+        company_id: 企業ID
+        accounts_id: 勘定科目
+        code: 補助科目コード
+        name: 補助科目名
+        kana: 補助科目カナ
+        tax_division_id: 税区分
+        tax_rate_id: 税率区分
+        tax_display: 消費税表示方法
+        round: 端数処理方法
+        business_division_id: 事業区分
+      use_account:
+        company_id: 企業ID
+        accounts_id: 勘定科目
+        analysis1_input: 拡張補助１入力有無
+        analysis2_input: 拡張補助２入力有無
+        analysis3_input: 拡張補助３入力有無
+        analysis4_input: 拡張補助４入力有無
+        analysis5_input: 拡張補助５入力有無
+        analysis6_input: 拡張補助６入力有無
+        analysis7_input: 拡張補助７入力有無
+        analysis8_input: 拡張補助８入力有無
+        analysis9_input: 拡張補助９入力有無
+        analysis10_input: 拡張補助１０入力有無
+        abbreviation: 略称
+        used: 使用有無
+        input_division: 入力区分
+        division_no: 拡張補助区分
+      accounts_setting:
+        endorsement_ac_used: 裏書評価勘定使用有無
+        discount_ac_used: 割引評価勘定使用有無
+        abridgment_method: 摘要表示単位
+        remarks1_reflected: 備考1の摘要反映有無
+        remarks2_reflected: 備考2の摘要反映有無
+        remarks3_reflected: 備考3の摘要反映有無
+        payment_type: 入金・支払区分
+        notice_journal_made: 通知日仕訳作成有無
+      analysis_item:
+        company_id: 企業ID
+        analysis_division_id: 拡張補助区分
+        name: 名称
+        abbreviation: 略称
+        kana: カナ
+        code: コード
+      operating_division:
+        division_no: 拡張伝票区分
+        company_id: 企業ID
+        name: 名称
+        abbreviation: 略称
+        used: 使用有無
+        input_division: 入力区分
+      operating_division_setting:
+        company_id: 企業ID
+        operating_division_id: 拡張伝票区分
+        input_type: 入力区分
+      operating_item:
+        division_no: 拡張伝票区分
+        company_id: 企業ID
+        operating_division_id: 拡張伝票区分
+        name: 名称
+        abbreviation: 略称
+        kana: カナ
+        code: コード
+      analysis_division:
+        name: 名称
+        abbreviation: 略称
+        used: 使用有無
+        input_division: 入力区分
+        division_no: 拡張補助区分
+      info:
+        title: タイトル
+        content: お知らせ内容
+        display_from: 表示開始日
+        display_to: 表示終了日
+      receipt:
+        company_id: 契約企業ID
+        auto_number: 管理番号
+        receipt_number: 領収証番号
+        trader_id: 請求先ID
+        corporation_number: 請求先法人番号
+        trader_name1: 請求先名1
+        trader_name2: 請求先名2
+        received_on: 入金日付
+        printed_on: 領収証印字日付
+        total_amount: 領収金額
+        tax_8: 消費税金額 8%
+        tax_10: 消費税金額 10%
+        tax1: 消費税金額 予備1
+        tax2: 消費税金額 予備2
+        taxable_amount: 印紙税計算対象金額
+        stamp_duty: 印紙税額
+        detail_cash: 内訳 現金
+        check: 内訳 小切手
+        bank_transfer: 内訳 振込
+        bill: 内訳 手形
+        bill_count: 手形枚数
+        offset: 内訳 相殺
+        detail_others1: 内訳 予備1
+        detail_others2: 内訳 予備2
+        provision: 但し書き
+        remarks: 備考
+        divided: 分割ステータス
+        receipt_id: 分割元領収証ID
+        partingl_number: 分割番号
+        bill_made: 手形データ作成区分
+        receipt_issued: 発行フラグ
+        reissued: 再発行区分
+        reissued_on: 再発行日付
+        approved: 承認フラグ
+        company_bank: 自社取引銀行
+      date_bank_payment:
+        aggregate_date: 集計開始年月
+        aggregate_criteria: 集計基準
+        aggregate_target: 集計対象
+        facts: てん末
+        company_bank_from: 自社取引銀行
+        company_bank_to: 自社取引銀行
+      date_bank_settlement:
+        aggregate_date: 集計開始年月
+        aggregate_target: 集計対象
+        company_bank_from: 自社取引銀行
+        company_bank_to: 自社取引銀行
+      initial_representation_of_data:
+        pbill_mailing_division: 支払手形郵送区分
+        pbill_postage_division: 支払手形郵送料区分
+        pbill_postage: 支払手形郵送料
+        receipt_postage: 領収証郵送料
+        rbill_drawing_bank_code: 受取手形表示銀行コード
+        rbill_drawing_bank_name: 受取手形表示銀行名
+        rbill_drawing_branch_code: 受取手形本支店コード
+        rbill_drawing_branch_name: 受取手形本支店名
+        pbill_company_bank: 支払手形振出銀行
+        ebill_settling_company_bank: 電子記録債権入金銀行
+        ebill_payment_company_bank: 電子記録債権支払銀行
+        rfactoring_company_bank: ファクタリング債権入金銀行
+        pfactoring_company_bank: ファクタング債務支払銀行
+        bank_transfer_receipt_company_bank: 振出入金銀行
+        bank_transfer_payment_company_bank: 振出支払銀行
+  enumerize:
+    date_display_format:
+      japanese: 和暦
+      anno_domini: 西暦
+
+    prefecture:
+      hokkaido: 北海道
+      aomori: 青森県
+      iwate: 岩手県
+      miyagi: 宮城県
+      akita: 秋田県
+      yamagata: 山形県
+      fukushima: 福島県
+      ibaraki: 茨城県
+      tochigi: 栃木県
+      gunma: 群馬県
+      saitama: 埼玉県
+      chiba: 千葉県
+      tokyo: 東京都
+      kanagawa: 神奈川県
+      niigata: 新潟県
+      toyama: 富山県
+      ishikawa: 石川県
+      fukui: 福井県
+      yamanashi: 山梨県
+      nagano: 長野県
+      gifu: 岐阜県
+      shizuoka: 静岡県
+      aichi: 愛知県
+      mie: 三重県
+      shiga: 滋賀県
+      kyoto: 京都府
+      osaka: 大阪府
+      hyogo: 兵庫県
+      nara: 奈良県
+      wakayama: 和歌山県
+      tottori: 鳥取県
+      shimane: 島根県
+      okayama: 岡山県
+      hiroshima: 広島県
+      yamaguchi: 山口県
+      tokushima: 徳島県
+      kagawa: 香川県
+      ehime: 愛媛県
+      kochi: 高知県
+      fukuoka: 福岡県
+      saga: 佐賀県
+      nagasaki: 長崎県
+      kumamoto: 熊本県
+      oita: 大分県
+      miyazaki: 宮崎県
+      kagoshima: 鹿児島県
+      okinawa: 沖縄県
+
+    open_ended:
+      unlimited: 無制限
+      limit: 制限有
+
+    next_altered:
+      no_change: 変更無
+      change: 変更有
+
+    locked:
+      unlocked: ロックアウト無
+      locked: ロックアウト有
+
+    tax_type:
+      bill: 支払手形
+      receipt: 領収証
+
+    taxed:
+      tax: 課税
+      untaxed: 対象外
+
+    abridgment_method:
+      line: 明細行単位
+      no_line: 明細行貸借別
+
+    payment_type:
+      payment: 入金
+      no_payment: 支払
+
+    divided:
+      usual: 通常
+      originally: 分割元
+      result: 分割結果
+
+    bill_made:
+      bill_receipt: 手形→領収証
+      receipt: 領収証
+      receipt_bill: 領収証→手形
+
+    approved:
+      no_approval: 未承認
+      first_approval: 一次承認
+      last_approval: 最終承認
+
+    menu:
+      product_category:
+        system: システム
+        common: 共通
+        bill_credit: 受取手形
+        bill_debit: 支払手形
+        ebill_credit: 電子記録債権
+        ebill_debit: 電子記録債務
+        factoring_credit: ファクタリング債権
+        factoring_debit: ファクタリング債務
+        account_receivable: 売掛金入金
+        account_payment: 買掛金支払
+        print_option: 印刷オプション
+      manager_division:
+        system_admin: システム
+        admin_user: 管理者ユーザ
+        general: 一般
+      extend_type:
+        no_extend: 通常メニュー
+        extend: 拡張メニュー
+
+    approval_setting:
+      approval_type:
+        no_approval: 承認機能を使用しない
+        one_phase_approval: １段階認証を使用する
+        two_phases_approval: ２段階認証を使用する
+
+    user:
+      user_type:
+        admin: 管理者
+        user: ユーザー
+
+    administrator:
+      administrator_type:
+        union_admin: UNION管理者
+        union_developer: UNION開発者
+        union_business: UNION営業
+
+    menu_authority:
+      authority_type:
+        full: フルコントロール
+        create_update: 登録・更新
+        create_update_print: 登録・更新・印刷
+        show_print: 参照・印刷
+
+    default_payable_site:
+      date_designation_division:
+        fixed_date: 期日サイト
+        collection_and_payment: 回収・支払サイト
+      contract_credit_category:
+        all: 全ての債権債務
+        bill_debit: 受取手形
+        bill_credit: 支払手形
+        ebill_debit: 電子記録債権
+        ebill_credit: 電子記録債務
+      site_designation_method:
+        no_designation: 指定しない
+        month_day: サイト日数（ｎヶ月後ｍ日）
+        after_day: サイト日数（ｓ日後）
+      holiday_transfer_method:
+        no_trans: 振替無し
+        previous_business_day: 前営業日
+        following_business_day: 翌営業日
+
+    approver:
+      approver_type:
+        first_approver: 一次承認者
+        last_approver: 最終承認者
+
+    trader:
+      reference_type:
+        billing: 請求先
+        payment: 支払
+        common: 共通
+    trader_bank_account:
+      account_type:
+        ordinary_account: 普通預金
+        current_account: 当座預金
+        others: その他
+
+    account:
+      tax_display:
+        outside: 外税表示
+        inside: 内税表示
+        particularly: 別段表示
+      round:
+        cutting_off: 切り捨て
+        rounding_off: 四捨五入
+        cutting_short: 別段表示
+      fund_division:
+        standard: 通常
+        fund: 資金
+      trader_shared:
+        no_apply: 適用しない
+        use_sub: 補助科目として適用する
+      department_input:
+        no_input: 入力しない
+        detail: 明細データ入力画面指定部門を反映
+        journalizing: 仕訳パターンで指定
+      trader_input_division:
+        no_input: 入力しない
+        customer: 請求先
+        payment: 取引先
+      tax_subject_division:
+        standard: 通常
+        payment_tax: 仮払消費税科目
+        receipt_tax: 仮受消費税科目
+
+    sub_account:
+      tax_display:
+        outside: 外税表示
+        inside: 内税表示
+        particularly: 別段表示
+      round:
+        cutting_off: 切り捨て
+        rounding_off: 四捨五入
+        cutting_short: 別段表示
+
+    operating_division_setting:
+      input_type:
+        bill_credit: 受取手形
+        bill_debit: 支払手形
+        ebill_credit: 電子記録債権
+        ebill_debit: 電子記録債務
+        factoring_credit: ファクタリング債権
+        factoring_debit: ファクタリング債務
+        account_receivable: 売掛金入金
+        account_payment: 買掛金支払
+        print_option: 印刷オプション
+
+    license:
+      license_type:
+        trial: お試し版
+        demo: デモ
+        operation: 本契約
+
+    operating_division:
+      input_division:
+        journal_basic_pattern: 仕訳パターンで指定
+        trader_journal_pattern: 取引先別仕訳パターンで指定
+        bank_journal_pattern: 銀行別仕訳パターンで指定
+        when_input_minutely: 明細データ入力時に指定
+        when_export_fixed_value_setting: データ出力時ニ固定値設定
+        mangement_item_journal_pattern: 管理項目別仕訳パターン
+
+    analysis_division:
+      input_division:
+        journal_basic_pattern: 仕訳パターンで指定
+        trader_journal_pattern: 取引先別仕訳パターンで指定
+        bank_journal_pattern: 銀行別仕訳パターンで指定
+        when_input_minutely: 明細データ入力時に指定
+        when_export_fixed_value_setting: データ出力時ニ固定値設定
+        mangement_item_journal_pattern: 管理項目別仕訳パターン
+
+  general:
+    list:
+      none: ー
+      with_or_without:
+        with: ○
+        with_out: ✕
+    label: &label
+      show: 参照
+      register: 登録
+      create: 新規作成
+      edit: 編集
+      update: 更新
+      detail: 詳細
+      delete: 削除
+      deleted: 削除済み
+      copy: コピー
+      download: ダウンロード
+      csv_download: CSVダウンロード
+      add: 追加
+      search: 検索
+      execute: "実行"
+      back: 戻る
+      close: 閉じる
+      import: インポート
+      select: 選択
+      cancel: キャンセル
+      bundle:
+        create: 一括作成
+        update: 一括編集
+        show: 参照
+      print: 帳票作成
+    message:
+      confirm_delete: "削除してよろしいでしょうか？\n削除を行うとデータの復旧は行えません。"
+      confirm_proceed: "実行してよろしいですか？"
+    placeholder:
+      api_response_additional_data: "GETの場合は、URLに付与するパラメータを記入。POSTの場合は、サーバに送信するPOSTデータを記入"
+    misc:
+      year: "%{year}年"
+      month: "%{month}月"
+      day: "%{day}日"
+      count: "%{count}件目"
+      as: として
+      yen: 円
+      from: ～
+      pixel: px
+      omission: ・・・
+      # count: 回
+
+  title: "電債 クラウド"
+
+  shared:
+    errors:
+      close: ｘ
+    header:
+      since: "Member Since"
+      "sign-out": ログアウト
+      profile: アカウント
+    sidebar:
+      receivables: 債権
+      payables: 債務
+      electronic_receivables: 電子記録債権
+      electronic_payables: 電子記録債務
+      master_management: マスタデータ管理
+      management: 管理メニュー
+      introduction_processing: 導入処理
+      acccount_cooperation_setting: 会計連動設定
+      synthetic_inquiry: 総合照会
+      subject_setting: 科目設定
+      operating_setting: 拡張伝票設定
+      analysis_setting: 拡張補助伝票設定
+      journalizing_making_setting: 仕訳作成設定
+      trader_sign_up: 取引先登録
+      synthesis_inquiry: 総合照会
+      date_bank_spreadsheet: 期日別銀行別集計表
+    index:
+      <<: *label
+    form:
+      <<: *label
+  base:
+    index:
+      <<: *label
+    show:
+      <<: *label
+  operative_settings:
+    date_transferred:
+      use: 有
+      not_use: 無
+    ebill_state_changed:
+      use: 有
+      not_use: 無
+    department_authority_used:
+      use: 有
+      not_use: 無
+    index:
+      <<: *label
+    form:
+      <<: *label
+  company_banks:
+    record_type:
+      use: JISコード
+      not_use: EBCDICコード
+    carriage_return:
+      use: 付けない
+      not_use: 付ける
+    end_of_file:
+      use: 付けない
+      not_use: 付ける
+    index:
+      <<: *label
+    form:
+      <<: *label
+  payables:
+    index:
+      <<: *label
+    form:
+      <<: *label
+  departments:
+    index:
+      <<: *label
+    form:
+      <<: *label
+  approval_settings:
+    one_phase_approval_skiped:
+      skip: 省略可
+      no_skip: 省略不可
+    index:
+      <<: *label
+    form:
+      <<: *label
+  remarks:
+    index:
+      <<: *label
+    form:
+      <<: *label
+  users:
+    list:
+      use: 有
+      not_use: 無
+    index:
+      restricred_create: "登録ユーザー数が上限に達した為、新規作成できません。"
+      create_quantity: "残り%{quantity}ユーザー登録できます。"
+      <<: *label
+    form:
+      <<: *label
+  license_allotments:
+    index:
+      restricred_create: "割当て可能なライセンス数が上限に達した為、ライセンス割当できません。"
+      create_quantity: "%{product_name}：残り%{quantity}ライセンス割当できます。"
+      <<: *label
+    form:
+      <<: *label
+  abridgments:
+    index:
+      <<: *label
+    form:
+      <<: *label
+  management_items:
+    index:
+      <<: *label
+    form:
+      <<: *label
+  menu_authorities:
+    index:
+      <<: *label
+    form:
+      <<: *label
+  default_payable_sites:
+    index:
+      <<: *label
+    form:
+      <<: *label
+  approvers:
+    approver_exist: "この承認者情報は既に登録されているので新規登録できません。"
+    index:
+      mail_delivered:
+        delivered: ○
+        no_delivered: ー
+      <<: *label
+    form:
+      mail_delivered:
+        delivered: 配信する
+        no_delivered: 配信しない
+      <<: *label
+  traders:
+    index:
+      <<: *label
+    form:
+      <<: *label
+  security_policies:
+    included_three_kinds:
+      skip: 有
+      no_skip: 無
+    included_account:
+      permit: 許可する
+      no_permit: 許可しない
+    index:
+      <<: *label
+    form:
+      <<: *label
+  trader_bank_accounts:
+    list:
+      trader_bank_account_create: 取引先口座情報作成
+      trader_bank_account_edit: 取引先口座情報編集
+      trader_bank_account_delete: 口座情報削除
+    index:
+      <<: *label
+    form:
+      <<: *label
+  slip_divisions:
+    form:
+      <<: *label
+    index:
+      <<: *label
+  accounts:
+    list:
+      input_option:
+        input: ○
+        no_input: ー
+    form:
+      input_option:
+        input: 入力する
+        no_input: 入力しない
+      <<: *label
+    index:
+      <<: *label
+  sub_accounts:
+    form:
+      <<: *label
+    index:
+      <<: *label
+  use_accounts:
+    form:
+      <<: *label
+    index:
+      <<: *label
+  analysis_items:
+    form:
+      <<: *label
+    index:
+      <<: *label
+  operating_divisions:
+    form:
+      use_option:
+        use: 使用する
+        no_use: 使用しない
+      <<: *label
+    index:
+      use_option:
+        use: ○
+        no_use: ✕
+      <<: *label
+  operating_division_settings:
+    form:
+      <<: *label
+    index:
+      <<: *label
+  operating_items:
+    form:
+      <<: *label
+    index:
+      <<: *label
+  accounts_settings:
+    endorsement_ac_used:
+      use: 使用する
+      not_use: 使用しない
+    discount_ac_used:
+      use: 使用する
+      not_use: 使用しない
+    notice_journal_made:
+      use: 使用する
+      not_use: 使用しない
+    remarks1_reflected:
+      display: 反映する
+      not_display: 反映しない
+    remarks2_reflected:
+      display: 反映する
+      not_display: 反映しない
+    remarks3_reflected:
+      display: 反映する
+      not_display: 反映しない
+    abridgment_method:
+      line: 明細行単位
+      no_line: 明細行貸借別
+    payment_type:
+      payment: 入金
+      no_payment: 支払
+    index:
+      <<: *label
+    form:
+      <<: *label
+  analysis_divisions:
+    used:
+      use: 使用する
+      no_use: 使用しない
+    index:
+      <<: *label
+    form:
+      <<: *label
+  receipts:
+    receipt_issued:
+      issue: 未発行
+      no_issue: 発行済
+    index:
+      <<: *label
+    form:
+      <<: *label
+  date_bank_payments:
+    index:
+      aggregate_date: 集計開始年月
+      aggregate_criteria: 集計基準
+      aggregate_target: 集計対象
+      facts: てん末
+      company_bank_from: 自社取引銀行
+      <<: *label
+    form:
+      <<: *label
+  date_bank_settlements:
+    index:
+      aggregate_date: 集計開始年月
+      aggregate_target: 集計対象
+      company_bank_from: 自社取引銀行
+      <<: *label
+    form:
+      <<: *label
+  payment_notices:
+    index:
+      trader_from: 支払先
+      payment_date_from: 支払日付
+      payment_target: 支払種別
+      <<: *label
+    form:
+      <<: *label
+  admin:
+    title: "ｅ達人クラウド"
+    shared:
+      header:
+        since: "Member Since"
+        "sign-out": ログアウト
+        profile: アカウント
+      sidebar:
+        master_management: マスタデータ管理
+        system_management: システム管理
+        customer_management: 顧客管理
+        institution_management: 機関管理
+      index:
+        <<: *label
+      form:
+        <<: *label
+    base:
+      index:
+        <<: *label
+    tops:
+      show:
+        more: もっと見る
+    users:
+      index:
+        <<: *label
+      form:
+        <<: *label
+    products:
+      use_or_no_use:
+        use: ○
+        no_use: ✕
+      index:
+        <<: *label
+      form:
+        select_product_category: 製品別使用有無選択
+        <<: *label
+    recording_institutions:
+      index:
+        <<: *label
+      form:
+        <<: *label
+    banks:
+      index:
+        <<: *label
+      new:
+        <<: *label
+    companies:
+      index:
+        <<: *label
+      show:
+        <<: *label
+      form:
+        <<: *label
+    management_divisions:
+      index:
+        <<: *label
+      form:
+        <<: *label
+      list:
+        user_create: ユーザ作成
+        user_edit: ユーザ編集
+        license: ライセンス管理
+        <<: *label
+    licenses:
+      index:
+        <<: *label
+      form:
+        <<: *label
+    menus:
+      index:
+        used: 使用
+        not_used: 不使用
+        <<: *label
+      list:
+        extend_type:
+          extend: ○
+          no_extend: ✕
+      form:
+        used: 使用する
+        not_used: 使用しない
+        extend_type:
+          extend: 有
+          no_extend: 無
+        <<: *label
+    state_codes:
+      index:
+        <<: *label
+      form:
+        <<: *label
+    administrators:
+      index:
+        <<: *label
+      form:
+        <<: *label
+    banks:
+      index:
+        <<: *label
+      form:
+        <<: *label
+    branches:
+      index:
+        <<: *label
+      form:
+        <<: *label
+    financial_institutions:
+      model_name: 金融機関
+      index:
+        import_file: インポートファイル
+        please_select_file: ファイルを選択して下さい。
+        <<: *label
+    users:
+      list:
+        true: 有
+        false: 無
+      index:
+        <<: *label
+      form:
+        <<: *label
+    business_divisions:
+      index:
+        <<: *label
+      form:
+        <<: *label
+    bank_holidays:
+      index:
+        <<: *label
+      form:
+        <<: *label
+    stamp_taxes:
+      index:
+        <<: *label
+      form:
+        <<: *label
+    tax_divisions:
+      index:
+        <<: *label
+      form:
+        <<: *label
+    tax_rates:
+      index:
+        used: 使用する
+        not_used: 使用しない
+      form:
+        <<: *label
+    infos:
+      index:
+        <<: *label
+      form:
+        <<: *label
+
+  default_actions: &default_actions
+    index: 一覧
+    new: 新規作成
+    create: 新規作成
+    edit: 変更
+    update: 変更
+    copy: 新規作成
+    show: 参照
+    search: 検索
+
+  selects:
+    accrual_type:
+      payv: 発生(債務者請求方式)
+      trns: 譲受
+      recv: 発生(債権者請求方式)
+    account_type:
+      nomal: 普通
+      current: 当座
+      other: その他
+    transfer_restricted:
+      none: なし
+      finantial_only: 金融機関のみ
+    period_type:
+      none: 指定なし
+      occurred_on: 発生日付
+      transferred_on: 譲受日付
+      matured_on: 支払期日
+      settled_on: 支払日付
+    name_specified:
+      debtor_name: 債務者名
+      assignor_name: 譲渡人名
+    initial_representation_of_data:
+      pbill_mailing_division:
+        hand: 手渡し
+        mail: 郵送
+      pbill_postage_division:
+        offset: 相殺
+        stamp: 切手
+    data_type:
+      receivable:
+        acceptances_receivable: 受取手形
+        electronic_receivables: 電子記録債権
+        factoring: ファクタリング債権
+        date_cash_payment: 期日現金入金
+    fact:
+      receivable:
+        receipt: 受領
+        transfer_endorsement: 譲渡（裏書）
+        discount: 割引
+        settlement: 決済
+        repayment_cancel: 返却（取消）
+        own_facts: 自社てん末
+      debt:
+        drawer: 振出
+        settlement: 決済
+        repayment_cancel: 返却（取消）
+
+  titles:
+    receivable_register: 債権登録
+    new_receivable_register: 新規に登録する
+    densai_notice_info: でんさい通知情報を受け入れる
+    densai_disclose_info: でんさい開示情報を受け入れる
+    erec_file_info: 電子債権情報ファイルを受け入れる
+    erec_mod: 修正・てん末変更を行う
+    dealing_choice: 処理選択
+    tops: トップ
+    sessions: ログイン
+    passwords: パスワード再発行
+    registrations: プロフィール
+    company_banks: 自社取引銀行管理
+    payables: 債務登録
+    operative_settings: 運用設定
+    departments: 部門登録
+    approval_settings: 承認設定
+    remarks: 備考登録
+    users: ユーザー登録
+    license_allotments: ライセンス割当
+    abridgments: 摘要登録
+    management_items: 管理項目登録
+    menu_authorities: メニュー権限登録
+    default_payable_sites: 期日サイト既定値
+    approvers: 承認者情報登録
+    traders: 取引先
+    new_traders: 新規登録
+    security_policies: セキュリティーポリシー
+    trader_bank_accounts: 取引先口座情報登録
+    slip_divisions: 伝票区分登録
+    accounts: 勘定科目登録
+    sub_accounts: 補助科目登録
+    use_accounts: 科目別入力設定
+    analysis_items: 拡張補助マスター
+    operating_divisions: 拡張伝票区分
+    operating_division_settings: 拡張伝票区分入力設定
+    operating_items: 拡張伝票マスター
+    accounts_settings: 仕訳作成設定
+    analysis_divisions: 拡張補助区分登録
+    receipts: 領収証登録
+    receivable_register: 債権登録
+    new_receivable_register: 新規に登録する
+    densai_notice_info: でんさい通知情報を受け入れる
+    densai_disclose_info: でんさい開示情報を受け入れる
+    erec_file_info: 電子債権情報ファイルを受け入れる
+    erec_mod: 修正・てん末変更を行う
+    receivables:
+      default: 電子記録債権入力
+      discounts: 割引入力
+      transfers: 一括譲渡処理
+      settlements: 電子記録債権決済指示
+      dealing_choice: 処理選択
+    interlocked: 連動処理
+    journals:
+      dealing_choice: 処理選択
+      journal_data: 仕訳作成
+    guarantors: 保証人情報入力
+    date_bank_choice: 処理選択
+    date_bank_payments: 期日別銀行別入金集計表
+    date_bank_settlements: 期日別銀行別決済集計表
+    payment_notices: 支払通知書
+    admin:
+      tops: トップ
+      sessions: ログイン
+      passwords: パスワード再発行
+      registrations: プロフィール
+      users: ユーザー管理
+      companies: 契約企業管理
+      management_divisions: 管理区分
+      licenses: ライセンス管理
+      products: 製品
+      recording_institutions: 電子債権記録機関管理
+      banks: 金融機関管理
+      menus: メニュー管理
+      state_codes: てん末管理
+      banks: 金融機関管理
+      administrators: UNIONユーザー管理
+      business_divisions: 事業区分管理
+      bank_holidays: 銀行休日管理
+      stamp_taxes: 印紙税管理
+      tax_divisions: 税区分管理
+      tax_rates: 税率管理
+      infos: お知らせ管理
+      financial_institutions: 金融機関管理
+
+  side_titles:
+    receivables:
+      default: 電子記録債権登録
+      discounts:
+        default: 債権割引処理
+        input_process: 割引入力処理
+        form_print: 割引申込書印刷
+        cancel_process: 割引取消処理
+      transfers:
+        default: 債権譲渡処理
+        bulk_transfer_process: 一括譲渡処理
+        densai_records_output: でんさい譲渡記録請求出力
+        application_form_print: 電手譲渡申込書印刷
+        cancel_process: 譲渡取消処理
+      settlements: 債権決済指示
+      dealing_choice: 処理選択
+    journals:
+      default: 仕訳作成
+      dealing_choice: 処理選択
+      data: 仕訳データ作成
+      output_format: 仕訳出力形式作成
+
+  search_modal_titles:
+    bank: 銀行検索
+    branch: 銀行本支店検索
+    department: 部門検索
+
+  small_titles:
+    receivables:
+      <<: *default_actions
+      search: 検索条件設定
+      result: 検索結果一覧
+      discounts:
+        search: 検索条件指定
+        result: 検索結果一覧
+        select: 割引日・割引料入力
+        confirm: 入力内容確認
+      transfers:
+        search: 検索条件指定
+        result: 検索結果一覧
+        select: 譲渡日付・譲渡先入力
+        confirm: 入力内容確認
+      settlements:
+        <<: *default_actions
+        search: 検索条件設定
+        result: 検索結果一覧
+        select: 手数料入力
+        confirm: 入力内容確認
+      dealing_choice:
+        regist: 以下のメニューより行う処理を選択してください。
+        discounts: 以下のメニューより行う処理を選択してください。
+        transfers: 以下のメニューより行う処理を選択してください。
+    journals:
+      dealing_choice:
+        select: 以下のメニューより行う処理を選択してください。
+      journal_data:
+        search: ""
+        confirm: ""
+        output: ""
+    guarantors:
+      new: ""
+    tops:
+      show: 表示
+    registrations:
+      <<: *default_actions
+    operative_settings:
+      control_panel:
+        show: 参照
+        edit: 編集
+      <<: *default_actions
+    company_banks:
+      <<: *default_actions
+    payables:
+      <<: *default_actions
+    departments:
+      <<: *default_actions
+    approval_settings:
+      <<: *default_actions
+    remarks:
+      <<: *default_actions
+    users:
+      <<: *default_actions
+    license_allotments:
+      <<: *default_actions
+    abridgments:
+      <<: *default_actions
+    management_items:
+      <<: *default_actions
+    menu_authorities:
+      <<: *default_actions
+    default_payable_sites:
+      <<: *default_actions
+    approvers:
+      <<: *default_actions
+    traders:
+      new: 新規作成
+      edit_or_delete: 修正・削除
+      site: サイト登録
+      <<: *default_actions
+    security_policies:
+      <<: *default_actions
+    trader_bank_accounts:
+      <<: *default_actions
+    slip_divisions:
+      <<: *default_actions
+    accounts:
+      <<: *default_actions
+    sub_accounts:
+      <<: *default_actions
+    use_accounts: 
+      <<: *default_actions
+    analysis_items:
+      <<: *default_actions
+    operating_divisions:
+       <<: *default_actions
+    operating_division_settings:
+      <<: *default_actions
+    operating_items:
+      <<: *default_actions
+    accounts_settings:
+      <<: *default_actions
+    analysis_divisions:
+      <<: *default_actions
+    receipts:
+      <<: *default_actions
+    date_bank_choice:
+      index: "以下のメニューより行う処理を選択してください。"
+    date_bank_payments:
+      <<: *default_actions
+    date_bank_settlements:
+      <<: *default_actions
+    payment_notices:
+      <<: *default_actions
+
+    admin:
+      tops:
+        show: 表示
+      products:
+        <<: *default_actions
+      recording_institutions:
+        <<: *default_actions
+      users:
+        <<: *default_actions
+      companies:
+        <<: *default_actions
+      management_divisions:
+        <<: *default_actions
+      licenses:
+        <<: *default_actions
+      banks:
+        <<: *default_actions
+      menus:
+        <<: *default_actions
+      state_codes:
+        <<: *default_actions
+      administrators:
+        <<: *default_actions
+      banks:
+        <<: *default_actions
+      branches:
+        <<: *default_actions
+      business_divisions:
+        <<: *default_actions
+      bank_holidays:
+        <<: *default_actions
+      stamp_taxes:
+        <<: *default_actions
+      tax_divisions:
+        <<: *default_actions
+      tax_rates:
+        <<: *default_actions
+      financial_institutions:
+        <<: *default_actions
+      infos:
+        <<: *default_actions
+
+  stage:
+    receivables:
+      discounts:
+        search: ①検索条件を指定する
+        result: ②割引する債権を選択
+        select: ③割引日・割引料入力
+        confirm: ④入力内容確認と登録
+      transfers:
+        select: ①譲渡日付・譲渡先入力
+        search: ②検索条件を指定する
+        result: ③譲渡する債権を選択
+        confirm: ④入力内容確認と登録
+      settlements:
+        search: ①検索条件を指定する
+        result: ②決済する債権を選択
+        select: ③手数料入力
+        confirm: ④入力内容確認と登録
+    journals:
+      journal_data:
+        search: ①検索条件を指定する
+        confirm: ②仕訳内容の確認と登録
+        output: ③仕訳伝票データを出力する
+  views:
+    pagination:
+      next: »
+      previous: «
+      last: Last
+      first: First
+    page_entries_info:
+      one_page:
+        display_entries:
+          zero: "%{entry_name}は見つかりませんでした。"
+          one: "1件の%{entry_name}を表示しています。"
+          other: "%{count}件の%{entry_name}を表示しています。"
+      more_pages:
+        display_entries: "%{count}件中、%{first}&nbsp;-&nbsp;%{last}件の%{entry_name}を表示しています。"

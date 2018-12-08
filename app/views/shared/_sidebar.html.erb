@@ -1,0 +1,224 @@
+<!-- Left side column. contains the logo and sidebar -->
+<aside class="left-side sidebar-offcanvas">
+  <!-- sidebar: style can be found in sidebar.less -->
+  <section class="sidebar">
+    <!-- sidebar menu: : style can be found in sidebar.less -->
+    <ul class="sidebar-menu">
+      <!-- 管理メニュー -->
+      <li class="treeview <%= raw('active') if current_controller?(["license_allotments", "approval_settings", "users", "menu_authorities", "security_policies"]) %>">
+	      <%= link_to "javascript:void(0)" do %>
+	        <i class="fa fa-arrow-circle-right"></i>
+          <span><%= t('.management') %></span>
+          <i class="fa fa-angle-left pull-right"></i>
+        <% end %>
+        <ul class="treeview-menu">
+      	  <li <%= raw('class="active"') if current_controller?("approval_settings") %>>
+      	    <%= link_to approval_settings_path do %><i class="fa fa-edit"></i><%= t('titles.approval_settings') %><% end %>
+      	  </li>
+      	  <li <%= raw('class="active"') if current_controller?("users") %>>
+      	    <%= link_to users_path do %><i class="fa fa-edit"></i><%= t('titles.users') %><% end %>
+      	  </li>
+      	  <li <%= raw('class="active"')  if current_controller?("license_allotments") %>>
+      	    <%= link_to license_allotments_path do %><i class="fa fa-edit"></i><%= t('titles.license_allotments') %><% end %>
+      	  </li>
+      	  <li <%= raw('class="active"') if current_controller?("menu_authorities") %>>
+      	    <%= link_to menu_authorities_path do %><i class="fa fa-edit"></i><%= t('titles.menu_authorities') %><% end %>
+      	  </li>
+	        <li <%= raw('class="active"') if current_controller?("approvers") %>>
+	          <%= link_to approvers_path do %><i class="fa fa-edit"></i><%= t('titles.approvers') %><% end %>
+	        </li>
+          <li <%= raw('class="active"') if current_controller?("security_policies") %>>
+            <%= link_to security_policy_path do %><i class="fa fa-edit"></i><%= t('titles.security_policies') %><% end %>
+          </li>
+        </ul>
+      </li>
+
+      <!-- 導入処理 -->
+      <li class="treeview <%= raw('active') if current_controller?(["operative_settings", "departments", "company_banks", "remarks", "management_items"]) %>">
+        <%= link_to "javascript:void(0)" do %>
+	        <i class="fa fa-arrow-circle-right"></i>
+          <span><%= t('.introduction_processing') %></span>
+          <i class="fa fa-angle-left pull-right"></i>
+        <% end %>
+        <ul class="treeview-menu">
+          <li <%= raw('class="active"') if current_controller?("operative_settings") %>>
+            <%= link_to operative_settings_control_panel_path do %><i class="fa fa-edit"></i><span><%= t('titles.operative_settings') %></span><% end %>
+          </li>
+          <li <%= raw('class="active"') if current_controller?("departments") %>>
+            <%= link_to departments_path do %><i class="fa fa-edit"></i><%= t('titles.departments') %><% end %>
+          </li>
+      	  <li <%= raw('class="active"') if current_controller?("remarks") %>>
+      	    <%= link_to remarks_path do %><i class="fa fa-edit"></i><%= t('titles.remarks') %><% end %>
+      	  </li>
+          <li <%= raw('class="active"') if current_controller?("management_items") %>>
+      	    <%= link_to management_items_path do %><i class="fa fa-edit"></i><%= t('titles.management_items') %><% end %>
+      	  </li>
+          <li <%= raw('class="active"') if current_controller?("company_banks") %>>
+            <%= link_to company_banks_path do %><i class="fa fa-edit"></i><span><%= t('titles.company_banks') %></span><% end %>
+          </li>
+        </ul>
+      </li>
+
+      <!-- 取引先登録 -->
+      <li class="treeview <%= raw('active') if current_controller?(["traders", "trader_bank_accounts"]) %>">
+        <%= link_to "javascript:void(0)" do %>
+	        <i class="fa fa-arrow-circle-right"></i>
+          <span><%= t('.trader_sign_up') %></span>
+          <i class="fa fa-angle-left pull-right"></i>
+        <% end %>
+        <ul class="treeview-menu">
+	        <li <%= raw('class="active"') if current_controller?("traders") && action_name == 'new' %>>
+            <%= link_to new_trader_path do %><i class="fa fa-edit"></i><span><%= t('small_titles.traders.new') %></span><% end %>
+          </li>
+          <li <%= raw('class="active"') if current_controller?('traders') && action_name == 'edit_or_delete' %>>
+            <%= link_to edit_or_delete_traders_path do %><i class='fa fa-edit'></i><span><%= t('small_titles.traders.edit_or_delete') %></span><% end  %>
+          </li>
+          <li <%= raw('class="active"') if current_controller?('traders') && action_name == 'site' %>>
+            <%= link_to site_traders_path do %><i class='fa fa-edit'></i><span><%= t('small_titles.traders.site') %></span><% end %>
+          </li>
+	      </ul>
+      </li>
+
+      <!-- 会計連携設定 -->
+      <li class="treeview <%= raw('active') if current_controller?(["accounts","abridgments", "slip_divisions", "analysis_divisions", "analysis_items", "operating_divisions", "operating_items", "operating_division_settings", "use_accounts"]) %>">
+	      <%= link_to "javascript:void(0)" do %>
+          <i class="fa fa-arrow-circle-right"></i>
+	        <span><%= t('.acccount_cooperation_setting') %></span>
+	        <i class="fa fa-angle-left pull-right"></i>
+        <% end %>
+
+        <ul class="treeview-menu">
+	        <li class="treeview <%= raw('active') if current_controller?(["accounts", "abridgments", "slip_divisions", "analysis_divisions", "analysis_items", "operating_divisions", "operating_items", "operating_division_settings", "use_accounts"]) %>">
+	          <%= link_to "javascript:void(0)" do %>
+              <i class="fa fa-arrow-circle-right"></i>
+	            <span><%= t('.subject_setting') %></span>
+	            <i class="fa fa-angle-left pull-right"></i>
+            <% end %>
+            
+            <ul class="treeview-menu">
+              <li <%= raw('class="active"') if current_controller?("slip_divisions") %>>
+                <%= link_to slip_divisions_path do %><i class="fa fa-edit"></i><%= t('titles.slip_divisions') %><% end %>
+              </li>
+
+
+              <li class="treeview <%= raw('active') if current_controller?(["operating_divisions", "operating_items", "operating_division_settings"]) %>">
+                <%= link_to "javascript:void(0)" do %>
+                  <i class="fa fa-arrow-circle-right"></i>
+                  <span><%= t('.operating_setting') %></span>
+                  <i class="fa fa-angle-left pull-right"></i>
+                <% end %>
+                
+                <ul class="treeview-menu">
+                  <li <%= raw('class="active"') if current_controller?("operating_divisions") %>>
+                    <%= link_to operating_divisions_path do %><i class="fa fa-edit"></i><%= t('titles.operating_divisions') %><% end %>
+                  </li>
+                  
+                  <li <%= raw('class="active"') if current_controller?("operating_division_settings") %>>
+                    <%= link_to operating_division_settings_path do %><i class="fa fa-edit"></i><%= t('titles.operating_division_settings') %><% end %>
+                  </li>
+                  
+                  <li <%= raw('class="active"') if current_controller?("operating_items") %>>
+                    <%= link_to operating_items_path do %><i class="fa fa-edit"></i><%= t('titles.operating_items') %><% end %>
+                  </li>
+                </ul>
+              </li>
+              
+              <li <%= raw('class="active"') if current_controller?("accounts") %>>
+                <%= link_to accounts_path do %><i class="fa fa-edit"></i><%= t('titles.accounts') %><% end %>
+              </li>
+
+              <li <%= raw('class="active"') if current_controller?("sub_accounts") %>>
+                <%= link_to sub_accounts_path do %><i class="fa fa-edit"></i><%= t('titles.sub_accounts') %><% end %>
+              </li>
+	            
+              <li class="treeview <%= raw('active') if current_controller?(["analysis_items", "analysis_divisions"]) %>">
+                <%= link_to "javascript:void(0)" do %>
+                  <i class="fa fa-arrow-circle-right"></i>
+                  <span><%= t('.analysis_setting') %></span>
+                  <i class="fa fa-angle-left pull-right"></i>
+                <% end %>
+                
+                <ul class="treeview-menu">
+                  <li <%= raw('class="active"') if current_controller?("analysis_divisions") %>>
+                    <%= link_to analysis_divisions_path do %><i class="fa fa-edit"></i><%= t('titles.analysis_divisions') %><% end %>
+                  </li>
+      	          
+                  <li <%= raw('class="active"') if current_controller?("analysis_items") %>>
+                    <%= link_to analysis_items_path do %><i class="fa fa-edit"></i><%= t('titles.analysis_items') %><% end %>
+                  </li>
+                </ul>
+              </li>
+
+              <li <%= raw('class="active"') if current_controller?("use_accounts") %>>
+                <%= link_to use_accounts_path do %><i class="fa fa-edit"></i><%= t('titles.use_accounts') %><% end %>
+              </li>
+  	          
+              <li <%= raw('class="active"') if current_controller?("abridgments") %>>
+                <%= link_to abridgments_path do %><i class="fa fa-edit"></i><%= t('titles.abridgments') %><% end %>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      
+      <!-- 総合照会 -->
+      <li class="treeview <%= raw('active') if current_controller?(["date_bank_choice", "date_bank_payments", "date_bank_settlements"]) %>">
+        <%= link_to "javascript:void(0)" do %>
+          <i class="fa fa-arrow-circle-right"></i>
+          <span><%= t('.synthesis_inquiry') %></span>
+          <i class="fa fa-angle-left pull-right"></i>
+        <% end %>
+        <ul class="treeview-menu">
+          <li class="treeview <%= raw('active') if current_controller?(["date_bank_choice", "date_bank_payments", "date_bank_settlements"]) %>">
+            <%= link_to "javascript:void(0)" do %>
+              <i class="fa fa-arrow-circle-right"></i>
+              <span><%= t('.date_bank_spreadsheet') %></span>
+              <i class="fa fa-angle-left pull-right"></i>
+            <% end %>
+            <ul class="treeview-menu">
+              <li <%= raw('class="active"') if current_controller?('date_bank_choice') %>>
+                <%= link_to date_bank_choice_path do %><i class="fa fa-edit"></i><%= t('titles.date_bank_choice') %><% end %>
+              </li>
+              <li <%= raw('class="active"') if current_controller?('date_bank_payments') %>>
+                <%= link_to edit_date_bank_payment_path do %><i class="fa fa-edit"></i><%= t('titles.date_bank_payments') %><% end %>
+              </li>
+              <li <%= raw('class="active"') if current_controller?("date_bank_settlements") %>>
+                <%= link_to edit_date_bank_settlement_path do %><i class="fa fa-edit"></i><%= t('titles.date_bank_settlements') %><% end %>
+              </li>
+            </ul>
+            <li <%= raw('class="active"') if current_controller?("payment_notice") %>>
+              <%= link_to new_payment_notice_path do %><i class="fa fa-file-text"></i><span><%= t('titles.payment_notices') %></span><% end %>
+            </li>
+          </li>
+        </ul>
+      </li>
+      
+      <!-- 債務登録 -->
+      <li <%= raw('class="active"') if current_controller?("payables") %>>
+        <%= link_to payables_path do %><i class="fa fa-file-text"></i><span><%= t('titles.payables') %></span><% end %>
+      </li>
+      
+      <!-- 領収書登録 -->
+      <li <%= raw('class="active"') if current_controller?("receipts") %>>
+        <%= link_to receipts_path do %><i class="fa fa-file-text"></i><span><%= t('titles.receipts') %></span><% end %>
+      </li>
+
+      <% Settings.menu_each do |menu| %>
+        <%= render layout: 'shared/treeview', locals: {menu: menu} do %>
+          <% menu.submenu_each do |submenu| %>
+            <% if submenu[:keep_controllers].present? %>
+              <%= render layout: 'shared/treeview', locals: {menu: submenu} do %>
+                <% submenu.submenu_each do |sub_submenu| %>
+                  <%= render partial: 'shared/treeviewmenu', locals: {submenu: sub_submenu} %>
+                <% end %>
+              <% end %>
+            <% else %>
+              <%= render partial: 'shared/treeviewmenu', locals: {submenu: submenu} %>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+    </ul>
+  </section>
+  <!-- /.sidebar -->
+</aside>

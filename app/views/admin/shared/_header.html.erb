@@ -1,0 +1,42 @@
+<!-- header logo: style can be found in header.less -->
+<header class="header">
+  <%= link_to t('admin.title'), admin_root_path, :class => :logo %>
+  <!-- Header Navbar: style can be found in header.less -->
+  <nav class="navbar navbar-static-top" role="navigation">
+    <!-- Sidebar toggle button-->
+    <%= link_to 'javascript:void(0)', :class => 'navbar-btn sidebar-toggle', 'data-toggle' => :offcanvas, :role => :button do %>
+      <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+    <% end %>
+
+    <div class="navbar-right">
+      <ul class="nav navbar-nav">
+
+        <!-- User Account: style can be found in dropdown.less -->
+        <li class="dropdown user user-menu">
+          <%= link_to 'javascript:void(0)', :class => 'dropdown-toggle', 'data-toggle' => :dropdown do %>
+            <i class="glyphicon glyphicon-user"></i>
+            <span><%= current_admin_administrator.name %> <i class="caret"></i></span>
+          <% end %>
+          <ul class="dropdown-menu">
+            <!-- User image -->
+            <li class="user-header bg-light-blue">
+              <p>
+                <%= current_admin_administrator.name %>
+                <small><%= t('.since') %> <%= current_admin_administrator.created_at.strftime('%d %b, %Y') %></small>
+              </p>
+            </li>
+            <!-- Menu Footer-->
+            <li class="user-footer">
+              <div class="pull-left">
+                <%= link_to t('.profile'), edit_admin_administrator_registration_path, :class => 'btn btn-default btn-flat' %>
+              </div>
+              <div class="pull-right">
+                <%= link_to t('.sign-out'), destroy_admin_administrator_session_path, :method => :delete, :class => 'btn btn-default btn-flat' %>
+              </div>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>

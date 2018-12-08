@@ -1,0 +1,87 @@
+Lint/AssignmentInCondition:
+  Enabled: false
+
+Lint/ConditionPosition:
+  Enabled: false
+
+Lint/HandleExceptions:
+  Enabled: false
+
+Lint/UnusedBlockArgument:
+  Enabled: false
+
+Lint/UnusedMethodArgument:
+  Enabled: false
+
+Metrics/AbcSize:
+  Max: 128
+
+Metrics/CyclomaticComplexity:
+  Max: 9
+
+Metrics/LineLength:
+  Max: 172
+
+Metrics/MethodLength:
+  Max: 36
+
+Metrics/PerceivedComplexity:
+  Max: 10
+
+Style/AccessModifierIndentation:
+  EnforcedStyle: outdent
+
+Style/Documentation:
+  Enabled: false
+
+Style/EmptyLinesAroundAccessModifier:
+  Enabled: false
+
+Style/EmptyLinesAroundBlockBody:
+  Enabled: false
+
+Style/HashSyntax:
+  EnforcedStyle: ruby19
+
+Style/MultilineOperationIndentation:
+  Enabled: false
+
+Style/NumericLiterals:
+  Enabled: false
+
+Style/PerlBackrefs:
+  Enabled: false
+
+Style/RaiseArgs:
+  EnforcedStyle: compact
+
+Style/RescueModifier:
+  Enabled: false
+
+Style/RegexpLiteral:
+  Enabled: false
+
+Style/SignalException:
+  Enabled: false
+
+Style/SingleLineBlockParams:
+  Enabled: false
+
+Style/SpaceAroundEqualsInParameterDefault:
+  EnforcedStyle: no_space
+
+Style/SpaceInsideHashLiteralBraces:
+  EnforcedStyle: no_space
+
+Style/UnlessElse:
+  Enabled: false
+
+Style/WordArray:
+  Enabled: false
+
+AllCops:
+  RunRailsCops: true
+  Exclude:
+    - db/schema.rb
+    - db/migrate/*
+    - 'vendor/**/*'

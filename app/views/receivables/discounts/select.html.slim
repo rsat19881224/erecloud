@@ -1,0 +1,67 @@
+= render :partial => 'shared/receivables/stage'
+section.container
+  = form_tag result_receivables_discounts_path, method: :get do
+    .row
+      = submit_tag '戻る', name: :back, class: "btn btn-default col-xs-2 pull-right back-button"
+
+  div
+    = form_tag confirm_receivables_discounts_path do
+      .financial-institutions
+        .row
+          .col-xs-2
+            label = '記録機関'
+          .col-xs-10
+            = @search_institution_bank[:recording_institution]
+        .row
+          .col-xs-2
+            label = '自社取引銀行'
+          .col-xs-2
+            = "#{@search_institution_bank[:bank][0]}:#{@search_institution_bank[:bank][1]}"
+          .col-xs-2
+            = "#{@search_institution_bank[:bank][2]}:#{@search_institution_bank[:bank][3]}"
+          .col-xs-6
+            = "#{@search_institution_bank[:bank][4]}:#{@search_institution_bank[:bank][5]} #{@search_institution_bank[:bank][6]}#{@search_institution_bank[:bank][7]}"
+      .row
+        .col-xs-2
+          label = '合計件数'
+        .col-xs-2
+          = "#{@receivable_searches.size}件"
+        .col-xs-2
+          label = '合計金額'
+        .col-xs-6
+          = "#{number_to_currency(@receivable_searches.inject(0) { |sum, r| sum + r.residual_money }, unit: '', precision: 0)}円"
+      .discount-date
+        .row
+          .col-xs-2
+            label = '割引申込日'
+          .col-xs-10
+            = text_field_tag "discount[requested_on]", @input_params.try(:fetch, 'requested_on', nil), class: :inputCalendars, autocomplete: :off
+        .row
+          .col-xs-2
+            label = '割引日(割引希望日)'
+          .col-xs-10
+            = text_field_tag "discount[transferred_on]", @input_params.try(:fetch, 'transferred_on', nil), class: :inputCalendars, autocomplete: :off
+      .result_container
+        .row.text-center.col-xs-10
+          .row
+            .col-xs-1 No
+            .col-xs-3 記録番号
+            .col-xs-1 支払期日
+            .col-xs-3 債権残高
+            .col-xs-2 割引料
+            .col-xs-2 手数料
+
+          - @receivable_searches.each_with_index do |r, i|
+            .row
+              = hidden_field_tag 'q[id_eq_any][]', r.id
+              = hidden_field_tag id="occurred_on#{r.id}", r.occurred_on
+              .col-xs-1.text-center = "No#{i+1}"
+              .col-xs-3 = r.recording_number
+              .col-xs-1 id="matured_on#{r.id}" = r.try(:matured_on).try(:strftime, "%Y-%m-%d")
+              .col-xs-3.text-right id="money#{r.id}" = number_to_currency(r.residual_money, unit: '', precision: 0)
+              .col-xs-2 = text_field_tag "discount[discount_charge][]", @input_params.try(:fetch, 'discount_charge').try(:fetch, i, 0), class: 'money_format text-right', autocomplete: :off
+              .col-xs-2 = text_field_tag "discount[bank_transfer_fee][]", @input_params.try(:fetch, 'bank_transfer_fee').try(:fetch, i, 0), class: 'money_format text-right', autocomplete: :off
+        .row
+          actions.col-xs-12
+            = button_tag 'キャンセル', type: 'button', class: 'btn btn-primary col-xs-2 col-xs-offset-1 form_reset'
+            = submit_tag '次へ', id: 'discount_confirm_button', class: 'btn btn-primary col-xs-2 col-xs-offset-1', disabled: true

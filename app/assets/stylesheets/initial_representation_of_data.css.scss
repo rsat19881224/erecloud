@@ -1,0 +1,76 @@
+$modalWidth: 1000px;
+$modalBodyPadding: 20px;
+$tableFormWidth: $modalWidth - $modalBodyPadding * 2;
+$thColor: #5bc0de;
+$thWidth: 210px;
+$tdWidth: $tableFormWidth - $thWidth;
+$trHeight: 33px;
+
+@mixin commonTableForm {
+    width: $tableFormWidth;
+
+    tbody {
+        tr {
+            border: 1px solid #ddd;
+            height: $trHeight;
+        }
+
+        th {
+            width: $thWidth;
+            display: table-cell;
+            vertical-align: middle;
+            padding-left: 5px;
+            background-color: $thColor;
+        }
+
+        td {
+            width: $tdWidth;
+            padding-left: 5px;
+        }
+    }
+}
+
+#initial_representation_of_data {
+    .modal-dialog {
+        width: $modalWidth;
+    }
+
+    .modal-body {
+        padding: $modalBodyPadding;
+    }
+
+    .modal-footer {
+        margin-top: 0px;
+
+        button {
+            width: 100px;
+            margin-left: 10px;
+        }
+    }
+}
+
+#initial_representation_of_data_form_table {
+    @include commonTableForm;
+}
+
+$companyBankCodeWidth: 80px;
+$companyBankNameWidth: $tdWidth - $companyBankCodeWidth - 15;
+.company_bank_field {
+    input[type='text']:first-child {
+        float: left;
+        width: $companyBankCodeWidth;
+        margin-right: 5px;
+    }
+
+    input[type='text']:nth-child(2) {
+        width: $companyBankNameWidth;
+    }
+}
+
+#trader_initial_representation_of_data_attributes_rbill_drawing_bank_name {
+    width: $tdWidth - 100px;
+}
+
+#trader_initial_representation_of_data_attributes_rbill_drawing_branch_name {
+    width: $tdWidth - 100px;
+}

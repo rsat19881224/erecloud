@@ -1,0 +1,8 @@
+li.treeview class = menu.active_keep_controller
+  = link_to "javascript:void(0)" do
+    i.fa.fa-arrow-circle-right
+    span = menu.t_title
+    i.fa.fa-angle-left.pull-right
+  ul.treeview-menu
+    = yield
+

@@ -1,0 +1,66 @@
+= render :partial => 'shared/receivables/stage'
+= search_form_for @q, url: result_receivables_settlements_path, method: :get do |f|
+  section.container.search_container
+    div
+      .row
+        .col-xs-2
+          label = "処理選択"
+        .col-xs-10
+          span.mr20
+            = radio_button_tag :cancel_flag, 0, checked: @aggregate_scope.try(:fetch, 'cancel_flag', '0') == '0'
+            span = "決済指示"
+          span
+            = radio_button_tag :cancel_flag, 1, checked: @aggregate_scope.try(:fetch, 'cancel_flag', '0') == '1'
+            span = "決済取消"
+    div
+      .row
+        .col-xs-2
+          = check_box_tag :recording_institutions_check, true, @aggregate_scope.try(:fetch, 'recording_institutions_check', 'false') == 'true'
+          = label_tag :recording_institutions_check, "記録機関を指定する"
+        .col-xs-10
+          = f.collection_select :recording_institution_id_eq, RecordingInstitution.all, :code, :name, {prompt: "記録機関を選んでください"}, {:disabled => "disabled"}
+
+    div
+      .row
+        .col-xs-2
+          label = "集計期間"
+        .col-xs-2
+          = select_tag :period_type_1, options_for_select(Settings.enumerize_options.receivables.period_types.map{|h| [t(h.name), h.id]}, selected: 1, selected: @aggregate_scope.try(:fetch, 'period_type_1', 1).to_i)
+        .col-xs-8
+          = search_field_tag :period_1_from, @aggregate_scope.try(:fetch, 'period_1_from', nil), disabled: true, class: :inputCalendars, autocomplete: :off
+          span.margin_lr ～
+          = search_field_tag :period_1_to, @aggregate_scope.try(:fetch, 'period_1_to', nil), disabled: true, class: :inputCalendars, autocomplete: :off
+      .row
+        .col-xs-2.col-xs-offset-2
+          =  select_tag :period_type_2, options_for_select(Settings.enumerize_options.receivables.period_types.map{|h| [t(h.name), h.id]}, selected: 1, selected: @aggregate_scope.try(:fetch, 'period_type_2', 1).to_i)
+        .col-xs-8
+          = search_field_tag :period_2_from, @aggregate_scope.try(:fetch, 'period_2_from', nil), disabled: true, class: :inputCalendars, autocomplete: :off
+          span.margin_lr ～
+          = search_field_tag :period_2_to, @aggregate_scope.try(:fetch, 'period_2_to', nil), disabled: true, class: :inputCalendars, autocomplete: :off
+      .row
+        .col-xs-2.col-xs-offset-2
+          = f.label :traders_code
+        .col-xs-8
+          = f.search_field :trader_id_gteq
+          span.margin_lr ～
+          = f.search_field :trader_id_lteq
+      .row
+        .col-xs-2.col-xs-offset-2
+          = f.label :residual_money
+        .col-xs-8
+          = f.search_field :residual_money_gteq
+          span.margin_lr ～
+          = f.search_field :residual_money_lteq
+      .row
+        .col-xs-2.col-xs-offset-2
+          = f.label :company_banks_code
+        .col-xs-8
+          = f.search_field :company_bank_id_gteq
+          span.margin_lr ～
+          = f.search_field :company_bank_id_lteq
+
+    div
+      .row
+       actions.col-xs-12
+        = submit_tag 'キャンセル', id: 'search_cancel', type: 'button', class: 'btn btn-primary col-xs-2'
+        = f.submit '次へ', class: 'btn btn-primary col-xs-2 col-xs-offset-1'

@@ -1,0 +1,23 @@
+table.table.table-striped
+  tbody
+    tr
+      th = Menu.human_attribute_name(:name)
+      th = ApprovalSetting.human_attribute_name(:approval_type)
+      th = ApprovalSetting.human_attribute_name(:one_phase_approval_skiped)
+
+    - objects.each do |object|
+      tr class=('deleted' if object.deleted?)
+        td(width='200px') = Menu.find_by_id(object.menu_id).name
+        td(width='150px') = t(object.approval_type, scope: 'enumerize.approval_setting.approval_type')
+        td(width='120px') = t("approval_settings.one_phase_approval_skiped.#{object.one_phase_approval_skiped ? 'skip' : 'no_skip'}")
+
+        td(width='80px' align='center')
+          = link_to t('general.label.edit'), polymorphic_path([@company, object], pickup_param.merge(action: :edit))
+        td
+          - unless object.deleted?
+            = link_to t('general.label.delete'), polymorphic_path([@company, object], pickup_param), :method => :delete, :data => {:confirm => t('general.message.confirm_delete')}
+          - else
+            = t('general.label.deleted')
+
+div class='box-footer clearfix'
+  = paginate objects, remote: true

@@ -1,0 +1,3 @@
+(function(){
+  $("<%= "#{params[:controller].split('/').last.singularize}-list" %>").html("<%= j render :partial => lookup_context.exists?("list", [], true) ? "list" : "admin/shared/list", :locals => {:objects => instance_variable_get("@#{params[:controller].split('/').last}"), :pickup_param => @pickup_param} %>");
+}).call(this);

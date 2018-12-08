@@ -1,0 +1,42 @@
+= render :partial => 'shared/journals/stage'
+section.container
+  .row
+    = form_tag search_journals_journal_data_path, method: :get do
+      = submit_tag '戻る', name: :back, class: "btn btn-default col-xs-2 pull-right back-button"
+  .confirm_container
+    .row.col-xs-10.text-center
+      .col-xs-1 作成指示
+      .col-xs-1 管理番号
+      .col-xs-1 てん末
+      .col-xs-1 仕訳日付
+      .col-xs-1 伝票番号
+      .col-xs-2 借方勘定科目
+      .col-xs-2 貸方勘定科目
+      .col-xs-1 金額
+      .col-xs-1 摘要
+      .col-xs-1 行数
+    .row.col-xs-2
+
+    = search_form_for @q, url: output_journals_journal_data_path, method: :post do |f|
+      - @result.each_with_index do |r, i|
+        .row.col-xs-10.text-center
+          .col-xs-1.text-center = check_box_tag 'q[id_eq_any][]', nil
+          .col-xs-1 = r.ebill.control_number
+          .col-xs-1 = r.ebill.state_code.bill
+          .col-xs-1 = r.journalizing_slip_date.try(:strftime, "%Y-%m-%d")
+          .col-xs-1 = r.slip_number
+          .col-xs-2 = r.slip_detail.to_a.pop.balanced == '0' ? r.slip_detail.to_a.pop.account_name : nil
+          .col-xs-2 = r.slip_detail.to_a.pop.balanced == '1' ? r.slip_detail.to_a.pop.account_name : nil
+          .col-xs-1.text-right = number_to_currency(r.ebill_receivable_state.amount_money, unit: '', precision: 0)
+          .col-xs-1 = r.slip_detail.to_a.pop.abridgment
+          .col-xs-1 = r.details_linage
+        .row.col-xs-2.text-center
+          = link_to '仕訳確認', '#', class: 'btn btn-default'
+      .row
+        actions.col-xs-12
+          = button_tag '全選択', type: :button, id: :check_all, class: 'btn btn-default col-xs-1'
+          = button_tag '全解除', type: :button, id: :cancel_all, class: 'btn btn-default col-xs-1 col-xs-offset-1'
+      .row
+        actions.col-xs-12
+          = button_tag 'リスト印刷', type: :button, id: :list_output_button, class: 'btn btn-default col-xs-2 col-xs-offset-7'
+          = submit_tag '登録して出力画面へ', id: :journal_output_button, class: 'btn btn-primary col-xs-2 pull-right', disabled: true

@@ -1,0 +1,259 @@
+= nested_form_for @instance do |f|
+  - if @instance.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@instance.errors.count, "error")} prohibited this instance from being saved:"
+      ul
+        - @instance.errors.full_messages.each do |message|
+          li = message
+
+  section.container
+    .row
+      = link_to '戻る', receivables_dealing_choice_regist_path, class: "btn btn-default col-xs-2 pull-right back-button"
+
+    .dtable
+      dl
+        dt = f.label :recording_institution_id
+        dd = f.collection_select :recording_institution_id, RecordingInstitution.all, :code, :name, prompt: "記録機関を選んでください"
+      dl
+        dt = f.label :recording_number
+        dd = f.text_field :recording_number
+
+    .dtable
+      dl
+       dt = f.label :accrual_type
+       dd
+         - Settings.enumerize_options.receivables.accrual_types.each do |h|
+           label.radio-inline.valign_middle
+             = f.radio_button :accrual_type, h.id
+             = f.label t(h.name)
+      dl
+        dt = f.label :trader_id
+        dd
+          = f.text_field :trader_id
+          - # TODO: move to settings
+          = radio_button_tag :trader_id_use_select, true, true
+          = label_tag :trader_id_use_select_true, "請求先コードを指定する"
+          = radio_button_tag :trader_id_use_select, false, false 
+          = label_tag :trader_id_use_select_false, "請求先を手入力する"
+      
+      = f.fields_for :trader do |f_trader| 
+        #trader.row.dtable.killmargin.killborder
+          dl.row-same-height
+            dt.col-xs-height.col-full-height
+              label#trader_label 債務者情報
+            dd.col-xs-height.col-full-height.killpadding
+              .dtable2
+                dl
+                  dt = f_trader.label :name
+                  dd = f_trader.text_field :name, :data => {toggle: :tooltip, placement: :top}, title: @instance.trader.name
+                dl
+                  dt = f_trader.label :kana
+                  dd = f_trader.text_field :kana, :data => {toggle: :tooltip, placement: :top}, title: @instance.trader.kana
+                dl
+                  dt = f_trader.label :branch_code
+                  dd
+                    .row.bank_row
+                      .col-xs-3.killpadding = f_trader.text_field :bank_code
+                      .col-xs-3.killpadding = f_trader.text_field :bank_name
+                      .col-xs-3.killpadding = f_trader.text_field :branch_code
+                      .col-xs-3.killpadding = f_trader.text_field :branch_name
+                dl
+                  dt = f_trader.label :account_number
+                  dd
+                    .row
+                      = f_trader.select :account_type, options_for_select(Settings.enumerize_options.receivables.account_types.map{|h| [t(h.name), h.id]}, selected: 1), {}, {class: "col-md-1 col-sm-1 col-xs-1 account-events killpadding"}
+                      = f_trader.number_field :account_number, class: "col-md-4 col-xs-3"
+                      = f_trader.label :user_number, class: "col-md-2 col-sm-3 col-xs-3 user-number"
+                      = f_trader.number_field :user_number, class: "col-md-4 col-xs-3"
+      #opt_trader_select.row.dtable.killmargin.killborder.collapse
+        = check_box_tag "opt_trader_selecter", true,  false
+        = label_tag "opt_trader_selecter","譲受債権の債務者を入力する"
+      #opt_trader.row.dtable.killmargin.killborder.collapse
+        = f.fields_for :opt_trader do |f_trader| 
+          .row.dtable.killmargin.killborder
+            dl.row-same-height.killborder
+              dt.col-xs-height.col-full-height
+                label 債務者情報
+              dd.col-xs-height.col-full-height.killpadding
+                .dtable2
+                  dl
+                    dt = f_trader.label :name
+                    dd = f_trader.text_field :name, :data => {toggle: :tooltip, placement: :top}, title: @instance.trader.name
+                  dl
+                    dt = f_trader.label :kana
+                    dd = f_trader.text_field :kana, :data => {toggle: :tooltip, placement: :top}, title: @instance.trader.kana
+                  dl
+                    dt = f_trader.label :branch_code
+                    dd
+                      .row.bank_row
+                        .col-xs-3.killpadding = f_trader.text_field :bank_code
+                        .col-xs-3.killpadding = f_trader.text_field :bank_name
+                        .col-xs-3.killpadding = f_trader.text_field :branch_code
+                        .col-xs-3.killpadding = f_trader.text_field :branch_name
+                  dl
+                    dt = f_trader.label :account_number
+                    dd
+                      .row
+                        = f_trader.select :account_type, options_for_select(Settings.enumerize_options.receivables.account_types.map{|h| [t(h.name), h.id]}, selected: 1), {}, {class: "col-md-1 col-sm-1 col-xs-1 account-events killpadding"}
+                        = f_trader.number_field :account_number, class: "col-md-4 col-xs-3"
+                        = f_trader.label :user_number, class: "col-md-2 col-sm-3 col-xs-3 user-number"
+                        = f_trader.number_field :user_number, class: "col-md-4 col-xs-3"
+    .dtable4.table.table-borderd
+      .row.killmargin
+        .col-xs-2.term = f.label :occurred_on
+        .col-xs-2.descp.killpadding.background-white = f.text_field :occurred_on, class: :inputCalendars
+        .col-xs-2.term = f.label :last_transferred_on
+        .col-xs-2.descp.killpadding.background-white = f.text_field :last_transferred_on, class: :inputCalendars
+        .col-xs-4.descp.background-white
+          label.col-xs-3.killpadding
+            small 譲受時保証
+          label.col-xs-3.killpadding
+            = f.radio_button :transfer_warrant, 1, checked: 'checked'
+            small あり
+          label.col-xs-3.killpadding
+            = f.radio_button :transfer_warrant, 2
+            small なし
+
+      .row.killmargin
+        .col-xs-2.term = f.label :due_become_on
+        .col-xs-2.descp.killpadding.background-white = f.text_field :due_become_on, class: :inputCalendars
+        .col-xs-2.term = f.label :settled_on
+        .col-xs-2.descp.killpadding.background-white = f.text_field :settled_on, class: :inputCalendars
+        .col-xs-4.descp.background-white
+          .col-xs-3.killpadding
+            small = f.label :site_division
+          label.killpadding.col-xs-5
+            = f.radio_button :site_division, 1
+            small style="font-size: 80%" nヶ月後m日
+          label.radio-inline.col-xs-4
+            = f.radio_button :site_division, 2, checked: 'checked'
+            small s日後
+
+      .row.killmargin
+        .col-xs-2.term = f.label :issue_money
+        .col-xs-4.descp.killpadding = f.text_field :issue_money, {class: :currency_amount}
+        .col-xs-2
+        .col-xs-4.descp.background-white
+          label.col-xs-4.killmargin
+            = text_field_tag :after_n_months, "", size: 4
+            small ヶ月後
+          label.col-xs-4.killmargin
+            = text_field_tag :m_date, "", size: 4
+            small 日
+          label.col-xs-4.killmargin
+            = text_field_tag :after_s_days, "", size: 4
+            small 日後
+
+    .dtable
+      dl
+        dt = f.label :company_bank_id
+        dd = f.number_field :company_bank_id
+    .dtable3
+      dl
+        dt.col-xs-2 = f.label :ref_no
+        dd.col-xs-4 = f.number_field :ref_no
+        dt.col-xs-2 = f.label :transfer_restricted
+        dd.col-xs-4
+          - Settings.enumerize_options.receivables.transfer_restricted.each do |h|
+            label.radio-inline.valign_middle
+              = f.radio_button :transfer_restricted, h.id
+              = f.label t(h.name)
+      dl
+        dt.col-xs-2= f.label :debtors_department_id
+        dd.col-xs-4 = f.number_field :debtors_department_id
+        dt.col-xs-2 = f.label :operating_item_id
+        dd.col-xs-4 = f.number_field :operating_item_id
+      dl
+        dt.col-xs-2 = f.label :remark1
+        dd.col-xs-10 = f.text_field :remark1, class: :widthmax
+      #opt_remark_select.row.dtable.killmargin.killborder
+        = check_box_tag "opt_remark_selecter", true,  false
+        = label_tag "opt_remark_selecter","メモを入力する"
+      #opt_remark.row.dtable.killmargin.killborder.collapse
+        - (2..3).each do |i|
+          dl
+            dt.col-xs-2 = f.label :"remark#{i}" 
+            dd.col-xs-10 = f.text_field :"remark#{i}", class: :widthmax
+    .dtable
+      - if false
+        dl
+          dt = f.label :residual_money, "債権残高"
+          dd.residual_money
+            = f.text_field :residual_money, {class: :currency_amount}
+    .row.tail_button_area
+      button.btn.btn-primary.col-xs-2 href="#bumon" data={toggle: 'modal'} 部門内訳入力
+      button.btn.btn-primary.col-xs-2.col-xs-offset-1 href="#hosyo" data={toggle: 'modal'} 保証人入力
+      = f.submit '登録', class: "btn btn-primary col-xs-2 col-xs-offset-2"
+
+      #bumon.modal.fade
+        .modal-dialog
+          .modal-content
+            .modal-header.alert.alert-info.killmargin
+              = close_button 'modal'
+              h4.modal-title
+                | 部門内訳金額入力
+                small 売掛け金部門の内訳金額を入力します。
+            .modal-body
+              .dtable3
+                dl
+                  dt.col-xs-2 = f.label :issue_money
+                  dd.col-xs-4.issue_money_mirror
+
+              = f.link_to_add '行追加', :section_breakdowns, class: 'btn btn-default', data: {target: '#bumontable'}
+
+              dl.dl-horizontal.pull-right.killmargin
+                dt 部門内訳合計金額
+                dd#bumon_issue_money = @receivable.section_breakdowns.map(&:department_money).inject(0){|num, i| num += i || 0}
+
+              .dtable4#bumontable
+                .row.killmargin 
+                  .term.col-xs-2 = label_tag SectionBreakdown.human_attribute_name(:no)
+                  .term.col-xs-2 = label_tag SectionBreakdown.human_attribute_name(:department_code)
+                  .term.col-xs-3 = label_tag SectionBreakdown.human_attribute_name(:department_name)
+                  .term.col-xs-3 = label_tag SectionBreakdown.human_attribute_name(:department_money)
+                  .term.col-xs-2 &nbsp;
+                = f.fields_for :section_breakdowns do |br| 
+                  .row.killmargin
+                    .descp.col-xs-2.no = br.options[:child_index].to_i + 1
+                    = f.fields_for :department do |dep|
+                      .descp.col-xs-2.killpadding = dep.text_field :code, class: 'widthmax'
+                      .descp.col-xs-3.killpadding = dep.text_field :name, class: 'widthmax'
+                    .descp.col-xs-3.killpadding = br.text_field :department_money, class: 'widthmax department_money currency_amount'
+                    .descp.col-xs-2 = br.link_to_remove "削除", class: 'btn btn-default btn-sm'
+                  
+            .modal-footer
+              button.btn.btn-primary type="button" data-dismiss="modal" 戻る
+
+      #hosyo.modal.fade
+        .modal-dialog style='width: 850px;'
+          .modal-content
+            .modal-header.alert.alert-info.killmargin
+              = close_button 'modal'
+              h4.modal-title
+                | 保証人入力
+            .modal-body
+              = render partial: 'guarantors_form', locals: {parent_f: f}
+            .modal-footer
+              button.btn.btn-primary type="button" data-dismiss="modal" 戻る
+
+
+= render partial: 'shared/banks/search_form', \
+locals: { \
+  modalid: 'search_bank_trader_modal_form', \
+  resultid: 'search_bank_trader_modal_result', \
+  target_controller_name: 'company_banks'}
+= render partial: 'shared/banks/search_form', \
+locals: { \
+  modalid: 'search_bank_opt_trader_modal_form', \
+  resultid: 'search_bank_opt_trader_modal_result', \
+  target_controller_name: 'company_banks'}
+= render partial: 'shared/branches/search_form', \
+locals: { \
+  modalid: 'search_branch_trader_modal_form', \
+  resultid: 'search_branch_trader_modal_result', \
+  target_controller_name: 'company_banks'}
+= render partial: 'shared/branches/search_form', \
+locals: { \
+  modalid: 'search_branch_opt_trader_modal_form', \
+  resultid: 'search_branch_opt_trader_modal_result', \
+  target_controller_name: 'company_banks'}

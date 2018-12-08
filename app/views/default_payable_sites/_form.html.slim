@@ -1,0 +1,47 @@
+table#default_payable_site_form_table
+  tr.contract_credit_category
+    th.item-header
+      = f.label :contract_credit_category, localize_attr(:contract_credit_category)
+    td
+      = f.select :contract_credit_category, DefaultPayableSite.contract_credit_category.options, {}
+
+  tr.site_designation_method_and_site_data
+    th.item-header
+      = f.label :site_designation_method, localize_attr(:site_designation_method)
+    td
+      .row#no_designation
+        - no_designation = DefaultPayableSite.site_designation_method.no_designation.value
+        .radio-inline
+          = f.radio_button :site_designation_method, no_designation
+          = localize_option(:site_designation_method, no_designation)
+      
+      .row#month_day
+        - month_day = DefaultPayableSite.site_designation_method.month_day.value
+        .radio-inline
+          = f.radio_button :site_designation_method, month_day
+          = localize_option(:site_designation_method, month_day)
+        .month-day-group
+          .month
+            = f.number_field :month, min: 0, max: 12, maxlength: 2
+            .date-annotation
+              p = 'ヶ月後(0〜12)'
+          .day
+            = f.number_field :day, min: 1, maxlength: 2
+            .date-annotation
+              = '日(※月末日は99)'
+
+      .row#after_day
+        - after_day = DefaultPayableSite.site_designation_method.after_day.value
+        .radio-inline
+          = f.radio_button :site_designation_method, after_day
+          = localize_option(:site_designation_method, after_day)
+        .after-day
+          = f.number_field :after_day, min: 1, max: 999, maxlength: 3
+          .date-annotation
+            p = '日後(1~999)'
+
+- if local_assigns.has_key? :trader
+  = f.hidden_field :trader_id, value: trader.id
+  
+.row#default_payable_site_function_bar
+  = f.submit t('general.label.update'), class: 'btn btn-primary'

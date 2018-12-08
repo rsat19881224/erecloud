@@ -1,0 +1,22 @@
+<%
+total_count = entries.total_count
+per_page = (params[:per_page].present? ? params[:per_page] : entries.default_per_page).to_i
+page = params[:page].present? ? params[:page].to_i : 1
+
+p = {
+    :entry_name => eval("#{entries.klass.name}.model_name.human"), 
+    :count => total_count,
+    :first => ((per_page * (page-1)) + 1),
+    :last => (per_page * page) <= total_count ? (per_page * page) : total_count
+  }
+
+if total_count < per_page
+  k = 'one_page.display_entries.' + (total_count == 0 ? 'zero' : 'other')
+else
+  k = 'more_pages.display_entries'
+end
+
+
+
+%>
+<%= raw t('views.page_entries_info.' + k, p) %>

@@ -1,0 +1,5 @@
+= render :partial => 'shared/journals/stage'
+section.container
+  .row
+    = form_tag confirm_journals_journal_data_path, method: :get do
+      = submit_tag '戻る', name: :back, class: "btn btn-default col-xs-2 pull-right back-button"

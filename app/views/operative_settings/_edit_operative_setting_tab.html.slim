@@ -1,0 +1,34 @@
+table
+  tbody
+    tr
+      th
+        = f.label :date_display_format, class: 'radio-inline'
+      td
+        .radio-inline
+          = f.radio_button :date_display_format, OperativeSetting.date_display_format.japanese.value, autofocus: true
+          = t('japanese', scope: 'enumerize.date_display_format')
+        .radio-inline
+          = f.radio_button :date_display_format, OperativeSetting.date_display_format.anno_domini.value, autofocus: true
+          = t('anno_domini', scope: 'enumerize.date_display_format')
+
+    tr
+      th
+        = f.label :is_transfer_fixed_date, class: 'radio-inline'
+      td
+        .radio-inline
+          = f.radio_button :is_transfer_fixed_date, true, autofocus: true
+          = '翌営業日に振り替える'
+        .radio-inline
+          = f.radio_button :is_transfer_fixed_date, false, autofocus: true
+          = '翌営業日に振り替えない'
+
+    tr
+      th
+        = f.label :is_use_section_authority, class: 'radio-inline'
+      td
+        .radio-inline
+          = f.radio_button :is_use_section_authority, true, autofocus: true
+          = '使用する'
+        .radio-inline
+          = f.radio_button :is_use_section_authority, false, autofocus: true
+          = '使用しない'

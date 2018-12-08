@@ -1,0 +1,65 @@
+= render :partial => 'shared/receivables/stage'
+= nested_form_for @instance, :url => { action: :search } do |f|
+  section.select_container
+    .row
+      = link_to '戻る', receivables_dealing_choice_transfers_path, class: "btn btn-default col-xs-2 pull-right back-button"
+    .dtable
+      dl
+        dt = f.label :recording_institution_id
+        dd = f.collection_select :recording_institution_id, RecordingInstitution.where(code: Settings.enumerize_options.receivables.recording_institutions.code.densai), :code, :name
+      dl
+        dt = f.label :company_bank_id
+        dd = f.text_field :company_bank_id
+
+    .dtable
+      dl
+        dt = f.label :transferred_on
+        dd = f.text_field :transferred_on, class: :inputCalendars, autocomplete: :off
+
+    .dtable
+      dl
+        dt
+          label 譲渡先指定
+        dd
+          .row
+            .col-xs-4
+              = check_box_tag :company_banks, autocomplete: :off
+              small 自社譲渡を行う
+            .col-xs-2.own_transfer_bank
+              label 自社譲渡銀行
+            .col-xs-6.killpadding
+            = f.fields_for :company_bank do |f_company_bank| 
+              = f_company_bank.text_field :code, disabled: true
+
+    .dtable
+      = f.fields_for :trader do |f_trader| 
+        .row.dtable.killmargin.killborder
+          dl.row-same-height
+            dt.col-xs-height.col-full-height
+              label 譲渡先情報
+            dd.col-xs-height.col-full-height.killpadding
+              .dtable2
+                dl
+                  dd
+                    .row
+                      = f_trader.text_field :code, :data => {toggle: :tooltip, placement: :top}, title: @instance.trader.code, class: 'col-xs-2'
+                      label.radio-inline.col-xs-4
+                        = radio_button_tag :transferee_code_use, 0, :checked => true
+                        small 譲渡先コードを入力する
+                      label.radio-inline.col-xs-4
+                        = radio_button_tag :transferee_code_use, 1
+                        small 譲渡先を手入力する
+                = render partial: "transferee_information", locals: {f_trader: f_trader}
+      dl
+        dt = f.label :guaranteed
+        dd
+          label.radio-inline.rabel_height
+            = f.radio_button :guaranteed, 0, :checked => true
+            small なし
+          label.radio-inline.rabel_height
+            = f.radio_button :guaranteed, 1
+            small 金融機関のみ
+
+    .row.tail_button_area
+      = f.button 'キャンセル', id: :select_cancel, type: :button, class: "btn btn-primary col-xs-2 col-xs-offset-2"
+      = f.submit '次へ', id: :select_submit, class: "btn btn-primary col-xs-2 col-xs-offset-2", :disabled => true

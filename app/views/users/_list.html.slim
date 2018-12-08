@@ -1,0 +1,45 @@
+table.table.table-striped
+  tbody
+    tr
+      th = User.human_attribute_name(:code)
+      th = User.human_attribute_name(:name)
+      th = User.human_attribute_name(:email)
+      th = User.human_attribute_name(:contact_mail)
+      th = User.human_attribute_name(:user_type)
+      th = User.human_attribute_name(:password_unlimited)
+      th = User.human_attribute_name(:next_login_time_password_changed)
+      th = User.human_attribute_name(:locked)
+      th
+      th
+
+    - objects.each do |object|
+      tr class=('deleted' if object.deleted?)
+        td(width='100px') = object.code
+        td(width='100px') = object.name
+        td(width='100px') = object.email
+        td(width='100px') = object.contact_mail
+        td(width='100px') = object.user_type.text
+        td(width='100px') = t(object.password_unlimited ? '.use' : '.not_use')
+        td(width='100px') = t(object.next_login_time_password_changed ? '.use' : '.not_use')
+        td(width='100px') = t(object.locked ? '.use' : '.not_use')
+
+        - if object.user_type.user_admin?
+          - if current_user.user_type.user_admin?
+            td width="60px" align="center"
+              = link_to t('general.label.edit'), polymorphic_path([object], pickup_param.merge(action: :edit))
+            td 
+              - unless object.deleted? 
+                = link_to t('general.label.delete'), polymorphic_path([object], pickup_param), :method => :delete, :data => {:confirm => t('general.message.confirm_delete')}
+              - else
+                = t('general.label.deleted')
+        - else
+          td width="60px" align="center"
+            = link_to t('general.label.edit'), polymorphic_path([object], pickup_param.merge(action: :edit))
+          td
+            - unless object.deleted? 
+              = link_to t('general.label.delete'), polymorphic_path([object], pickup_param), :method => :delete, :data => {:confirm => t('general.message.confirm_delete')} 
+            - else
+              = t('general.label.deleted')
+
+div class='box-footer clearfix'
+  = paginate objects, remote: true

@@ -1,0 +1,56 @@
+table
+  tr
+    th(colspan=2)
+      = f.label :company_name1
+    td
+      = raw(@operative_setting.company_name1)
+
+  tr
+    th(colspan=2)
+      = f.label :company_name2
+    td
+      = raw(@operative_setting.company_name2)
+
+  tr
+    th#address_group(rowspan=4 style='width: 60px') = '住所'
+    tr
+      th
+        = f.label :postal_code
+      td
+        = raw(@operative_setting.postal_code)
+    tr
+      th = f.label :address1
+      td = raw(@operative_setting.address1)
+    tr
+      th = f.label :address2
+      td = raw(@operative_setting.address2)
+
+  tr
+    th(colspan=2)
+      = f.label :company_number
+    td
+      = raw(@operative_setting.company_number)
+
+  tr
+    th(colspan=2)
+      = f.label :representative_name
+    td
+      = raw(@operative_setting.representative_name)
+
+  tr
+    th(colspan=2)
+      = f.label :representative_official_title
+    td
+      = raw(@operative_setting.representative_official_title)
+
+  tr
+    th(colspan=2)
+      = f.label :person_in_charge_name
+    td
+      = raw(@operative_setting.person_in_charge_name)
+
+  tr
+    th(colspan=2)
+      = f.label :person_in_charge_official_title
+    td
+      = raw(@operative_setting.person_in_charge_official_title)

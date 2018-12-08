@@ -1,0 +1,2 @@
+.col-xs-4
+  = select :menu_authority, :menu_id, options_from_collection_for_select(menus, :id, :name), {}, class: 'form-control'

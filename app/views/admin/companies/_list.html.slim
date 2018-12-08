@@ -1,0 +1,44 @@
+
+table.table.table-striped
+  tbody
+    tr
+      th = Company.human_attribute_name(:management_division_id)
+      th = Company.human_attribute_name(:number)
+      th = Company.human_attribute_name(:affiliated)
+      th = Company.human_attribute_name(:group_number)
+      th = Company.human_attribute_name(:demanded)
+      th = Company.human_attribute_name(:name)
+      th = Company.human_attribute_name(:tel)
+      th = Company.human_attribute_name(:affiliated_post)
+      th = Company.human_attribute_name(:charge_name)
+      th = Company.human_attribute_name(:email)
+      th
+      th
+      th
+      th
+
+    - objects.each do |object|
+      tr class=('deleted' if object.deleted?)
+        td(width='100px') = object.management_division.try(:name)
+        td(width='100px') = object.number
+        td(width='60px') = Company.human_attribute_name("affiliated_#{object.affiliated}")
+        td(width='100px') = object.group_number
+        td(width='60px') = Company.human_attribute_name("affiliated_#{object.demanded}")
+        td(width='120px') = object.name
+        td(width='100px') = object.tel
+        td(width='100px') = object.affiliated_post
+        td(width='100px') = object.charge_name 
+        td(width='100px') = object.email
+        
+        td(width='50px' align='center') = link_to t('general.label.edit'), polymorphic_path([:admin, object], pickup_param.merge(action: :edit))
+        td(width='50px' align='center') = link_to t('.license'), polymorphic_path([:admin, object, License], pickup_param)
+        td(width='50px' align='center')
+          = link_to t(object.admin_user.present? ? '.user_edit' : '.user_create'), polymorphic_path([:admin, object, "user"], pickup_param.merge(action: object.admin_user.present? ? :edit : :new))
+        td
+          - unless object.deleted?
+            = link_to t('general.label.delete'), polymorphic_path([:admin, object], pickup_param), :method => :delete, :data => {:confirm => t('general.message.confirm_delete')}
+          - else
+            = t('general.label.deleted')
+
+div class='box-footer clearfix'
+  = paginate objects, remote: true

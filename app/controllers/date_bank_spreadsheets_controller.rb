@@ -1,0 +1,2 @@
+class DateBankSpreadsheetsController < BaseController
+end

@@ -1,0 +1,2 @@
+module Journals::JournalDataHelper
+end

@@ -1,0 +1,76 @@
+.row
+  .col-md-6
+    div class='box box-primary'
+      .box-body
+
+        .form-group
+          = Company.human_attribute_name(:management_division_id)
+          br
+          = @company.management_division.try(:name)
+
+        .form-group
+          = Company.human_attribute_name(:number)
+          br
+          = @company.number 
+
+        .form-group
+          = Company.human_attribute_name(:affiliated)
+          br
+          = Company.human_attribute_name("affiliated_#{@company.affiliated}") 
+
+        .form-group
+          = Company.human_attribute_name(:group_number)
+          br
+          = @companygroup_number
+
+        .form-group
+          = Company.human_attribute_name(:demanded)
+          br
+          = Company.human_attribute_name("demanded_#{@company.demanded}")
+
+        .form-group
+          = Company.human_attribute_name(:name)
+          br
+          = @company.name 
+
+        .form-group
+          = Company.human_attribute_name(:postal_code) 
+          br
+          = @company.postal_code
+
+        .form-group
+          = Company.human_attribute_name(:prefecture)
+          br
+          = @company.prefecture.text
+
+        .form-group
+           = Company.human_attribute_name(:address)
+           br
+          = @company.address
+
+        .form-group
+          = Company.human_attribute_name(:tel)
+          br
+          = @company.tel
+
+        .form-group
+          = Company.human_attribute_name(:fax)
+          br
+          = @company.fax
+
+        .form-group
+          = Company.human_attribute_name(:affiliated_post)
+          br
+          = @company.affiliated_post 
+
+        .form-group
+          = Company.human_attribute_name(:charge_name)
+          br 
+          = @company.charge_name 
+
+        .form-group
+          = Company.human_attribute_name(:email)
+          br
+          = @company.email 
+
+      = link_to t('.back'), polymorphic_path([:admin, @company.class.name.constantize])

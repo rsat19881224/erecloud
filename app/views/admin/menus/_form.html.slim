@@ -1,0 +1,47 @@
+.row
+  .col-md-6 
+    div class='box box-primary'
+      .box-body
+        = form_for(object, url: polymorphic_path([:admin, object]), :html => {:class => "form-horizontal"}, method: (object.new_record? ? :post : :put)) do |f|
+          = render partial: 'shared/errors', locals: {errors: object.errors}
+          
+          div align="right"
+            = link_to t('.back'), polymorphic_path([:admin, object.class.name.constantize])
+          br
+
+          .form-group
+            = f.label :code, class: 'col-xs-3 form-control-static'
+            .col-xs-4
+              = f.text_field :code, autofocus: true, class: "form-control"
+
+          .form-group
+            = f.label :name, class: 'col-xs-3 form-control-static'
+            .col-xs-9
+              = f.text_field :name, autofocus: true, class: "form-control"
+
+          .form-group
+            = f.label :product_category, class: 'col-xs-3 form-control-static'
+            .col-xs-4
+              = f.select :product_category, Menu.product_category.options, {:selected => "common"}, class: 'form-control'
+
+          .form-group
+            = f.label :manager_division, class: 'col-xs-3 form-control-static'
+            .col-xs-4
+              = f.select :manager_division, Menu.manager_division.options, {:selected => "general"}, class: 'form-control'
+
+          .form-group
+            = f.label :extend_type, class: 'col-xs-3 form-control-static'
+            .col-xs-4
+              = f.select :extend_type, Menu.extend_type.options, {:selected => "general"}, class: 'form-control'
+
+          .form-group
+            = f.label :approval_setting_used, class: 'col-xs-3 form-control-static'
+            .col-xs-9
+              = f.radio_button :approval_setting_used, true, {}
+              = t('.used')
+              = f.radio_button :approval_setting_used, false, {}
+              = t('.not_used')
+
+          div align="right"
+            = f.submit t(object.new_record? ? '.create' : '.update'), class: 'btn btn-primary'
+          br

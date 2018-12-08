@@ -1,0 +1,78 @@
+<!-- Left side column. contains the logo and sidebar -->
+<aside class="left-side sidebar-offcanvas">
+  <!-- sidebar: style can be found in sidebar.less -->
+  <section class="sidebar">
+    <!-- sidebar menu: : style can be found in sidebar.less -->
+    <ul class="sidebar-menu">
+      <li class="treeview <%= raw('active') if current_controller?(["admin/products", "admin/menus", "admin/tax_rates", "admin/state_codes", "admin/administrators", "admin/business_divisions", "admin/stamp_taxes", "admin/tax_divisions"]) %>">
+        <%= link_to "javascript:void(0)" do %>
+          <i class="fa fa-arrow-circle-right"></i>
+          <span><%= t('.system_management') %></span>
+          <i class="fa fa-angle-left pull-right"></i>
+        <% end %>
+        <ul class="treeview-menu">
+          <li <%= raw('class="active"') if current_controller?("admin/products") %>>
+            <%= link_to admin_products_path do %><i class="fa fa-edit"></i> <span><%= t('titles.admin.products') %></span><% end %>
+          </li>
+          <li <%= raw('class="active"') if current_controller?("admin/menus") %>>
+  	        <%= link_to admin_menus_path do %><i class="fa fa-edit"></i> <%= t('titles.admin.menus') %><% end %>
+  	      </li>
+          <li <%= raw('class="active"') if current_controller?("admin/tax_rates") %>>
+            <%= link_to admin_tax_rates_path do %><i class="fa fa-edit"></i> <%= t('titles.admin.tax_rates') %><% end %>
+          </li>
+          <li <%= raw('class="active"') if current_controller?("admin/state_codes") %>>
+            <%= link_to admin_state_codes_path do %><i class="fa fa-edit"></i> <%= t('titles.admin.state_codes') %><% end %>
+          </li>
+          <li <%= raw('class="active"') if current_controller?("admin/administrators") %>>
+            <%= link_to admin_administrators_path do %><i class="fa fa-edit"></i> <%= t('titles.admin.administrators') %><% end %>
+          </li>
+          <li <%= raw('class="active"') if current_controller?("admin/business_divisions") %>>
+            <%= link_to admin_business_divisions_path do %><i class="fa fa-edit"></i> <%= t('titles.admin.business_divisions') %><% end %>
+          </li>
+          <li <%= raw('class="active"') if current_controller?("admin/stamp_taxes") %>>
+            <%= link_to admin_stamp_taxes_path do %><i class="fa fa-edit"></i> <%= t('titles.admin.stamp_taxes') %><% end %>
+          </li>
+          <li <%= raw('class="active"') if current_controller?("admin/tax_divisions") %>>
+            <%= link_to admin_tax_divisions_path do %><i class="fa fa-edit"></i> <%= t('titles.admin.tax_divisions') %><% end %>
+          </li>
+          <li <%= raw('class="active"') if current_controller?("admin/infos") %>>
+            <%= link_to admin_infos_path do %><i class="fa fa-edit"></i> <%= t('titles.admin.infos') %><% end %>
+          </li>
+        </ul>
+      </li>
+      <li class="treeview <%= raw('active') if current_controller?(["admin/companies","admin/management_divisions"]) %>">
+        <%= link_to "javascript:void(0)" do %>
+          <i class="fa fa-arrow-circle-right"></i>
+          <span><%= t('.customer_management') %></span>
+          <i class="fa fa-angle-left pull-right"></i>
+        <% end %>
+        <ul class="treeview-menu">
+          <li <%= raw('class="active"') if current_controller?("admin/companies") %>>
+            <%= link_to admin_companies_path do %><i class="fa fa-edit"></i> <span><%= t('titles.admin.companies') %></span><% end %>
+          </li>
+          <li <%= raw('class="active"') if current_controller?("admin/management_divisions") %>>
+            <%= link_to admin_management_divisions_path do %><i class="fa fa-edit"></i> <span><%= t('titles.admin.management_divisions') %></span><% end %>
+          </li>
+        </ul>
+      </li>
+      <li class="treeview <%= raw('active') if current_controller?(["admin/recording_institutions", "admin/bank_holidays", "admin/financial_institutions"]) %>">
+        <%= link_to "javascript:void(0)" do %>
+          <i class="fa fa-arrow-circle-right"></i>
+          <span><%= t('.institution_management') %></span>
+          <i class="fa fa-angle-left pull-right"></i>
+        <% end %>
+        <ul class="treeview-menu">
+          <li <%= raw('class="active"') if current_controller?("admin/recording_institutions") %>>
+            <%= link_to admin_recording_institutions_path do %><i class="fa fa-edit"></i> <%= t('titles.admin.recording_institutions') %><% end %>
+          </li>
+          <li <%= raw('class="active"') if current_controller?("admin/bank_holidays") %>>
+            <%= link_to admin_bank_holidays_path do %><i class="fa fa-edit"></i> <%= t('titles.admin.bank_holidays') %><% end %>
+          </li>
+          <li <%= raw('class="active"') if current_controller?("admin/financial_institutions") %>>
+            <%= link_to admin_financial_institutions_path do %><i class="fa fa-edit"></i> <%= t('titles.admin.financial_institutions') %><% end %>
+          </li>
+        </ul>
+      </li>
+  </section>
+  <!-- /.sidebar -->
+</aside>

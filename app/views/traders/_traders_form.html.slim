@@ -1,0 +1,110 @@
+table#trader_form_table
+  tbody
+    tr
+      th(colspan=2)
+        = f.label :code
+      td
+        = f.text_field :code,  maxlength: 20, autofocus: true
+
+    tr
+      th(colspan=2)
+        = f.label :name1
+      td
+        = f.text_field :name1, autofocus: true
+
+    tr
+      th(colspan=2)
+        = f.label :name2
+      td
+        = f.text_field :name2, autofocus: true
+
+    tr
+      th(colspan=2)
+        = f.label :kana
+      td
+        = f.text_field :kana, maxlength: 50, autofocus: true
+
+    tr
+      th(colspan=2)
+        = f.label :short_name
+      td
+        = f.text_field :short_name, autofocus: true
+
+    tr
+      th.address-group-th(rowspan=4) = '住所'
+      tr
+        th.address-group-item-th = f.label :postal_code
+        td = f.text_field :postal_code, maxlength: 8, autofocus: true
+      tr
+        th.address-group-item-th = f.label :address1
+        td = f.text_field :address1, autofocus: true
+      tr
+        th.address-group-item-th = f.label :address2
+        td = f.text_field :address2, autofocus: true
+
+    tr
+      th(colspan=2)
+        = f.label :person_in_charge_name
+      td
+        = f.text_field :person_in_charge_name, autofocus: true
+
+    tr
+      th(colspan=2)
+        = f.label :person_in_charge_official_title
+      td
+        = f.text_field :person_in_charge_official_title, autofocus: true
+
+    tr
+      th(colspan=2)
+        = f.label :tel
+      td
+        = f.text_field :tel
+
+  tr
+    th(colspan=2)
+      = f.label :fax
+    td
+      = f.text_field :fax, autofocus: true
+
+  tr
+    th(colspan=2)
+      = f.label :email
+    td
+      = f.text_field :email, autofocus: true
+
+  tr
+    th(colspan=2)
+      = f.label :reference_type
+    td
+      .radio-inline
+        = f.radio_button :reference_type, Trader.reference_type.billing, autofocus: true
+        = Trader.reference_type.billing.text
+      .radio-inline
+        = f.radio_button :reference_type, Trader.reference_type.payment, autofocus: true
+        = Trader.reference_type.payment.text
+      .radio-inline
+        = f.radio_button :reference_type, Trader.reference_type.common, autofocus: true
+        = Trader.reference_type.common.text
+
+  tr
+    th(colspan=2)
+      = f.label :customer_code
+    td
+      = f.text_field :customer_code, maxlength: 20, autofocus: true
+
+  tr
+    th(colspan=2)
+      = f.label :vendor_code
+    td
+      = f.text_field :vendor_code, maxlength: 20, autofocus: true
+
+  tr
+    th(colspan=2)
+      = f.label :is_make_journalizing
+    td
+      .radio-inline
+        = f.radio_button :is_make_journalizing, true, autofocus: true
+        = '作成する'
+      .radio-inline
+        = f.radio_button :is_make_journalizing, false, autofocus: true
+        = '作成しない'

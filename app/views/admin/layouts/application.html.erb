@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= t('admin.title') %></title>
+  <%= include_gon %>
+  <%= stylesheet_link_tag  'admin/application' %>
+  <%= javascript_include_tag 'admin/application' %>
+  <%= javascript_include_tag "admin/#{controller_name}" %>
+  <%= stylesheet_link_tag  "admin/#{controller_name}" %>
+  <%= csrf_meta_tags %>
+</head>
+<body class="skin-blue">
+
+<%= render :partial => 'admin/shared/header' %>
+
+<div class="wrapper row-offcanvas row-offcanvas-left">
+  <%= render :partial => 'admin/shared/sidebar' %>
+
+  <!-- Right side column. Contains the navbar and content of the page -->
+  <aside class="right-side">
+    <%= render :partial => 'admin/shared/content_header' unless params[:controller] == "admin/tops" %>
+
+    <!-- Main content -->
+    <section class="content">
+
+<%= yield %>
+
+    </section><!-- /.content -->
+  </aside><!-- /.right-side -->
+</div><!-- ./wrapper -->
+
+<!-- add new calendar event modal -->
+
+</body>
+</html>

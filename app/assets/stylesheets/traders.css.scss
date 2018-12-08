@@ -1,0 +1,154 @@
+$formWidth: 1000px;
+$formPadding: 5px;
+$formMargin: 5px;
+$thWidth: 150px;
+$tdWidth: $formWidth - $formPadding - $thWidth;
+$thColor: #5bc0de;
+$functionBarButtonWidth: 140px;
+
+@mixin commonBorderStyle {
+    border: 1px solid #ddd;
+}
+
+@mixin commonTableForm {
+    width: 100%;
+
+    tbody {
+        tr { @include commonBorderStyle; }
+
+        th {
+            width: $thWidth;
+            padding-left: 5px;
+            background-color: $thColor;
+        }
+
+        td {
+            width: $tdWidth;
+            padding-left: 5px;
+        }
+    }
+}
+
+.radio-inline {
+    display: inline;
+    margin-right: 5px;
+    padding-left: 0px;
+}
+
+.address-group-th {
+    border-right: 1px solid #ddd;
+    width: $thWidth / 2 - 1;
+}
+
+.new_trader, .edit_trader {
+    padding: $formPadding;
+    margin: $formMargin;
+    width: $formWidth;
+}
+
+#trader_form_table {
+    @include commonTableForm;
+}
+
+$resultRowHeight: 35px;
+$resultCodeWidth: 120px;
+$resultName1Width: 350px;
+$resultKanaWidth: 350px;
+$resultLinkWidth: 80px;
+$resultTableWidth: $resultCodeWidth + $resultName1Width + $resultKanaWidth + $resultLinkWidth;
+
+#trader_search {
+    margin: 0px 20px 20px 20px;
+
+    #trader_search_result_table {
+        .result-head, .result-body { height: $resultRowHeight; }
+        .code  { width: $resultCodeWidth; }
+        .name1 { width: $resultName1Width; }
+        .kana  { width: $resultKanaWidth; }
+        .result-row { height: $resultRowHeight; }
+        .edit-link, .create-link {
+            width: $resultLinkWidth;
+            text-align: center;
+            vertical-align: middle;
+
+            .btn-default {
+              padding: 0px;
+              text-align: center;
+              vertical-align: middle;
+              width: $resultLinkWidth - 5px;
+              height: $resultRowHeight - 3px;
+              margin: 0px;
+            }
+        }
+    }
+
+    #trader_search_form_table {
+        @include commonTableForm;
+        width: 900px;
+        padding: 10px;
+        margin: 0px 0px 20px 0px;
+        border: 1px groove #ddd;
+        #q_code_gteq { margin-right: 10px; }
+        #q_code_lteq { margin-left: 10px; }
+        #q_name1_cont, #q_kana_cont { width: 500px; }
+    }
+
+    #trader_search_form_function_bar {
+        margin: 10px;
+        text-align: right;
+        button, input[type='submit'] {
+          width: 100px;
+          margin-left: 10px;
+        }
+    }
+}
+
+#bottom_function_bar {
+    width: 100%;
+    padding: 0px 10px 0px 10px;
+    margin: 20px 0px 0px 0px;
+}
+
+#bottom_function_bar_left {
+    display: block;
+    float: left;
+    width: ($formWidth - $formPadding * 2 - 10 * 2) / 2;
+    text-align: left;
+
+    button {
+        width: $functionBarButtonWidth;
+        margin: 0px 10px 0px 0px;
+    }
+}
+
+#bottom_function_bar_right {
+    display: block;
+    float: right;
+    width: ($formWidth - $formPadding * 2 - 10 * 2) / 2;
+    text-align: right;
+
+    input[type='submit'], button, a {
+        width: $functionBarButtonWidth;
+        margin: 0px 0px 0px 10px;
+    }
+}
+
+#trader_name1, #trader_name2, #trader_short_name {
+    width: 700px;
+}
+
+#trader_address1, #trader_address2 {
+    width: $tdWidth - 10px;
+}
+
+#trader_person_in_charge_official_title {
+    width: 500px;
+}
+
+#trader_person_in_charge_name {
+    width: 400px;
+}
+
+#trader_email {
+    width: 400px;
+}

@@ -1,0 +1,64 @@
+.row
+  .col-md-6 
+    div class='box box-primary'
+      .box-body
+        = form_for(object, url: polymorphic_path([object]), :html => {:class => "form-horizontal"}, method: (object.new_record? ? :post : :put)) do |f|
+          = render partial: 'shared/errors', locals: {errors: object.errors}
+          
+          div align="right"
+            = link_to t('.back'), polymorphic_path([object.class.name.constantize])
+          br
+
+          .form-group
+            = f.label :accounts_id, class: 'col-xs-3 form-control-static'
+            .col-xs-9
+              - if object.persisted?
+                = f.label :accounts_id, Account.find_by_id(object.account_id).name, class: 'form-control'
+              - else
+                = f.select :account_id, options_from_collection_for_select(Account.of_ours(@my_company), :id, :name,selected: params['params_id']), {}, autofocus: true, class: 'form-control'
+
+          .form-group
+            = f.label :code, class: 'col-xs-3 form-control-static'
+            .col-xs-4
+              = f.text_field :code, autofocus: true, class: "form-control"
+
+          .form-group
+            = f.label :name, class: 'col-xs-3 form-control-static'
+            .col-xs-9
+              = f.text_field :name, autofocus: true, class: "form-control"
+
+          .form-group
+            = f.label :kana, class: 'col-xs-3 form-control-static'
+            .col-xs-9
+              = f.text_field :kana, autofocus: true, class: "form-control"
+
+          .form-group
+            = f.label :tax_division_id, class: 'col-xs-3 form-control-static'
+            .col-xs-9
+              = f.select :tax_division_id,  options_from_collection_for_select(TaxDivision.all, :id, :name,selected: object.tax_division_id), {}, autofocus: true, class: 'form-control'
+
+          .form-group
+            = f.label :tax_rate_id, class: 'col-xs-3 form-control-static'
+            .col-xs-4
+              = f.select :tax_rate_id, options_from_collection_for_select(TaxRate.all, :id, :name,selected: object.tax_rate_id), {}, autofocus: true, class: 'form-control'
+
+          .form-group
+            = f.label :tax_display, class: 'col-xs-3 form-control-static'
+            .col-xs-4
+              - tax_displays = Settings.enumerize_options.sub_account.tax_displays
+              = f.select :tax_display, tax_displays.map{|at| [t(at.name, scope: 'enumerize.sub_account.tax_display'), at.id]}, {}, autofocus: true, class: 'form-control'
+
+          .form-group
+            = f.label :round, class: 'col-xs-3 form-control-static'
+            .col-xs-4
+              - rounds = Settings.enumerize_options.sub_account.rounds
+              = f.select :round, rounds.map{|at| [t(at.name, scope: 'enumerize.sub_account.round'), at.id]}, {}, autofocus: true, class: 'form-control'
+
+          .form-group
+            = f.label :business_division_id, class: 'col-xs-3 form-control-static'
+            .col-xs-4
+              = f.select :business_division_id, options_from_collection_for_select(BusinessDivision.all, :id, :name,selected: object.business_division_id), {}, autofocus: true, class: 'form-control'
+
+          div align="right"
+            = f.submit t(object.new_record? ? '.create' : '.update'), class: 'btn btn-primary'
+          br

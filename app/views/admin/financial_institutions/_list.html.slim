@@ -1,0 +1,25 @@
+span(class='label-text')
+  = raw(page_entries_info)
+
+.box-body.table-responsive.no-padding
+  table(class='table table-striped')
+    tbody
+      tr
+        th = Bank.human_attribute_name(:code)
+        th = Bank.human_attribute_name(:name)
+        th = Bank.human_attribute_name(:kana)
+        th = Branch.human_attribute_name(:code)
+        th = Branch.human_attribute_name(:name)
+        th = Branch.human_attribute_name(:kana)
+      - @branches.each do |branch|
+        tr
+          - bank = Bank.search(id: branch.bank_id).result.first 
+          td(width='120px') = bank.code
+          td(width='240px') = bank.name
+          td(width='240px') = bank.kana
+          td(width='120px') = branch.code
+          td(width='240px') = branch.name
+          td(width='240px') = branch.kana
+
+.box-footer.clearfix
+  = paginate @branches, remote: true

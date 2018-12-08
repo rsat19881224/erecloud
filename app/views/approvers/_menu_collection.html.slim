@@ -1,0 +1,7 @@
+.form-group
+  = label :approver, :menu_id, Menu.human_attribute_name(:name), class: 'col-xs-3 form-control-static'
+  .col-xs-4
+    - if object.persisted?
+      = Menu.find_by_id(object.menu_id).name
+    - else
+      = select :approver, :menu_id, options_from_collection_for_select(menus, :id, :name), {}, autofocus: true, class: 'form-control'

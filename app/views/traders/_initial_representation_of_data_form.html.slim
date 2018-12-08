@@ -1,0 +1,97 @@
+- ird_options = Settings.enumerize_options.initial_representation_of_data
+
+table#initial_representation_of_data_form_table
+  tbody
+    tr
+      th
+        = f.label :pbill_mailing_division
+      td
+        - ird_options.pbill_mailing_divisions.each do |division|
+          .radio-inline
+            = f.radio_button :pbill_mailing_division, division.value, autofocus: true
+            = t(division.name)
+
+    tr
+      th
+        = f.label :pbill_postage_division
+      td
+        - ird_options.pbill_postage_divisions.each do |division|
+          .radio-inline
+            = f.radio_button :pbill_postage_division, division.value, autofocus: true
+            = t(division.name)
+
+    tr
+      th
+        = f.label :pbill_postage
+      td
+        = f.number_field :pbill_postage, maxlength: 10, autofocus: true
+
+    tr
+      th
+        = f.label :receipt_postage
+      td
+        = f.number_field :receipt_postage, maxlength: 10, autofocus: true
+
+    tr
+      th
+        = f.label :rbill_drawing_bank_code
+      td
+        = f.text_field :rbill_drawing_bank_code, maxlength: 4, autofocus: true
+
+    tr
+      th
+        = f.label :rbill_drawing_bank_name
+      td
+        = f.text_field :rbill_drawing_bank_name, autofocus: true
+
+    tr
+      th
+        = f.label :rbill_drawing_branch_code
+      td
+        = f.text_field :rbill_drawing_branch_code, maxlength: 3, autofocus: true
+
+    tr
+      th
+        = f.label :rbill_drawing_branch_name
+      td
+        = f.text_field :rbill_drawing_branch_name, autofocus: true
+
+    tr
+      th
+        = f.label :pbill_company_bank
+      td
+        .company_bank_field
+          = text_field_tag "#{f.object_name}[pbill_company_bank][code]", '', maxlength: 10, autofocus: true
+          = text_field_tag "#{f.object_name}[pbill_company_bank][name]", '', readonly: true, disabled: true, tabindex: -1
+
+    tr
+      th
+        = f.label :ebill_settling_company_bank
+      td
+        .company_bank_field
+          = text_field_tag "#{f.object_name}[ebill_settling_company_bank][code]", '', maxlength: 10, autofocus: true
+          = text_field_tag "#{f.object_name}[ebill_settling_company_bank][name]", '', readonly: true, disabled: true,  tabindex: -1
+
+    tr
+      th
+        = f.label :ebill_payment_company_bank
+      td
+        .company_bank_field
+          = text_field_tag "#{f.object_name}[ebill_payment_company_bank][code]", '', maxlength: 10, autofocus: true
+          = text_field_tag "#{f.object_name}[ebill_payment_company_bank][name]", '', readonly: true, disabled: true, tabindex: -1
+
+    tr
+      th
+        = f.label :bank_transfer_receipt_company_bank
+      td
+        .company_bank_field
+          = text_field_tag "#{f.object_name}[bank_transfer_receipt_company_bank][code]", '', maxlength: 10, autofocus: true
+          = text_field_tag "#{f.object_name}[bank_transfer_receipt_company_bank][name]", '', readonly: true, disabled: true, tabindex: -1
+
+    tr
+      th
+        = f.label :bank_transfer_payment_company_bank
+      td
+        .company_bank_field
+          = text_field_tag "#{f.object_name}[bank_transfer_payment_company_bank_code][code]", '', maxlength: 10, autofocus: true
+          = text_field_tag "#{f.object_name}[bank_transfer_payment_company_bank][name]", '', readonly: true, disabled: true, tabindex: -1

@@ -1,0 +1,28 @@
+table.table.table-striped#analysis_item_table
+  tbody
+    tr
+      th = AnalysisItem.human_attribute_name(:analysis_division_id)
+      th = AnalysisItem.human_attribute_name(:code)
+      th = AnalysisItem.human_attribute_name(:name)
+      th = AnalysisItem.human_attribute_name(:kana)
+      th = AnalysisItem.human_attribute_name(:abbreviation)
+      th
+      th
+
+  - analysises.each do |object|
+    tr class=('deleted' if object.deleted?)
+      td(width="100px") = AnalysisDivision.find_by_id(object.analysis_division_id).name
+      td(width="100px") = object.code 
+      td(width="150px") = object.name 
+      td(width="250px") = object.kana 
+      td(width="100px") = object.abbreviation 
+      
+      td(width="60px" align="center") = link_to t('general.label.edit'), polymorphic_path([object], pickup_param.merge(action: :edit)) 
+      td 
+          - unless object.deleted?
+            = link_to t('general.label.delete'), polymorphic_path([object], pickup_param), :method => :delete, :data => {:confirm => t('general.message.confirm_delete')}
+          - else
+            = t('general.label.deleted')
+
+div.box-footer.clearfix
+  = paginate objects, remote: true

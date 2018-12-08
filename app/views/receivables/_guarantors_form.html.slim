@@ -1,0 +1,34 @@
+= parent_f.fields_for :guarantors do |f|
+  .hide = f.options[:child_index]
+  dl.all
+    dt.base = label_tag "No"
+    dd.migi.no = f.options[:child_index].to_i + 1
+    dt.base = label_tag "取引先"
+    dd.migi = f.text_field :trader_id
+    dt.base2 = label_tag "保証人情報"
+    dd
+      dl
+        dt.sub = f.label "名称"
+        dd.migi = f.text_field :guarantor_name, :class => "longarea"
+        dt.sub = f.label "カナ"
+        dd.migi = f.text_field :guarantor_kana, :class => "longarea"
+        dt.sub = f.label "銀行本支店"
+        dd.migi
+          div
+            = f.text_field :bank_code, :class => "yoko"
+            = f.text_field :bank_kana, :class => "yoko"
+            = f.text_field :branch_code, :class => "yoko"
+            = f.text_field :branch_kana, :class => "yoko"
+        dt.sub = f.label "口座番号"
+        dd.migi
+          div
+            = f.select :account_type, [["普通", 1],["当座", 2],["その他", 9]]
+            = f.text_field :account_number, :class => "kouza"
+
+  dl.all2 style="margin-bottom: 5px"
+    dt.base = f.label "保証記録日"
+    dd.migi = f.text_field :guaranty_recorded_on, class: 'inputCalendars'
+
+  = f.link_to_remove "削除", class: 'btn btn-default', style: 'margin-bottom: 30px;'
+
+= parent_f.link_to_add '続けて入力', :guarantors, class: 'btn btn-default pull-right'

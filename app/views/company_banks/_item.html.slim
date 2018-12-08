@@ -1,0 +1,118 @@
+.company-bank-button-group(align='right')
+  = link_to self.model.model_name.human + '一覧ヘ戻る', polymorphic_path(model), class: 'btn btn-primary'
+
+.company-bank-content-group
+  table
+    tbody
+      tr
+        th.table-title(colspan=2)
+          label 自社取引銀行設定
+
+      tr
+        th
+          = CompanyBank.human_attribute_name(:code)
+        td
+          = sprintf("%010d", @company_bank.code.to_i)
+
+      tr
+        th
+          = CompanyBank.human_attribute_name(:name)
+        td
+          = @company_bank.name
+
+      tr
+        th
+          label 銀行情報
+        td
+          .fi-code
+            label = CompanyBank.human_attribute_name(:bank_code)
+            p = sprintf("%04d", @company_bank.bank_code.to_i)
+          .fi-name
+            label = CompanyBank.human_attribute_name(:bank_name)
+            = @company_bank.bank_name
+          .fi-kana
+            label = CompanyBank.human_attribute_name(:bank_kana)
+            = @company_bank.bank_kana
+
+        tr
+          th
+            label 銀行支店情報
+          td
+            .fi-code
+              label = CompanyBank.human_attribute_name(:branch_code)
+              p = sprintf("%03d", @company_bank.branch_code.to_i)
+            .fi-name
+              label = CompanyBank.human_attribute_name(:branch_name)
+              = @company_bank.branch_name
+            .fi-kana
+              label = CompanyBank.human_attribute_name(:branch_kana)
+              = @company_bank.branch_kana
+
+        tr
+          th
+            = CompanyBank.human_attribute_name(:account_type)
+          td
+            - type = Settings.enumerize_options.company_bank.account_types.find {|at| at.id == @company_bank.account_type }
+            = @company_bank.account_type
+
+        tr
+          th
+            = CompanyBank.human_attribute_name(:account_number)
+          td
+            = @company_bank.account_number
+
+        tr
+          th
+            = CompanyBank.human_attribute_name(:account_name_kana)
+          td
+            = @company_bank.account_name_kana
+
+        tr
+          th
+            = CompanyBank.human_attribute_name(:limit_discount_money)
+          td
+            = @company_bank.limit_discount_money
+
+  table
+    tbody
+      tr
+        th.table-title(colspan=2)
+          label 自社取引銀行設定
+
+      tr
+        th
+          = CompanyBank.human_attribute_name(:densai_user_number)
+        td
+          = @company_bank.densai_user_number
+
+      tr
+        th
+          = CompanyBank.human_attribute_name(:jemco_user_number)
+        td
+          = @company_bank.jemco_user_number
+
+      tr
+        th
+          = CompanyBank.human_attribute_name(:jemco_discount_financial_institution_user_number)
+        td
+          = @company_bank.jemco_discount_financial_institution_user_number
+
+      tr
+        th
+          = CompanyBank.human_attribute_name(:jemoco_is_indicate_present_guarantee)
+        td
+          - if @company_bank.jemoco_is_indicate_present_guarantee.presence
+            = @company_bank.jemoco_is_indicate_present_guarantee ? '表示する' : '表示しない'
+
+      tr
+        th
+          = CompanyBank.human_attribute_name(:mizuho_user_number)
+        td
+          = @company_bank.mizuho_user_number
+
+      tr
+        th
+          = CompanyBank.human_attribute_name(:smbc_user_number)
+        td
+          = @company_bank.smbc_user_number
+

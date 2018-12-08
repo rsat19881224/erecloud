@@ -1,0 +1,56 @@
+table
+  tr
+    th(colspan=2)
+      = f.label :company_name1
+    td
+      = f.text_field :company_name1, maxlength: 60, autofocus: true
+
+  tr
+    th(colspan=2)
+      = f.label :company_name2
+    td
+      = f.text_field :company_name2, maxlength: 60, autofocus: true
+
+  tr
+    th#address_group(rowspan=4 style='width: 60px') = '住所'
+    tr
+      th
+        = f.label :postal_code
+      td
+        = f.text_field :postal_code, maxlength: 8, autofocus: true
+    tr
+      th = f.label :address1
+      td = f.text_field :address1, maxlength: 100, autofocus: true
+    tr
+      th = f.label :address2
+      td = f.text_field :address2, maxlength: 100, autofocus: true
+
+  tr
+    th(colspan=2)
+      = f.label :company_number
+    td
+      = f.text_field :company_number, maxlength: 13, autofocus: true
+
+  tr
+    th(colspan=2)
+      = f.label :representative_name
+    td
+      = f.text_field :representative_name, maxlength: 30, autofocus: true
+
+  tr
+    th(colspan=2)
+      = f.label :representative_official_title
+    td
+      = f.text_field :representative_official_title, maxlength: 30, autofocus: true
+
+  tr
+    th(colspan=2)
+      = f.label :person_in_charge_name
+    td
+      = f.text_field :person_in_charge_name, maxlength: 30, autofocus: true
+
+  tr
+    th(colspan=2)
+      = f.label :person_in_charge_official_title
+    td
+      = f.text_field :person_in_charge_official_title, maxlength: 40, autofocus: true

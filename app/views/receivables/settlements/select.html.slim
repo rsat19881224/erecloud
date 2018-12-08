@@ -1,0 +1,45 @@
+= render :partial => 'shared/receivables/stage'
+section.container
+  = form_tag result_receivables_settlements_path, method: :get do
+    .row
+      = submit_tag '戻る', name: :back, class: "btn btn-default col-xs-2 pull-right back-button"
+
+  div
+    = form_tag confirm_receivables_settlements_path do
+      .row
+        .col-xs-1
+          label = '決済指示'
+        .col-xs-1
+          label = '指定件数'
+        .col-xs-10
+          = "#{@receivable_searches.size}件"
+      .row
+        .col-xs-1.col-xs-offset-1
+          label = '合計金額'
+        .col-xs-10
+          = "#{number_to_currency(@receivable_searches.inject(0) { |sum, r| sum + r.residual_money }, unit: '', precision: 0)}円"
+      .result_container
+        .row.col-xs-10
+          .row.text-center.header
+            .col-xs-1 No
+            .col-xs-1 支払期日
+            .col-xs-1 支払日
+            .col-xs-3 請求先
+            .col-xs-2 債権残高
+            .col-xs-2 手数料
+
+          - @receivable_searches.each_with_index do |r, i|
+            .row
+              = hidden_field_tag 'settlement[id][]', r.id
+              .col-xs-1.text-center.vertical-middle = "No#{i+1}"
+              .col-xs-1.vertical-middle = r.try(:matured_on).try(:strftime, "%Y-%m-%d")
+              .col-xs-1.vertical-middle = r.try(:settled_on).try(:strftime, "%Y-%m-%d")
+              .col-xs-3.two-lines
+                .row.two-lines-child  = r.trader.try(:code)
+                .row.two-lines-child  = r.trader.try(:name1)
+              .col-xs-2.text-right.vertical-middle id="money#{r.id}" = number_to_currency(r.residual_money, unit: '', precision: 0)
+              .col-xs-2.vertical-middle = text_field_tag "settlement[fee][]", @input_params.try(:fetch, 'fee', []).try(:fetch, i, '0').try(:to_i), class: 'money_format text-right', autocomplete: :off
+        .row
+          actions.col-xs-12
+            = button_tag 'キャンセル', type: 'button', id: 'settlements_select_reset', class: 'btn btn-primary col-xs-2 col-xs-offset-1'
+            = submit_tag '次へ', id: 'settlements_confirm_button', class: 'btn btn-primary col-xs-2 col-xs-offset-1'

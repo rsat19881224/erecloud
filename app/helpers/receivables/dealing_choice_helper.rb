@@ -1,0 +1,2 @@
+module Receivables::DealingChoiceHelper
+end

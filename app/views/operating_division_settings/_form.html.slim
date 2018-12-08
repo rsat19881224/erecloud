@@ -1,0 +1,27 @@
+.row
+  .col-md-6 
+    div class='box box-primary'
+      .box-body
+        = form_for(object, url: polymorphic_path([object]), :html => {:class => "form-horizontal"}, method: (object.new_record? ? :post : :put)) do |f|
+          = render partial: 'shared/errors', locals: {errors: object.errors}
+          
+          div align="right"
+            = link_to t('.back'), polymorphic_path([object.class.name.constantize])
+          br
+
+          .form-group
+            = f.label :operating_division_id, class: 'col-xs-3 form-control-static'
+            .col-xs-9
+              - if object.persisted?
+                = OperatingDivision.find_by_id(object.operating_division_id).name
+              - else
+                = f.select :operating_division_id, options_from_collection_for_select(OperatingDivision.of_ours(@my_company), :id, :name), {}, autofocus: true, class: 'form-control'
+
+          .form-group
+            = f.label :input_type, class: 'col-xs-3 form-control-static'
+            .col-xs-9
+              = f.select :input_type, OperatingDivisionSetting.input_type.options, {}, autofocus: true, class: 'form-control'
+
+          div align="right"
+            = f.submit t(object.new_record? ? '.create' : '.update'), class: 'btn btn-primary'
+          br

@@ -1,0 +1,39 @@
+.row
+  .col-md-6 
+    div class='box box-primary'
+      .box-body
+        = form_for(object, url: polymorphic_path([object]), :html => {:class => "form-horizontal"}, method: (object.new_record? ? :post : :put)) do |f|
+          = render partial: 'shared/errors', locals: {errors: object.errors}
+          
+          div align="right"
+            = link_to t('.back'), polymorphic_path([object.class.name.constantize])
+          br
+
+          .form-group
+            = f.label :analysis_division_id, class: 'col-xs-3 form-control-static'
+            .col-xs-9
+              = f.select :analysis_division_id, options_from_collection_for_select(AnalysisDivision.of_ours(@my_company), :id, :name), {}, autofocus: true, class: 'form-control'
+
+          .form-group
+            = f.label :code, class: 'col-xs-3 form-control-static'
+            .col-xs-9
+              = f.text_field :code, autofocus: true, class: "form-control"
+
+          .form-group
+            = f.label :name, class: 'col-xs-3 form-control-static'
+            .col-xs-9
+              = f.text_field :name, autofocus: true, class: "form-control"
+
+          .form-group
+            = f.label :kana, class: 'col-xs-3 form-control-static'
+            .col-xs-9
+              = f.text_field :kana, autofocus: true, class: "form-control"
+
+          .form-group
+            = f.label :abbreviation, class: 'col-xs-3 form-control-static'
+            .col-xs-9
+              = f.text_field :abbreviation, autofocus: true, class: "form-control"
+
+          div align="right"
+            = f.submit t(object.new_record? ? '.create' : '.update'), class: 'btn btn-primary'
+          br

@@ -1,0 +1,19 @@
+h1 Listing receivables
+
+table
+  thead
+    tr
+      th
+      th
+      th
+
+  tbody
+    - @receivables.each do |receivable|
+      tr
+        td = link_to 'Show', receivable
+        td = link_to 'Edit', edit_receivable_path(receivable)
+        td = link_to 'Destroy', receivable, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Receivable', new_receivable_path

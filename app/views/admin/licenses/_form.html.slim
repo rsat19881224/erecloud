@@ -1,0 +1,62 @@
+.row
+  .col-md-6 
+    div class='box box-primary'
+      .box-body
+        = form_for(object, url: polymorphic_path([:admin, @company, object]), :html => {:class => "form-horizontal"}, method: (object.new_record? ? :post : :put)) do |f|
+          = render partial: 'shared/errors', locals: {errors: object.errors}
+          
+          div align="right"
+            = link_to t('.back'), polymorphic_path([:admin, @company, License])
+          br
+
+          .form-group
+            = f.label :product_id, class: 'col-xs-3 form-control-static'
+            .col-xs-4
+              - if object.persisted?
+                = raw(object.product.name)
+              - else
+                = f.select :product_id, options_from_collection_for_select(Product.unlicensed(@company), :id, :name, f.object.product_id), {}, class: 'form-control'
+
+          .form-group
+            = f.label :number_of_license, class: 'col-xs-3 form-control-static'
+            .col-xs-4
+              - if object.persisted?
+                = f.number_field :number_of_license, min: 1, maxlength: 3, value: object.number_of_license, autofocus: true, class: 'form-control'
+              - else
+                = f.number_field :number_of_license, min: 1, maxlength: 3, value: 1, autofocus: true, class: 'form-control'
+
+          .form-group
+            = f.label :use_starting_date, class: 'col-xs-3 form-control-static'
+            .col-xs-4
+              - if object.persisted?
+                = f.text_field :use_starting_date, value: format_date_default(object.use_starting_date), readonly: true, class: 'form-control'
+              - else
+                = f.text_field :use_starting_date, value: format_date_default(Date.today), class: 'form-control datetimepicker', placeholder: 'YYYY/MM/DD'
+
+          .form-group
+            = f.label :period_of_service, class: 'col-xs-3 form-control-static'
+            .col-xs-4
+              - if object.persisted?
+                = f.number_field :period_of_service, min: 1, maxlength: 4, value: object.period_of_service, autofocus: true, class: 'form-control'
+              - else
+                = f.number_field :period_of_service, min: 1, maxlength: 4, value: 1, autofocus: true, class: 'form-control'
+
+          .form-group
+            = f.label :use_end_date, class: 'col-xs-3 form-control-static'
+            .col-xs-4
+              - if object.persisted?
+                = f.text_field :use_end_date, readonly: true, value: format_date_default(object.use_end_date), class: 'form-control'
+              - else
+                = f.text_field :use_end_date, readonly: true, value: format_date_default(Date.today.next), class: 'form-control'
+  
+          .form-group
+            = f.label :license_type, class: 'col-xs-3 form-control-static'
+            .col-xs-4
+              - if object.persisted?
+                = f.select :license_type, License.license_type.options, {selected: object.license_type}, autofocus: true, class: 'form-control'
+              - else
+                = f.select :license_type, License.license_type.options, {selected: License.license_type.trial}, autofocus: true, class: 'form-control'
+
+          div align="right"
+            = f.submit t(object.new_record? ? '.create' : '.update'), class: 'btn btn-primary'
+          br

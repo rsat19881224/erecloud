@@ -1,0 +1,613 @@
+# 共通変数
+defaults: &defaults
+  enumerize_options:
+    receivables:
+      accrual_types:
+        -
+          name: "selects.accrual_type.payv"
+          id: 1
+        -
+          name: "selects.accrual_type.trns"
+          id: 3
+        -
+          name: "selects.accrual_type.recv"
+          id: 2
+      account_types:
+        -
+          name: "selects.account_type.nomal"
+          id: 1
+        -
+          name: "selects.account_type.current"
+          id: 2
+        -
+          name: "selects.account_type.other"
+          id: 9
+      transfer_restricted:
+        -
+          name: "selects.transfer_restricted.none"
+          id: 1
+        -
+          name: "selects.transfer_restricted.finantial_only"
+          id: 2
+      period_types:
+        -
+          name: "selects.period_type.none"
+          id: 1
+        -
+          name: "selects.period_type.occurred_on"
+          id: 2
+        -
+          name: "selects.period_type.transferred_on"
+          id: 3
+        -
+          name: "selects.period_type.matured_on"
+          id: 4
+        -
+          name: "selects.period_type.settled_on"
+          id: 5
+      name_specified:
+        -
+          name: "selects.name_specified.debtor_name"
+          id: 1
+        -
+          name: "selects.name_specified.assignor_name"
+          id: 2
+      recording_institutions:
+        code:
+          densai: "1"
+          jemco: "5"
+    journals:
+      data_type:
+        receivable:
+          -
+            name: "selects.data_type.receivable.acceptances_receivable"
+            id: 1
+          -
+            name: "selects.data_type.receivable.electronic_receivables"
+            id: 2
+          -
+            name: "selects.data_type.receivable.factoring"
+            id: 3
+          -
+            name: "selects.data_type.receivable.date_cash_payment"
+            id: 4
+      facts:
+        receivable:
+          -
+            name: "selects.fact.receivable.receipt"
+            id: 1
+          -
+            name: "selects.fact.receivable.transfer_endorsement"
+            id: 2
+          -
+            name: "selects.fact.receivable.discount"
+            id: 3
+          -
+            name: "selects.fact.receivable.settlement"
+            id: 4
+          -
+            name: "selects.fact.receivable.repayment_cancel"
+            id: 5
+          -
+            name: "selects.fact.receivable.own_facts"
+            id: 6
+        debt:
+          -
+            name: "selects.fact.debt.drawer"
+            id: 1
+          -
+            name: "selects.fact.debt.settlement"
+            id: 2
+          -
+            name: "selects.fact.debt.repayment_cancel"
+            id: 3
+    menu_attrs:
+      - title: "titles.receivable_register"
+        keep_controllers:
+          - "receivables"
+          - "receivables/dealing_choice"
+          - "receivables/discounts"
+          - "receivables/transfers"
+          - "receivables/settlements"
+        keep_actions:
+          - "regist"
+          - "new"
+          - "search"
+          - "select"
+          - "discounts"
+          - "transfers"
+        submenu:
+          - title: "side_titles.receivables.default"
+            keep_controllers:
+              - "receivables"
+              - "receivables/dealing_choice"
+            keep_actions:
+              - "regist"
+              - "new"
+            submenu:
+              - title: "side_titles.receivables.dealing_choice"
+                controller: "/receivables/dealing_choice"
+                action: "regist"
+              - title: "titles.new_receivable_register"
+                controller: "/receivables"
+                action: "new"
+              - title: "titles.densai_notice_info"
+                controller:
+              - title: "titles.densai_disclose_info"
+                controller:
+              - title: "titles.erec_mod"
+                controller:
+          - title: "side_titles.receivables.discounts.default"
+            keep_controllers:
+              - "receivables/discounts"
+              - "receivables/dealing_choice"
+            keep_actions:
+              - "discounts"
+              - "search"
+            submenu:
+              - title: "side_titles.receivables.dealing_choice"
+                controller: "/receivables/dealing_choice"
+                action: "discounts"
+              - title: "side_titles.receivables.discounts.input_process"
+                controller: "/receivables/discounts"
+                action: "search"
+              - title: "side_titles.receivables.discounts.form_print"
+                controller:
+                action:
+              - title: "side_titles.receivables.discounts.cancel_process"
+                controller:
+                action:
+          - title: "side_titles.receivables.transfers.default"
+            keep_controllers:
+              - "receivables/transfers"
+              - "receivables/dealing_choice"
+            keep_actions:
+              - "transfers"
+              - "select"
+            submenu:
+              - title: "side_titles.receivables.dealing_choice"
+                controller: "/receivables/dealing_choice"
+                action: "transfers"
+              - title: "side_titles.receivables.transfers.bulk_transfer_process"
+                controller: "/receivables/transfers"
+                action: "select"
+              - title: "side_titles.receivables.transfers.densai_records_output"
+                controller:
+                action:
+              - title: "side_titles.receivables.transfers.application_form_print"
+                controller:
+                action:
+              - title: "side_titles.receivables.transfers.cancel_process"
+                controller:
+                action:
+          - title: "side_titles.receivables.settlements"
+            controller: "/receivables/settlements"
+            action: "search"
+      - title: "titles.interlocked"
+        keep_controllers:
+          - "journals/dealing_choice"
+          - "journals/journal_data"
+        keep_actions:
+          - "select"
+          - "search"
+        submenu:
+          - title: "side_titles.journals.default"
+            keep_controllers:
+              - "journals/dealing_choice"
+              - "journals/journal_data"
+            keep_actions:
+              - "select"
+              - "search"
+            submenu:
+              - title: "side_titles.journals.dealing_choice"
+                controller: "/journals/dealing_choice"
+                action: "select"
+              - title: "side_titles.journals.data"
+                controller: "/journals/journal_data"
+                action: "search"
+              - title: "side_titles.journals.output_format"
+                controller:
+                action:
+    account_types:
+      - "saving"
+      - "checking"
+
+    prefectures:
+      - "hokkaido"
+      - "aomori"
+      - "iwate"
+      - "miyagi"
+      - "akita"
+      - "yamagata"
+      - "fukushima"
+      - "ibaraki"
+      - "tochigi"
+      - "gunma"
+      - "saitama"
+      - "chiba"
+      - "tokyo"
+      - "kanagawa"
+      - "niigata"
+      - "toyama"
+      - "ishikawa"
+      - "fukui"
+      - "yamanashi"
+      - "nagano"
+      - "gifu"
+      - "shizuoka"
+      - "aichi"
+      - "mie"
+      - "shiga"
+      - "kyoto"
+      - "osaka"
+      - "hyogo"
+      - "nara"
+      - "wakayama"
+      - "tottori"
+      - "shimane"
+      - "okayama"
+      - "hiroshima"
+      - "yamaguchi"
+      - "tokushima"
+      - "kagawa"
+      - "ehime"
+      - "kochi"
+      - "fukuoka"
+      - "saga"
+      - "nagasaki"
+      - "kumamoto"
+      - "oita"
+      - "miyazaki"
+      - "kagoshima"
+      - "okinawa"
+
+    user:
+      user_types:
+        - "user_admin"
+        - "user_general"
+
+    administrator:
+      administrator_types:
+        - "union_admin"
+        - "union_developer"
+        - "union_business"
+
+    tax_types:
+      - "bill"
+      - "receipt"
+
+    date_display_formats:
+      - "japanese"
+      - "anno_domini"
+
+    taxeds:
+      - "tax"
+      - "untaxed"
+
+    abridgment_method:
+      - "line"
+      - "no_line"
+
+    payment_type:
+      - "payment"
+      - "no_payment"
+
+    divided:
+      - "usual"
+      - "originally"
+      - "result"
+
+    bill_made:
+      - "bill_receipt"
+      - "receipt"
+      - "receipt_bill"
+
+    approved:
+      - "no_approval"
+      - "first_approval"
+      - "last_approval"
+
+    menu:
+      manager_divisions:
+        - "general"
+        - "admin_user"
+        - "system_admin"
+      product_categories:
+        - "system"
+        - "common"
+        - "bill_credit"
+        - "bill_debit"
+        - "ebill_credit"
+        - "ebill_debit"
+        - "factoring_credit"
+        - "factoring_debit"
+        - "account_receivable"
+        - "account_payment"
+        - "print_option"
+      extend_types:
+        - "no_extend"
+        - "extend"
+
+    approval_setting:
+      approval_types:
+        - "no_approval"
+        - "one_phase_approval"
+        - "two_phases_approval"
+
+    menu_authority:
+      authority_types:
+        - "full"
+        - "create_update"
+        - "create_update_print"
+        - "show_print"
+
+    default_payable_site:
+      date_designation_divisions:
+        - "fixed_date"
+        - "collection_and_payment"
+      contract_credit_categories:
+        - "all"
+        - "bill_debit"
+        - "bill_credit"
+        - "ebill_debit"
+        - "ebill_credit"
+      site_designation_methods:
+        - "no_designation"
+        - "month_day"
+        - "after_day"
+      holiday_transfer_methods:
+        - "no_trans"
+        - "previous_business_day"
+        - "following_business_day"
+
+    approver:
+      approver_types:
+        - "last_approver"
+        - "first_approver"
+
+    trader:
+      reference_types:
+        - "billing"
+        - "payment"
+        - "common"
+
+    trader_bank_account:
+      account_types:
+        -
+          name: "nomal"
+          id: 1
+        -
+          name: "current"
+          id: 2
+        -
+          name: "other"
+          id: 9
+
+    account:
+      tax_displays:
+        - 
+          name: "outside"
+          id: 1
+        - 
+          name: "inside"
+          id: 2
+        - 
+          name: "particularly"
+          id: 3
+      rounds:
+        - 
+          name: "cutting_off"
+          id: 1
+        - 
+          name: "rounding_off"
+          id: 2
+        - 
+          name: "cutting_short"
+          id: 3
+      fund_divisions:
+        - 
+          name: "standard"
+          id: 1
+        - 
+          name: "fund"
+          id: 2
+      trader_shareds:
+        - 
+          name: "no_apply"
+          id: 1
+        - 
+          name: "use_sub"
+          id: 2
+      department_inputs:
+        - 
+          name: "no_input"
+          id: 1
+        - 
+          name: "detail"
+          id: 2
+        - 
+          name: "journalizing"
+          id: 3
+      trader_input_divisions:
+        - 
+          name: "no_input"
+          id: 1
+        - 
+          name: "customer"
+          id: 2
+        - 
+          name: "payment"
+          id: 3
+      tax_subject_divisions:
+        - 
+          name: "standard"
+          id: 1
+        - 
+          name: "payment_tax"
+          id: 2
+        - 
+          name: "receipt_tax"
+          id: 3
+
+    sub_account:
+      tax_displays:
+        - 
+          name: "outside"
+          id: 1
+        - 
+          name: "inside"
+          id: 2
+        - 
+          name: "particularly"
+          id: 3
+      rounds:
+        - 
+          name: "cutting_off"
+          id: 1
+        - 
+          name: "rounding_off"
+          id: 2
+        - 
+          name: "cutting_short"
+          id: 3
+
+    operating_division_setting:
+      input_types:
+        - "bill_credit"
+        - "bill_debit"
+        - "ebill_credit"
+        - "ebill_debit"
+        - "factoring_credit"
+        - "factoring_debit"
+        - "account_receivable"
+        - "account_payment"
+        - "print_option"
+
+    company_bank:
+      account_types:
+        -
+          name: "selects.account_type.nomal"
+          id: 1
+        -
+          name: "selects.account_type.current"
+          id: 2
+        -
+          name: "selects.account_type.other"
+          id: 9
+
+    license:
+      license_types:
+        - "trial"
+        - "demo"
+        - "operation"
+
+    initial_representation_of_data:
+      pbill_mailing_divisions:
+        -
+          name: "selects.initial_representation_of_data.pbill_mailing_division.hand"
+          value: 0
+        -
+          name: "selects.initial_representation_of_data.pbill_mailing_division.mail"
+          value: 1
+      pbill_postage_divisions:
+        -
+          name: "selects.initial_representation_of_data.pbill_postage_division.offset"
+          value: 0
+        -
+          name: "selects.initial_representation_of_data.pbill_postage_division.stamp"
+          value: 1
+
+    operating_division:
+      input_divisions:
+        -
+          value: 1
+          human: 'enumerize.operating_division.input_division.journal_basic_pattern'
+        -
+          value: 2
+          human: 'enumerize.operating_division.input_division.trader_journal_pattern'
+        -
+          value: 3
+          human: 'enumerize.operating_division.input_division.bank_journal_pattern'
+        -
+          value: 4
+          human: 'enumerize.operating_division.input_division.when_input_minutely'
+        -
+          value: 5
+          human: 'enumerize.operating_division.input_division.when_export_fixed_value_setting'
+        -
+          value: 7
+          human: 'enumerize.operating_division.input_division.mangement_item_journal_pattern'
+
+    analysis_division:
+      input_divisions:
+        -
+          value: 1
+          human: 'enumerize.analysis_division.input_division.journal_basic_pattern'
+        -
+          value: 2
+          human: 'enumerize.analysis_division.input_division.trader_journal_pattern'
+        -
+          value: 3
+          human: 'enumerize.analysis_division.input_division.bank_journal_pattern'
+        -
+          value: 4
+          human: 'enumerize.analysis_division.input_division.when_input_minutely'
+        -
+          value: 5
+          human: 'enumerize.analysis_division.input_division.when_export_fixed_value_setting'
+        -
+          value: 7
+          human: 'enumerize.analysis_division.input_division.mangement_item_journal_pattern'
+
+  number_of_pages:
+    -
+      - 25
+      - 25
+    -
+      - 50
+      - 50
+    -
+      - 100
+      - 100
+    -
+      - 150
+      - 150
+    -
+      - 200
+      - 200
+
+# 開発用環境変数
+development:
+  <<: *defaults
+  notification:
+    error:
+      from: error@example.com
+      to: error@example.com
+      subject: '[erecloud][error] エラー通知'
+
+# テスト環境変数
+test:
+  <<: *defaults
+  notification:
+    error:
+      from: error@example.com
+      to: error@example.com
+      subject: '[erecloud][error] エラー通知'
+
+# ステージング環境変数
+staging:
+  <<: *defaults
+  notification:
+    error:
+      from: error@example.com
+      to: error@example.com
+      subject: '[erecloud][error] エラー通知'
+
+# 本番用環境変数
+production:
+  <<: *defaults
+  notification:
+    error:
+      from: error@example.com
+      to: error@example.com
+      subject: '[erecloud][error] エラー通知'

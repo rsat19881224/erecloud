@@ -1,0 +1,39 @@
+= nested_form_for @trader, html: { method: (@trader.new_record? ? :post : :put) } do |f|
+  = render partial: 'shared/errors', locals: {errors: @trader.errors}
+  = render partial: 'traders_form', locals: {f: f}
+
+  #bottom_function_bar
+    #bottom_function_bar_left
+      button.btn.btn-primary(type='button' href='#initial_representation_of_data' data={toggle: 'modal'}) = '初期表示設定'
+      button.btn.btn-primary(type='button' href='#trader_bank_accounts' data={toggle: 'modal'}) = '取引先口座情報'
+    #bottom_function_bar_right
+      button.btn.btn-success(type='button' id="trader_#{action_name}_cancel") = t('general.label.cancel')
+      - if action_name == 'new'
+        = f.submit t('general.label.create'), class: 'btn btn-primary'
+      - else
+        = link_to t('general.label.delete'), polymorphic_path([@trader]), method: :delete, data: {confirm: t('general.message.confirm_delete'), before_path: request.path}, class: 'btn btn-danger'
+        = f.submit t('general.label.update'), class: 'btn btn-primary'
+
+  #initial_representation_of_data.modal.fade
+    .modal-dialog
+      .modal-content
+        .modal-header
+          h4.modal-title = '初期表示設定'
+        .modal-body
+          = f.fields_for :initial_representation_of_data, @trader.initial_representation_of_data do |f|
+            = render partial: 'initial_representation_of_data_form', locals: {f: f}
+        .modal-footer
+          button.btn.btn-primary(id="initial_representation_of_data_#{action_name}_cancel" type='button') = t('general.label.cancel')
+          button.btn.btn-default(type='button' data-dismiss='modal') = t('general.label.close')
+
+  #trader_bank_accounts.modal.fade
+    .modal-dialog
+      .modal-content
+        .modal-header
+          h4.modal-title = '取引先口座情報'
+        .modal-body
+          = f.fields_for :trader_bank_accounts, @trader.trader_bank_accounts do |f|
+            = render partial: 'trader_bank_accounts_form', locals: {f: f}
+          = f.link_to_add '続けて入力', :trader_bank_accounts, class: 'btn btn-success add-trader_bank_accounts-link'
+        .modal-footer
+          button.btn.btn-default(type='button' data-dismiss='modal') = t('general.label.close')

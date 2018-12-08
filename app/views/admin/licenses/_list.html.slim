@@ -1,0 +1,43 @@
+table class='table table-striped'
+  tbody
+    tr
+      th
+        = License.human_attribute_name(:product_id)
+      th
+        = License.human_attribute_name(:number_of_license)
+      th
+        = License.human_attribute_name(:license_type)
+      th
+        = License.human_attribute_name(:period_of_service)
+      th
+        = License.human_attribute_name(:use_starting_date)
+      th
+        = License.human_attribute_name(:use_end_date)
+      th
+      th
+      
+    - objects.each do |object|
+      tr class=('deleted' if object.deleted?)
+        td(width='240px')
+          = object.product.name
+        td(width='120px')
+          = object.number_of_license
+        td(width='120px')
+          = t(object.license_type, scope: 'enumerize.license.license_type')
+        td(width='80px')
+          = object.period_of_service
+        td(width='120px')
+          = object.use_starting_date.strftime(t('date.formats.default'))
+        td(width='120px')
+          = object.use_end_date.strftime(t('date.formats.default'))
+        td(width='80px' align='center')
+          = link_to t('general.label.edit'), polymorphic_path([:admin, @company, object], pickup_param.merge(action: :edit))
+        td
+          - unless object.deleted?
+            = link_to t('general.label.delete'), polymorphic_path([:admin, @company, object], pickup_param), :method => :delete, :data => {:confirm => t('general.message.confirm_delete')}
+          - else
+            = t('general.label.deleted')
+
+div class='box-footer clearfix'
+  = paginate objects, remote: true
+

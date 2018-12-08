@@ -1,0 +1,38 @@
+#edit_small_content_title(data-small-title="#{t('edit', scope: 'small_titles.operative_settings.control_panel')}")
+#previous_operative_setting_data(data-previous-data="#{@operative_setting.as_json(except: %i(id company_id created_at updated_at deleted_at))}")
+
+= form_for @operative_setting, url: {action: 'control_panel'}, method: :post, html: {class: 'operative_setting_form'} do |f|
+  = render partial: 'shared/errors', locals: {errors: @operative_setting.errors}
+
+  .top-function-bar
+    button.btn.btn-primary#change_edit_mode_button(type='button') = t('general.label.edit')
+
+  ul.nav.nav-tabs(role='tablist')
+    li.active
+      a(href='#company_information_tab' data-toggle='tab') = '会社情報'
+    li
+      a(href='#operative_setting_tab' data-toggle='tab') = '運用設定'
+
+  - show_style = @current_control_mode != 'show' ? 'hidden' : ''
+  - edit_style = @current_control_mode != 'edit' ? 'hidden' : ''
+  #operative_setting_tab_content.tab-content
+    #company_information_tab.tab-pane.active
+      #show_company_information_tab(class="#{show_style}")
+        = render partial: 'show_company_information_tab', locals: {f: f}
+      #edit_company_information_tab(class="#{edit_style}")
+        = render partial: 'edit_company_information_tab', locals: {f: f}
+    #operative_setting_tab.tab-pane
+      #show_operative_setting_tab(class="#{show_style}")
+        = render partial: 'show_operative_setting_tab', locals: {f: f}
+      #edit_operative_setting_tab(class="#{edit_style}")
+        = render partial: 'edit_operative_setting_tab', locals: {f: f}
+
+  = f.hidden_field :control_mode, value: 'show'
+
+  .buttom-function-bar
+    .group1
+      = link_to '自社取引銀行', company_banks_path, class: 'btn btn-primary'
+      button.btn.btn-primary#default_payable_sites_button(type='button') = '期日サイト既定値'
+    .group2
+      button#operative_setting_cancel(type='button' class="btn btn-primary #{'disabled' if @current_control_mode == 'show'}") = t('general.label.cancel')
+      = f.submit t('general.label.update'), id: 'operative_setting_submit', class: "btn btn-primary #{'disabled' if @current_control_mode == 'show'}"

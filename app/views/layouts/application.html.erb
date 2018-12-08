@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= t('title') %></title>
+  <%= include_gon %>
+  <%= stylesheet_link_tag  'application' %>
+  <%= stylesheet_link_tag controller_name %>
+  <%- (controller.class.try(:option_stylesheet_links)|| []).each do |style|  %>
+    <%= stylesheet_link_tag style %>
+  <% end %>
+  <%= javascript_include_tag 'application' %>
+  <%= javascript_include_tag controller_name %>
+  <%- (controller.class.try(:option_javascript_includes) || []).each do |script| %>
+    <%= javascript_include_tag script %>
+  <% end %>
+  <%= csrf_meta_tags %>
+</head>
+<body class="skin-blue">
+
+<%= render :partial => 'shared/header' %>
+
+<div class="wrapper row-offcanvas row-offcanvas-left">
+  <%= render :partial => 'shared/sidebar' %>
+
+  <!-- Right side column. Contains the navbar and content of the page -->
+  <aside class="right-side">
+    <%= render :partial => 'shared/content_header' unless params[:controller] == "tops" %>
+
+    <!-- Main content -->
+    <section class="content">
+
+<%= yield %>
+
+    </section><!-- /.content -->
+  </aside><!-- /.right-side -->
+</div><!-- ./wrapper -->
+
+<!-- add new calendar event modal -->
+
+</body>
+</html>

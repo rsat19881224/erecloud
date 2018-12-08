@@ -1,0 +1,2 @@
+module AbridgmentsHelper
+end

@@ -1,0 +1,2 @@
+class Payable < Ebill
+end

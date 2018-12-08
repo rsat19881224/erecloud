@@ -1,0 +1,20 @@
+dl
+  dt = f_trader.label :name
+  dd = f_trader.text_field :name, :data => {toggle: :tooltip, placement: :top}, title: @instance.trader.name
+dl
+  dt = f_trader.label :kana
+  dd = f_trader.text_field :kana, :data => {toggle: :tooltip, placement: :top}, title: @instance.trader.kana
+dl
+  dt = f_trader.label :branch_code
+  dd
+    .row.bank_row
+      .col-xs-3.killpadding = f_trader.text_field :bank_code
+      .col-xs-3.killpadding.col-xs-offset-3 = f_trader.text_field :branch_code
+dl
+  dt = f_trader.label :account_number
+  dd
+    .row
+      = f_trader.select :account_type, options_for_select(Settings.enumerize_options.receivables.account_types.map{|h| [t(h.name), h.id]}, selected: 1), {}, {class: "col-md-1 col-sm-1 col-xs-1 account-events killpadding"}
+      = f_trader.number_field :account_number, class: "col-md-4 col-xs-3"
+      = f_trader.label :user_number, class: "col-md-2 col-sm-3 col-xs-3 user-number"
+      = f_trader.number_field :user_number, class: "col-md-4 col-xs-3"

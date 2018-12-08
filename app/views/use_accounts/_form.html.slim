@@ -1,0 +1,121 @@
+.row
+  .col-md-6 
+    div class='box box-primary'
+      .box-body
+        = form_for(object, url: polymorphic_path([object]), :html => {:class => "form-horizontal"}, method: (object.new_record? ? :post : :put)) do |f|
+          = render partial: 'shared/errors', locals: {errors: object.errors}
+          
+          div align="right"
+            = link_to t('.back'), polymorphic_path([object.class.name.constantize])
+          br
+
+          .form-group
+            = f.label :code, class: 'col-xs-3 form-control-static'
+            .col-xs-5
+              = f.text_field :code, autofocus: true, class: 'form-control'
+
+          .form-group
+            = f.label :name, class: 'col-xs-3 form-control-static'
+            .col-xs-9
+              = f.text_field :name, autofocus: true, class: 'form-control'
+
+          .form-group
+            = f.label :department_input, class: 'col-xs-3 form-control-static'
+            .col-xs-5
+              - department_inputs = Settings.enumerize_options.account.department_inputs
+              = f.select :department_input, department_inputs.map{|at| [t(at.name, scope: 'enumerize.account.department_input'), at.id]}, {}, autofocus: true, class: 'form-control'
+
+
+          .form-group
+            = f.label :analysis1_input, class: 'col-xs-3 form-control-static'
+            .col-xs-2
+              = f.radio_button :analysis1_input, true, id: 'analysis1_input_input'
+              = label :analysis1_input, t('.input_option.input'), for: 'analysis1_input_input', class: 'form-control-static'
+            .col-xs-2
+              = f.radio_button :analysis1_input, false, id: 'analysis1_input_no_input'
+              = label :analysis1_input, t('.input_option.no_input'), for: 'analysis1_input_no_input', class: 'form-control-static'
+
+          .form-group
+            = f.label :analysis2_input, class: 'col-xs-3 form-control-static'
+            .col-xs-2
+              = f.radio_button :analysis2_input, true, id: 'analysis2_input_input'
+              = label :analysis2_input, t('.input_option.input'), for: 'analysis2_input_input', class: 'form-control-static'
+            .col-xs-2
+              = f.radio_button :analysis2_input, false, id: 'analysis2_input_no_input'
+              = label :analysis2_input, t('.input_option.no_input'), for: 'analysis2_input_no_input', class: 'form-control-static'
+
+          .form-group
+            = f.label :analysis3_input, class: 'col-xs-3 form-control-static'
+            .col-xs-2
+              = f.radio_button :analysis3_input, true, id: 'analysis3_input_input'
+              = label :analysis3_input, t('.input_option.input'), for: 'analysis3_input_input', class: 'form-control-static'
+            .col-xs-2
+              = f.radio_button :analysis3_input, false, id: 'analysis3_input_no_input'
+              = label :analysis3_input, t('.input_option.no_input'), for: 'analysis3_input_no_input', class: 'form-control-static'
+
+          .form-group
+            = f.label :analysis4_input, class: 'col-xs-3 form-control-static'
+            .col-xs-2
+              = f.radio_button :analysis4_input, true, id: 'analysis4_input_input'
+              = label :analysis4_input, t('.input_option.input'), for: 'analysis4_input_input', class: 'form-control-static'
+            .col-xs-2
+              = f.radio_button :analysis4_input, false, id: 'analysis4_input_no_input'
+              = label :analysis4_input, t('.input_option.no_input'), for: 'analysis4_input_no_input', class: 'form-control-static'
+
+          .form-group
+            = f.label :analysis5_input, class: 'col-xs-3 form-control-static'
+            .col-xs-2
+              = f.radio_button :analysis5_input, true, id: 'analysis5_input_input'
+              = label :analysis5_input, t('.input_option.input'), for: 'analysis5_input_input', class: 'form-control-static'
+            .col-xs-2
+              = f.radio_button :analysis5_input, false, id: 'analysis5_input_no_input'
+              = label :analysis5_input, t('.input_option.no_input'), for: 'analysis5_input_no_input', class: 'form-control-static'
+
+          .form-group
+            = f.label :analysis6_input, class: 'col-xs-3 form-control-static'
+            .col-xs-2
+              = f.radio_button :analysis6_input, true, id: 'analysis6_input_input'
+              = label :analysis6_input, t('.input_option.input'), for: 'analysis6_input_input', class: 'form-control-static'
+            .col-xs-2
+              = f.radio_button :analysis6_input, false, id: 'analysis6_input_no_input'
+              = label :analysis6_input, t('.input_option.no_input'), for: 'analysis6_input_no_input', class: 'form-control-static'
+
+          .form-group
+            = f.label :analysis7_input, class: 'col-xs-3 form-control-static'
+            .col-xs-2
+              = f.radio_button :analysis7_input, true, id: 'analysis7_input_input'
+              = label :analysis7_input, t('.input_option.input'), for: 'analysis7_input_input', class: 'form-control-static'
+            .col-xs-2
+              = f.radio_button :analysis7_input, false, id: 'analysis7_input_no_input'
+              = label :analysis7_input, t('.input_option.no_input'), for: 'analysis7_input_no_input', class: 'form-control-static'
+
+          .form-group
+            = f.label :analysis8_input, class: 'col-xs-3 form-control-static'
+            .col-xs-2
+              = f.radio_button :analysis8_input, true, id: 'analysis8_input_input'
+              = label :analysis8_input, t('.input_option.input'), for: 'analysis8_input_input', class: 'form-control-static'
+            .col-xs-2
+              = f.radio_button :analysis8_input, false, id: 'analysis8_input_no_input'
+              = label :analysis8_input, t('.input_option.no_input'), for: 'analysis8_input_no_input', class: 'form-control-static'
+
+          .form-group
+            = f.label :analysis9_input, class: 'col-xs-3 form-control-static'
+            .col-xs-2
+              = f.radio_button :analysis9_input, true, id: 'analysis9_input_input'
+              = label :analysis9_input, t('.input_option.input'), for: 'analysis9_input_input', class: 'form-control-static'
+            .col-xs-2
+              = f.radio_button :analysis9_input, false, id: 'analysis9_input_no_input'
+              = label :analysis9_input, t('.input_option.no_input'), for: 'analysis9_input_no_input', class: 'form-control-static'
+
+          .form-group
+            = f.label :analysis10_input, class: 'col-xs-3 form-control-static'
+            .col-xs-2
+              = f.radio_button :analysis10_input, true, id: 'analysis10_input_input'
+              = label :analysis10_input, t('.input_option.input'), for: 'analysis10_input_input', class: 'form-control-static'
+            .col-xs-2
+              = f.radio_button :analysis10_input, false, id: 'analysis10_input_no_input'
+              = label :analysis10_input, t('.input_option.no_input'), for: 'aanalysis10_input_no_input', class: 'form-control-static'
+
+          div align="right"
+            = f.submit t(object.new_record? ? '.create' : '.update'), class: 'btn btn-primary'
+          br

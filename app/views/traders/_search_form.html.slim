@@ -1,0 +1,23 @@
+table
+  tbody
+    tr
+      th
+        = f.label :code, Trader.human_attribute_name(:code)
+      td
+        = f.search_field :code_gteq, maxlength: 10, autofocus: true
+        = p '～'
+        = f.search_field :code_lteq, maxlength: 10, autofocus: true
+    tr
+      th
+        = f.label :name1_cont, Trader.human_attribute_name(:name1)
+      td
+        = f.search_field :name1_cont, autofocus: true
+    tr
+      th
+        = f.label :kana_cont, Trader.human_attribute_name(:kana)
+      td
+        = f.search_field :kana_cont, autofocus: true
+
+.row#trader_search_form_function_bar
+  = f.button t('general.label.cancel'), id: 'trader_search_cancel', class: 'btn btn-success', type: 'button'
+  = f.submit t('general.label.search'), class: 'btn btn-primary'

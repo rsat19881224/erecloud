@@ -1,0 +1,11 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>
+    <%= render :partial => 'shared/content_title' %>
+    <small><%= render :partial => 'shared/content_small_title' %></small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><%= link_to raw('<i class="fa fa-dashboard"></i> Home'), admin_root_path %></li>
+    <li class="active"><%= render :partial => 'shared/content_title' %></li>
+  </ol>
+</section>

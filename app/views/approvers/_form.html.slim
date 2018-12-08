@@ -1,0 +1,38 @@
+.row
+  .col-md-6 
+    div class='box box-primary'
+      .box-body
+        = form_for(object, url: polymorphic_path([object]), :html => {:class => "form-horizontal"}, method: (object.new_record? ? :post : :put)) do |f|
+          = render partial: 'shared/errors', locals: {errors: object.errors}
+          
+          div align="right"
+            = link_to t('.back'), polymorphic_path([object.class.name.constantize])
+          br
+
+          .form-group
+            = f.label :user_id, class: 'col-xs-3 form-control-static'
+            .col-xs-9
+              - if object.persisted?
+                = User.find_by_id(object.user_id).name
+              - else
+                = f.select :user_id, options_from_collection_for_select(User.of_ours(@my_company), :id, :name), {}, autofocus: true, class: 'form-control'
+
+          div id="menu_select_form"
+            = menu_collection[0]
+
+          .form-group
+            = f.label :approver_type, class: 'col-xs-3 form-control-static'
+            .col-xs-4
+              = f.select :approver_type, Approver.approver_type.options, {selected: 'last_approver'}, autofocus: true, class: 'form-control'
+
+          .form-group
+            = f.label :mail_delivered, class: 'col-xs-3 form-control-static'
+            .col-xs-4
+              = f.radio_button :mail_delivered, true,  autofocus: true, class: 'form-control'
+              = t("approvers.form.mail_delivered.delivered")
+              = f.radio_button :mail_delivered, false, autofocus: true, class: 'form-control'
+              = t("approvers.form.mail_delivered.no_delivered")
+
+          div align="right"
+            = f.submit t(object.new_record? ? '.create' : '.update'), class: 'btn btn-primary'
+          br

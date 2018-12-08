@@ -1,0 +1,37 @@
+@mixin searchModalForm($label-font-size: 14px, $title-bottom-size: 15px)  {
+  .modal-title {
+    margin-bottom: $title-bottom-size
+  }
+
+  .form-horizontal {
+    .control-label {
+      padding-right: 0px;
+      font-size: $label-font-size;
+      text-align: left;
+    }
+  }
+
+  td:nth-child(4) {
+    padding: 0px;
+    text-align: center;
+    vertical-align: middle; 
+
+    button {
+      display: table-cell;
+      background-color: #449D44;
+      border-color: #449D44;
+    }
+  }
+}
+
+#search_branch_modal_form {
+  @include searchModalForm;
+}
+
+#search_bank_modal_form {
+  @include searchModalForm;
+}
+
+#search_department_modal_form {
+  @include searchModalForm;
+}

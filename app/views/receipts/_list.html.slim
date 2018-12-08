@@ -1,0 +1,31 @@
+table.table.table-striped
+  tbody
+    tr
+      th = Receipt.human_attribute_name(:receipt_number)
+      th = Receipt.human_attribute_name(:trader_name1)
+      th = Receipt.human_attribute_name(:received_on) 
+      th = Receipt.human_attribute_name(:total_amount)
+      th = Receipt.human_attribute_name(:stamp_duty) 
+      th = Receipt.human_attribute_name(:receipt_issued)
+      th = Receipt.human_attribute_name(:reissued_on) 
+
+    - objects.each do |object|
+      tr class=('deleted' if object.deleted?)
+        td(width='120px') = object.receipt_number
+        td(width='120px') = object.trader_name1
+        td(width='120px') = object.received_on
+        td(width='120px') = object.total_amount
+        td(width='120px') = object.stamp_duty
+        td(width='120px') = t(object.receipt_issued ? 'issue' : 'no_issue', scope: 'receipts.receipt_issued')
+        td(width='120px') = object.reissued_on
+
+        td(width='80px' align='center')
+          = link_to t('general.label.edit'), polymorphic_path([@company, object], pickup_param.merge(action: :edit))
+        td
+          - unless object.deleted?
+            = link_to t('general.label.delete'), polymorphic_path([@company, object], pickup_param), :method => :delete, :data => {:confirm => t('general.message.confirm_delete')}
+          - else
+            = t('general.label.deleted')
+
+div class='box-footer clearfix'
+  = paginate objects, remote: true

@@ -1,0 +1,84 @@
+@mixin tabLayout {
+  height: 300px;
+  padding: 10px;
+
+  table {
+    width: 100%;
+
+    tbody {
+      tr {
+        border: 1px solid #ddd;
+      }
+
+      th {
+        width: 150px;
+        padding-left: 5px;
+        padding-right: 5px;
+        background-color: #5bc0de;
+      }
+
+      td {
+        padding-left: 5px;
+        padding-right: 5px;
+
+        .show_style {
+          background-color: white;
+          boder-style: none;
+        }
+      }
+    }
+  }
+}
+
+.operative_setting_form {
+  width: 800px;
+}
+
+#company_information_tab {
+  @include tabLayout;
+}
+
+#operative_setting_tab {
+  @include tabLayout;
+
+  .radio-inline {
+    display: inline;
+    margin-right: 5px;
+    padding-left: 0px;
+  }
+}
+
+#address_group {
+  background-color: #5bc0de;
+  padding-right: 1px;
+  border-right: 1px solid #ddd;
+}
+
+.top-function-bar {
+  text-align: right;
+
+  button {
+    width: 138px;
+  }
+}
+
+.buttom-function-bar {
+  display: block;
+  margin-top: 20px;
+
+  .group1 {
+    float: left;
+    a, button {
+      width: 138px;
+      margin-right: 10px;
+    }
+  }
+
+  .group2 {
+    text-align: right;
+    button, input[type='submit'] {
+      width: 138px;
+      margin-left: 10px;
+    }
+  }
+}

@@ -1,0 +1,9 @@
+<%=
+if params.has_key? :content_small_title
+  params[:content_small_title]
+elsif I18n.exists? "small_titles.#{params[:controller].gsub('/', '.')}.#{params[:action]}"
+  t("small_titles.#{params[:controller].gsub('/', '.')}.#{params[:action]}")
+else
+  "small_titles.#{params[:controller].gsub('/', '.')}.#{params[:action]}"
+end
+-%>

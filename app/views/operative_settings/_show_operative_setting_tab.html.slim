@@ -1,0 +1,23 @@
+table
+  tbody
+    tr
+      th
+        = f.label :date_display_format
+      td
+        = t(@operative_setting.date_display_format, scope: 'enumerize.date_display_format')
+    tr
+      th
+        = f.label :is_transfer_fixed_date
+      td
+        - if @operative_setting.is_transfer_fixed_date
+          = '翌営業日に振り替える'
+        - else
+          = '翌営業日に振り替えない'
+    tr
+      th
+        = f.label :is_use_section_authority
+      td
+        - if @operative_setting.is_use_section_authority
+          = '使用する'
+        - else
+          = '使用しない'

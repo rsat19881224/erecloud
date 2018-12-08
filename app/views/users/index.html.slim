@@ -1,0 +1,17 @@
+.col-xs-12
+  .box
+    .box-header
+      .box-tools
+
+      - if restricted_create?(@my_company)
+        = t('.restricred_create')
+        br
+      - else
+        = button_link_to t('.create'), (polymorphic_path([params[:controller].gsub('/', '_').singularize.to_sym], action: :new) rescue url_for(action: :new))
+        = "（ #{t('.create_quantity', :quantity => create_quantity(@my_company))}）"
+        br
+   
+      = render :partial => "shared/page_entries_info", :locals => {:entries => instance_variable_get("@#{params[:controller].split('/').last}") }
+
+    div class="box-body table-responsive no-padding" id="#{params[:controller].split('/').last.singularize}-list"
+      = render :partial => lookup_context.exists?("list", params[:controller], true) ? "list" : "shared/list", :locals => {:objects => instance_variable_get("@#{params[:controller].split('/').last}"), :pickup_param => @pickup_param}

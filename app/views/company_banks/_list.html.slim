@@ -1,0 +1,37 @@
+table.table.table-striped
+  tbody
+    tr
+      th(width='120px')
+        label = 'コード'
+      th(width='240px')
+        label = '名称'
+      th(width='120px')
+        label = CompanyBank.human_attribute_name(:bank_code)
+      th(width='240px')
+        label = CompanyBank.human_attribute_name(:bank_name)
+      th(width='120px')
+        label = CompanyBank.human_attribute_name(:branch_code)
+      th(width='240px')
+        label = CompanyBank.human_attribute_name(:branch_name)
+      th(width='150px')
+        label = CompanyBank.human_attribute_name(:account_type)
+      th(width='240px')
+        label = CompanyBank.human_attribute_name(:account_number)
+      th(width='50px')
+      th(width='50px')
+      th(width='50px')
+    - company_banks = objects.select {|cb| !cb.deleted? }
+    - company_banks.each do |company_bank|
+      - type = Settings.enumerize_options.company_bank.account_types.find {|at| at.id == company_bank.account_type }
+      tr
+        td = sprintf("%010d", company_bank.code.to_i)
+        td = company_bank.name
+        td = sprintf("%04d", company_bank.bank_code.to_i)
+        td = company_bank.bank_name
+        td = sprintf("%03d", company_bank.branch_code.to_i)
+        td = company_bank.branch_name
+        td = company_bank.account_type 
+        td = company_bank.account_number
+        td = link_to t('general.label.show'), polymorphic_path(company_bank)
+        td = link_to t('general.label.edit'), polymorphic_path(company_bank, action: :edit)
+        td = link_to t('general.label.delete'), polymorphic_path(company_bank), method: :delete, data: {confirm: t('general.message.confirm_delete')}

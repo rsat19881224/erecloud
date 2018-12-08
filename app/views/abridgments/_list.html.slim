@@ -1,0 +1,23 @@
+table.table.table-striped
+  tbody
+    tr
+      th = Abridgment.human_attribute_name(:code)
+      th = Abridgment.human_attribute_name(:contents)
+      th
+      th
+
+    - objects.each do |object|
+      tr class=('deleted' if object.deleted?)
+        td(width='120px') = object.code
+        td(width='120px') = object.contents
+
+        td(width='80px' align='center')
+          = link_to t('general.label.edit'), polymorphic_path([@company, object], pickup_param.merge(action: :edit))
+        td
+          - unless object.deleted?
+            = link_to t('general.label.delete'), polymorphic_path([@company, object], pickup_param), :method => :delete, :data => {:confirm => t('general.message.confirm_delete')}
+          - else
+            = t('general.label.deleted')
+
+div class='box-footer clearfix'
+  = paginate objects, remote: true

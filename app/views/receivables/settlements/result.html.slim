@@ -1,0 +1,47 @@
+= render :partial => 'shared/receivables/stage'
+section.container
+  .row
+    = form_tag search_receivables_settlements_path, method: :get do
+      = submit_tag '戻る', name: :back, class: "btn btn-default col-xs-2 pull-right back-button"
+  .result_container
+    .row
+      .row.text-center.header
+        .col-xs-1.column-division
+          .row
+            .col-xs-6 No
+            .col-xs-6 選択
+        .col-xs-1 支払期日
+        .col-xs-1 支払日
+        .col-xs-2 請求先
+        .col-xs-1 債権残高
+        .col-xs-1 原債権金額
+        .col-xs-2 決済入金銀行
+        .col-xs-2.two-lines
+          .row.two-lines-child 記録番号
+          .row.two-lines-child 記録機関
+        .col-xs-1 発生日
+
+      = search_form_for @q, url: select_receivables_settlements_path, method: :post do |f|
+        - @receivable_searches.each_with_index do |r, i|
+          .row
+            .col-xs-1.text-center
+              .row.margin-arrow
+                .col-xs-6 = "No#{i+1}"
+                .col-xs-6 = check_box_tag 'q[id_eq_any][]', r.id, @select_ids.try(:fetch, 'id_eq_any').try(:fetch, i, false)
+            .col-xs-1 = r.try(:matured_on).try(:strftime, "%Y-%m-%d")
+            .col-xs-1 = r.try(:settled_on).try(:strftime, "%Y-%m-%d")
+            .col-xs-2.two-lines
+              .row.two-lines-child  = r.trader.try(:code)
+              .row.two-lines-child  = r.trader.try(:name1)
+            .col-xs-1.text-right id="money#{r.id}" = number_to_currency(r.residual_money, unit: '', precision: 0)
+            .col-xs-1.text-right = number_to_currency(r.issue_money, unit: '', precision: 0)
+            .col-xs-2 = r.company_bank.try(:name)
+            .col-xs-2.two-lines
+              .row.two-lines-child = r.recording_number
+              .row.two-lines-child = r.recording_institution.try(:abbreviation)
+            .col-xs-1 = r.try(:occurred_on).try(:strftime, "%Y-%m-%d")
+        .row
+         actions.col-xs-12
+          = button_tag '全選択', type: :button, id: :check_all, class: 'btn btn-default col-xs-1'
+          = button_tag '全解除', type: :button, id: :cancel_all, class: 'btn btn-default col-xs-1 col-xs-offset-1'
+          = submit_tag '次へ', id: :settlement_select_button, class: 'btn btn-primary col-xs-2 col-xs-offset-6', disabled: true

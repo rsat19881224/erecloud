@@ -1,0 +1,36 @@
+table.table.table-bordered
+  thead
+    tr
+      th rowspan="2" No
+      th.killpadding rowspan="2" てん末
+      th rowspan="2" 記録機関
+      th.border-bottom-none.killpadding 原債権記録番号
+      th rowspan="2" 請求先
+      th rowspan="2" 発生日付
+      th rowspan="2" 金額
+      th rowspan="2" 債権残高
+      th rowspan="2" 支払期日
+      th rowspan="2" 自社取引銀行
+      th.border-none rowspan="2" colspan="2"
+    tr
+      th.killpadding 分割記録番号
+
+  tbody
+    - @ReceivableSearches.each.with_index(1) do |r, i|
+      tr
+        td rowspan="2" = i
+        td rowspan="2" = r.state_code.ebill
+        td rowspan="2" = r.recording_institution.abbreviation
+        td.border-bottom-none = r.recording_number
+        td.border-bottom-none = r.trader.try(:code)
+        td rowspan="2" = r.try(:occurred_on).try(:strftime, "%Y-%m-%d")
+        td.text-right rowspan="2" = number_to_currency(r.amount_money, unit: '', precision: 0)
+        td.text-right rowspan="2" = number_to_currency(r.residual_money, unit: '', precision: 0)
+        td rowspan="2" = r.try(:matured_on).try(:strftime, "%Y-%m-%d")
+        td.border-bottom-none = r.company_bank.try(:code)
+        td.border-none rowspan="2" = link_to '修正', '#', class: 'btn btn-default'
+        td.border-none rowspan="2" = link_to 'てん末変更', '#', class: (r.residual_money.present? && r.residual_money > 0) ? 'btn btn-default' : 'btn btn-default disabled'
+      tr
+        td = r.division_recording_number
+        td = r.trader.present? ? r.trader.try(:abbreviation) : r.trader_kana
+        td = r.company_bank.try(:name)

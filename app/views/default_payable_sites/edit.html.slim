@@ -1,0 +1,14 @@
+.modal.fade(id='default_payable_sites_modal_form')
+  .modal-dialog
+    .modal-content
+      .modal-header
+        .modal-title
+          h2(class='display: inline') = t('titles.default_payable_sites')
+      .modal-body
+        = form_for 'default_payable_site', url: {controller: :default_payable_sites, action: :index}, method: :post, remote: true, html: {id: 'default_payable_sites_form'} do |f|
+          - form_locals = {f: f}
+          - form_locals.merge!({trader: trader}) if local_assigns.has_key? :trader
+          = render partial: 'form', locals: form_locals
+          = render partial: 'list', locals: {f: f, sites: sites}
+      .modal-footer
+        button(type='button' class='btn btn-default' data-dismiss='modal') = t('general.label.close')

@@ -1,0 +1,16 @@
+.search_container .row {
+  margin-bottom: 20px;
+}
+
+.confirm_container {
+  margin-top: 20px;
+}
+.confirm_container .row div[class*="col-"] {
+  border: 1px solid #ddd;
+  padding: 1px 4px;
+  margin: 0px;
+  height: 30px;
+}
+.confirm_container actions {
+  margin-top: 20px;
+}

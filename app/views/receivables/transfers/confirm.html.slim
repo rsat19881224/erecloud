@@ -1,0 +1,41 @@
+= render :partial => 'shared/receivables/stage'
+section.container
+  = form_tag result_receivables_transfers_path, method: :get do
+    .row
+      = submit_tag '戻る', name: :back, class: "btn btn-default col-xs-2 pull-right back-button"
+
+  div
+    .financial-institutions
+      = render partial: "search_information"
+    .row.transfer_amount
+      .col-xs-2
+        label = '譲渡金額合計'
+      .col-xs-10
+        = "#{number_to_currency(total_amount = @receivable_searches.inject(0) { |sum, r| sum + r.residual_money }, unit: '', precision: 0)}円"
+
+    .result_container
+      .row
+        = form_tag update_all_receivables_transfers_path do
+          .row.text-center
+            .col-xs-1 No
+            .col-xs-2 記録番号
+            .col-xs-1 支払期日
+            .col-xs-2 譲渡金額
+            .col-xs-2 請求先
+            .col-xs-2 債務者
+            .col-xs-1 発生日
+            .col-xs-1 譲受日
+
+          - @receivable_searches.each_with_index do |r, i|
+            .row
+              .col-xs-1.text-center = "No#{i+1}"
+              .col-xs-2 = r.recording_number
+              .col-xs-1 = r.try(:matured_on).try(:strftime, "%Y-%m-%d")
+              .col-xs-2.text-right = number_to_currency(r.try(:residual_money), unit: '', precision: 0)
+              .col-xs-2 = r.trader.try(:abbreviation)
+              .col-xs-2 = r.try(:debtor_name)
+              .col-xs-1 = r.try(:occurred_on).try(:strftime, "%Y-%m-%d")
+              .col-xs-1 = r.try(:transferred_on).try(:strftime, "%Y-%m-%d")
+          .row
+            actions.col-xs-12
+              = submit_tag '一括更新', class: 'btn btn-primary col-xs-2 col-xs-offset-10'

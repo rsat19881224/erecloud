@@ -1,0 +1,27 @@
+- binding.pry
+- if params_id.present?
+  = form_tag({controller: "sub_accounts", action: "index"}, method: "post", class: "form-horizontal") do 
+    .controls.col-xs-4
+      = collection_select(:select,:account_id,Account.all,:id,:name,{},{class: "form-control"})
+      br
+  .col-xs-12
+    .box
+      .box-header
+        .box-tools
+          = button_link_to t('.create'), (polymorphic_path([params[:controller].gsub('/', '_').singularize.to_sym], action: :new, params_id: params_id ) rescue url_for(action: :new))
+
+          br
+          = render :partial => "shared/page_entries_info", :locals => {:entries => instance_variable_get("@#{params[:controller].split('/').last}")}
+
+      div class="box-body table-responsive no-padding" id="#{params[:controller].split('/').last.singularize}-list"
+        = render :partial => lookup_context.exists?("list", params[:controller], true) ? "list" : "shared/list", :locals => {:objects => instance_variable_get("@#{params[:controller].split('/').last}"), :pickup_param => @pickup_param, :accounts => accounts}
+- else
+  .col-xs-12
+    .box
+      .box-header
+        .box-tools
+          br
+          .alert.alert-info.alert-dismissable
+            = t('勘定科目が設定されていません。')
+            i.fa.fa-info
+              

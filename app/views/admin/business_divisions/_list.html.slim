@@ -1,0 +1,23 @@
+table.table.table-striped
+  tbody
+    tr
+      th = params[:controller].split('/').last.singularize.camelize.constantize.human_attribute_name(:code)
+      th = params[:controller].split('/').last.singularize.camelize.constantize.human_attribute_name(:name)
+      th
+      th
+      
+    - objects.each do |object|
+      tr class=('deleted' if object.deleted?)
+        td(width='240px') = object.code
+        td(width='240px') = object.name
+
+        td(width='60px' align='center')
+          = link_to t('general.label.edit'), polymorphic_path([:admin, object], pickup_param.merge(action: :edit))
+        td
+          - unless object.deleted?
+            = link_to t('general.label.delete'), polymorphic_path([:admin, object], pickup_param), :method => :delete, :data => {:confirm => t('general.message.confirm_delete')}
+          - else
+            = t('general.label.deleted')
+
+div class='box-footer clearfix'
+  = paginate objects, remote: true

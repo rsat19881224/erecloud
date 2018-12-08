@@ -1,0 +1,1 @@
+$('#analysis_item_table').html("<%= j(render partial: 'list', locals: {objects: instance_variable_get("@#{params[:controller].split('/').last}"),analysises: analysises, pickup_param: pickup_param}) %>")

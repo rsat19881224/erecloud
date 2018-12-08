@@ -1,0 +1,61 @@
+.row
+  .col-md-6 
+    div class='box box-primary'
+      .box-body
+        = form_for payment_notice_path, :html => {:class => "form-horizontal"} do
+          
+          br
+            = label :aggregate_date, '集計範囲', class: 'col-xs-3 form-control-static'
+          br
+          
+          .form-group
+            div style='margin-left: 3em'
+              = label :trader_from, t('payment_notices.index.trader_from'), class: 'col-xs-2 form-control-static'
+            .col-xs-3
+              = text_field :trader_from, '', class: 'form-control'
+            .col-xs-6
+              = label :trader_nm_from, '', class: 'form-control'
+          .form-group
+            div align="right" style='margin-left: 3em'
+              = label '', '〜', class: 'col-xs-2 form-control-static'
+            .col-xs-3
+              = text_field :trader_to, '', class: 'form-control'
+            .col-xs-6
+              = label :trader_nm_to, '', class: 'form-control'
+          br
+                      
+          .form-group
+            div style='margin-left: 3em'
+              = label :payment_date_from, t('payment_notices.index.payment_date_from'), class: 'col-xs-2 form-control-static'
+            .col-xs-3
+              = text_field :payment_date_from, '', class: 'form-control datetimepicker', placeholder: 'YYYY/MM/DD'
+            .col-xs-1
+              = label '', '〜', class: 'col-xs-2 form-control-static'
+            .col-xs-3
+              = text_field :payment_date_to, '', class: 'form-control datetimepicker', placeholder: 'YYYY/MM/DD'
+          
+          br        
+            = label :payment_target, t('payment_notices.index.payment_target'), class: 'col-xs-3 form-control-static'
+          br
+          
+          .form-group
+            div style='margin-left: 3em'
+              .col-xs-3
+                = check_box :payment_target, '', class: 'form-control', id: 'bill_drawer'
+                = label :payment_target, '手形-振出', for: 'bill_drawer', class: 'form-control-static'
+              .col-xs-2
+                = check_box :payment_target, '', class: 'form-control', id: 'bill_transfer'
+                = label :payment_target, '手形-譲渡', for: 'bill_transfer', class: 'form-control-static'
+          .form-group
+            div style='margin-left: 3em'
+              .col-xs-3
+                = check_box :payment_target, '', class: 'form-control', id: 'ebill_drawer'
+                = label :payment_target, '電子記録債権-振出', for: 'ebill_drawer', class: 'form-control-static'
+              .col-xs-3
+                = check_box :payment_target, '', class: 'form-control', id: 'ebill_transfer'
+                = label :payment_target, '電子記録債権-譲渡', for: 'bill_transfer', class: 'form-control-static'
+          br
+
+          div align="right"
+            = link_to t('general.label.search'), edit_payment_notice_path, class: 'btn btn-primary'
+          br

@@ -1,0 +1,57 @@
+= render :partial => 'shared/receivables/stage'
+section.container
+  .row
+    = form_tag search_receivables_discounts_path, method: :get do
+        = submit_tag '戻る', name: :back, class: "btn btn-default col-xs-2 pull-right back-button"
+
+  div
+    .row
+      .col-xs-2
+        label = '記録機関'
+      .col-xs-10
+        = @search_institution_bank[:recording_institution]
+    .row
+      .col-xs-2
+        label = '自社取引銀行'
+      .col-xs-2
+        = "#{@search_institution_bank[:bank][0]}:#{@search_institution_bank[:bank][1]}"
+      .col-xs-2
+        = "#{@search_institution_bank[:bank][2]}:#{@search_institution_bank[:bank][3]}"
+      .col-xs-6
+        = "#{@search_institution_bank[:bank][4]}:#{@search_institution_bank[:bank][5]} #{@search_institution_bank[:bank][6]}#{@search_institution_bank[:bank][7]}"
+    .row
+      .col-xs-2.col-xs-offset-4
+        label = '指定件数'
+      .col-xs-2#select_number
+        = '0件'
+      .col-xs-2
+        label = '指定金額'
+      .col-xs-2#select_amount
+        = '0'
+  .result_container
+    .row.text-center
+      .col-xs-1 No
+      .col-xs-1 選択
+      .col-xs-2 記録番号
+      .col-xs-1 支払期日
+      .col-xs-2 債権残高
+      .col-xs-2 原債権金額
+      .col-xs-2 請求先
+      .col-xs-1 発生日
+
+    = search_form_for @q, url: select_receivables_discounts_path, method: :post do |f|
+      - @receivable_searches.each_with_index do |r, i|
+        .row
+          .col-xs-1.text-center = "No#{i+1}"
+          .col-xs-1.text-center = check_box_tag 'q[id_eq_any][]', r.id, @select_ids.try(:fetch, 'id_eq_any').try(:fetch, i, false)
+          .col-xs-2 = r.recording_number
+          .col-xs-1 = r.try(:matured_on).try(:strftime, "%Y-%m-%d")
+          .col-xs-2.text-right id="money#{r.id}" = number_to_currency(r.residual_money, unit: '', precision: 0)
+          .col-xs-2.text-right = number_to_currency(r.issue_money, unit: '', precision: 0)
+          .col-xs-2 = r.trader.try(:abbreviation)
+          .col-xs-1 = r.try(:occurred_on).try(:strftime, "%Y-%m-%d")
+      .row
+       actions.col-xs-12
+        = button_tag '全選択', type: :button, id: :check_all, class: 'btn btn-default col-xs-1'
+        = button_tag '全解除', type: :button, id: :cancel_all, class: 'btn btn-default col-xs-1 col-xs-offset-1'
+        = submit_tag '次へ', id: :discount_select_button, class: 'btn btn-primary col-xs-2 col-xs-offset-6', disabled: true

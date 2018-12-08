@@ -1,0 +1,61 @@
+.row
+  .col-md-6 
+    div class='box box-primary'
+      .box-body
+        = form_for(object, url: security_policy_path, :html => {:class => "form-horizontal"}, method: (object.new_record? ? :post : :put)) do |f|
+          = render partial: 'shared/errors', locals: {errors: object.errors}
+          
+          div align="right"
+            = link_to t('.back'), security_policy_path
+          br
+
+          .form-group
+            = f.label :min_characters, class: 'col-xs-4 form-control-static'
+            .col-xs-4
+              = f.text_field :min_characters, autofocus: true, class: "form-control"
+
+          .form-group
+            = f.label :included_three_kinds, class: 'col-xs-4 form-control-static'
+            .col-xs-4
+              = f.radio_button :included_three_kinds, true
+              = t('security_policies.included_three_kinds.skip')
+              = f.radio_button :included_three_kinds, false
+              = t('security_policies.included_three_kinds.no_skip')
+
+          .form-group
+            = f.label :included_account, class: 'col-xs-4 form-control-static'
+            .col-xs-4
+              = f.radio_button :included_account, true
+              = t('security_policies.included_account.permit')
+              = f.radio_button :included_account, false
+              = t('security_policies.included_account.no_permit')
+
+          .form-group
+            = f.label :number_of_history_generations, class: 'col-xs-4 form-control-static'
+            .col-xs-4
+              = f.text_field :number_of_history_generations, autofocus: true, class: "form-control"
+
+          .form-group
+            = f.label :valid_period, class: 'col-xs-4 form-control-static'
+            .col-xs-4
+              = f.text_field :valid_period, autofocus: true, class: "form-control"
+
+          .form-group
+            = f.label :change_prohibition_period, class: 'col-xs-4 form-control-static'
+            .col-xs-4
+              = f.text_field :change_prohibition_period, autofocus: true, class: "form-control"
+
+          .form-group
+            = f.label :lockout_setting, class: 'col-xs-4 form-control-static'
+            .col-xs-4
+              = f.text_field :lockout_setting, autofocus: true, class: "form-control"
+
+          .form-group
+            = f.label :time_elapsed, class: 'col-xs-4 form-control-static'
+            .col-xs-4
+              = f.text_field :time_elapsed, autofocus: true, class: "form-control"
+
+          div align="right"
+            = f.submit t(object.new_record? ? '.create' : '.update'), class: 'btn btn-primary'
+          br
+

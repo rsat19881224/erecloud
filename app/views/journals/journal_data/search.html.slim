@@ -1,0 +1,65 @@
+= render :partial => 'shared/journals/stage'
+section.container.search_container
+  .row
+    = form_tag select_journals_dealing_choice_index_path, method: :get do
+      = submit_tag '戻る', name: :back, class: "btn btn-default col-xs-2 pull-right back-button"
+  = search_form_for @q, url: confirm_journals_journal_data_path, method: :get do |f|
+    .row
+      .col-xs-2
+        label = "仕訳日付"
+      .col-xs-10
+        = f.text_field :journalizing_slip_date_gteq, class: :inputCalendars, autocomplete: :off
+        span.margin_lr ～
+        = f.text_field :journalizing_slip_date_lteq, class: :inputCalendars, autocomplete: :off
+    .row
+      .col-xs-2
+        label = "債権種別"
+      .col-xs-10
+        = f.select :ebill_data_type_eq, Settings.enumerize_options.journals.data_type.receivable.map { |item| [t(item.name), item.id] }, :prompt => "指定なし"
+    .row
+      .col-xs-2
+        label = "てん末"
+      .col-xs-10
+        - Settings.enumerize_options.journals.facts.receivable.each do |fact|
+          label
+            = check_box_tag 'facts[id][]', fact[:id]
+            = label_tag t(fact[:name]), nil
+        = f.collection_select :ebill_receivable_state_own_state_id_eq, OwnState.where(company_id: current_user.company_id), :code, :name, {:prompt => "指定なし"}, {:disabled => true}
+
+    .row
+      .col-xs-2
+        label = "取引先"
+      .col-xs-10
+        = f.text_field :slip_detail_trader_code_gteq, autocomplete: :off
+        span.margin_lr ～
+        = f.text_field :slip_detail_trader_code_lteq, autocomplete: :off
+    .row
+      .col-xs-2
+        label = "自社取引銀行"
+      .col-xs-10
+        = f.text_field :ebill_receivable_state_trader_id_gteq, autocomplete: :off
+        span.margin_lr ～
+        = f.text_field :slip_detail_trader_code_lteq, autocomplete: :off
+
+    .row
+      .col-xs-2
+        label = "利用者情報"
+      .col-xs-10
+        = f.text_field :renew_user_id_gteq, autocomplete: :off
+        span.margin_lr ～
+        = f.text_field :renew_user_id_lteq, autocomplete: :off
+
+    .row
+      .col-xs-2
+        label = "出力区分"
+      .col-xs-10
+        / TODO: 未作成のransackタグを作成
+        = f.label :exported, '未出力'
+        = f.radio_button :exported_eq, 0, checked: true
+        = f.label :exported, '出力済'
+        = f.radio_button :exported_eq, 1
+
+    .row
+      actions.col-xs-12
+        = submit_tag 'キャンセル', id: 'cancel', type: 'button', class: 'btn btn-primary col-xs-2'
+        = f.submit '次へ', class: 'btn btn-primary col-xs-2 col-xs-offset-1'

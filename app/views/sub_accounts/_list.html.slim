@@ -1,0 +1,36 @@
+table.table.table-striped#sub_account_table
+  tbody
+    tr
+      th = SubAccount.human_attribute_name(:accounts_id) 
+      th = SubAccount.human_attribute_name(:code)
+      th = SubAccount.human_attribute_name(:name)
+      th = SubAccount.human_attribute_name(:kana)
+      th = SubAccount.human_attribute_name(:tax_division_id)
+      th = SubAccount.human_attribute_name(:tax_rate_id)
+      th = SubAccount.human_attribute_name(:round)
+      th = SubAccount.human_attribute_name(:business_division_id)
+      th
+      th
+
+    - accounts.each do |object|
+      - tax_displays = Settings.enumerize_options.sub_account.tax_displays.find {|at| at.id == object.tax_display }
+      tr class=('deleted' if object.deleted?)
+        td(width='100px') = object.account_id ? Account.find_by_id(object.account_id).name : t('general.list.none')
+        td(width='100px') = object.code
+        td(width='100px') = object.name
+        td(width='100px') = object.kana
+        td(width='100px') = object.tax_division_id ? TaxDivision.find_by_id(object.tax_division_id).name : t('general.list.none')
+        td(width='100px') = object.tax_rate_id ? TaxRate.find_by_id(object.tax_rate_id).name : t('general.list.none')
+        td(width='100px') = t(tax_displays[:name], scope: 'enumerize.sub_account.tax_display')
+        td(width='100px') = object.business_division_id ? BusinessDivision.find_by_id(object.business_division_id).name : t('general.list.none')
+
+        td(width='80px' align='center')
+          = link_to t('general.label.edit'), polymorphic_path([@company, object], pickup_param.merge(action: :edit))
+        td
+          - unless object.deleted?
+            = link_to t('general.label.delete'), polymorphic_path([@company, object], pickup_param), :method => :delete, :data => {:confirm => t('general.message.confirm_delete')}
+          - else
+            = t('general.label.deleted')
+
+div class='box-footer clearfix'
+  = paginate objects, remote: true

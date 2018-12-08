@@ -1,0 +1,20 @@
+table.table.table-striped#operating_item_table
+  tbody
+    tr
+      th = Account.human_attribute_name(:code)
+      th = Account.human_attribute_name(:name)
+      th = Account.human_attribute_name(:department_input)
+      - @analysis_division.each do |div|
+        th = AnalysisDivision.human_attribute_name(:division_no) + div.division_no.to_s
+      th 
+
+  - @account.each do |object|
+    - department_inputs = Settings.enumerize_options.account.department_inputs.find {|at| at.id == object.department_input }
+
+    tr 
+      td(width="100px") = object.code 
+      td(width="160px") = object.name
+      td(width='100px') = t(department_inputs[:name], scope: 'enumerize.account.department_input')
+      - @analysis_division.each do |div|
+        td(width="100px") =  t(eval("object.analysis#{div.division_no}_input") ? 'use' : 'no_use', scope: 'operating_divisions.index.use_option')
+      td(width="60px" align="center") = link_to t('general.label.edit'), polymorphic_path([object], pickup_param.merge(action: :edit))

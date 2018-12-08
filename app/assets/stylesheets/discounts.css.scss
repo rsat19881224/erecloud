@@ -1,0 +1,26 @@
+.search_container .row {
+  margin-bottom: 20px;
+}
+
+.margin_lr {
+  margin: 0 10px;
+}
+.result_container {
+  margin-top: 20px;
+}
+.result_container .row div[class*="col-"] {
+  border: 1px solid #ddd;
+  padding: 1px 4px;
+  margin: 0px;
+  height: 30px;
+}
+.result_container actions {
+  margin-top: 20px;
+}
+
+.financial-institutions {
+  margin: 20px 0 10px 0;
+}
+.discount-date {
+  margin: 20px 0 10px 0;
+}

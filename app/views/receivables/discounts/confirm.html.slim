@@ -1,0 +1,84 @@
+= render :partial => 'shared/receivables/stage'
+section.container
+  = form_tag select_receivables_discounts_path do
+    .row
+      = submit_tag '戻る', name: :back, class: "btn btn-default col-xs-2 pull-right back-button"
+
+  div
+    .financial-institutions
+      .row
+        .col-xs-2
+          label = '記録機関'
+        .col-xs-10
+          = @search_institution_bank[:recording_institution]
+      .row
+        .col-xs-2
+          label = '自社取引銀行'
+        .col-xs-2
+          = "#{@search_institution_bank[:bank][0]}:#{@search_institution_bank[:bank][1]}"
+        .col-xs-2
+          = "#{@search_institution_bank[:bank][2]}:#{@search_institution_bank[:bank][3]}"
+        .col-xs-6
+          = "#{@search_institution_bank[:bank][4]}:#{@search_institution_bank[:bank][5]} #{@search_institution_bank[:bank][6]}#{@search_institution_bank[:bank][7]}"
+    .row
+      .col-xs-2
+        label = '合計件数'
+      .col-xs-2
+        = "#{@receivable_searches.size}件"
+      .col-xs-2
+        label = '合計金額'
+      .col-xs-6
+        = "#{number_to_currency(total_amount = @receivable_searches.inject(0) { |sum, r| sum + r.residual_money }, unit: '', precision: 0)}円"
+    .row
+      .col-xs-2
+        label = '割引料合計'
+      .col-xs-2
+        = "#{number_with_delimiter(total_charge = @input_params[:discount_charge].map(&:to_i).inject(:+))}円"
+      .col-xs-2
+        label = '手数料合計'
+      .col-xs-2
+        = "#{number_with_delimiter(total_fee = @input_params[:bank_transfer_fee].map(&:to_i).inject(:+))}円"
+      .col-xs-2
+        label = '差引入金額'
+      .col-xs-2
+        = "#{number_to_currency(total_amount - (total_charge + total_fee), unit: '', precision: 0)}円"
+    .discount-date
+      .row
+        .col-xs-2
+          label = '割引申込日'
+        .col-xs-10
+          = Date.parse(@input_params[:requested_on]).strftime("%Y年 %m月 %d日")
+      .row
+        .col-xs-2
+          label = '割引日(割引希望日)'
+        .col-xs-10
+          = Date.parse(@input_params[:transferred_on]).strftime("%Y年 %m月 %d日")
+    .result_container
+      .row
+        = form_tag update_all_receivables_discounts_path do
+          .row.text-center
+            .col-xs-1 No
+            .col-xs-2 記録番号
+            .col-xs-1 支払期日
+            .col-xs-2 割引金額
+            .col-xs-2 請求先
+            .col-xs-1 発生日
+            .col-xs-2 割引料
+            .col-xs-1 手数料
+
+          - @receivable_searches.each_with_index do |r, i|
+            .row
+              = hidden_field_tag "discount[#{r.id}][]", @input_params[:discount_charge][i]
+              = hidden_field_tag "discount[#{r.id}][]", @input_params[:bank_transfer_fee][i]
+              = hidden_field_tag "discount[#{r.id}][]", amount_money = r.try(:residual_money).to_i - @input_params[:discount_charge][i].to_i - @input_params[:bank_transfer_fee][i].to_i
+              .col-xs-1.text-center = "No#{i+1}"
+              .col-xs-2 = r.recording_number
+              .col-xs-1 = r.try(:matured_on).try(:strftime, "%Y-%m-%d")
+              .col-xs-2.text-right = number_with_delimiter(amount_money)
+              .col-xs-2 = r.trader.try(:abbreviation)
+              .col-xs-1 = r.try(:occurred_on).try(:strftime, "%Y-%m-%d")
+              .col-xs-2.text-right = number_with_delimiter(@input_params[:discount_charge][i])
+              .col-xs-1.text-right = number_with_delimiter(@input_params[:bank_transfer_fee][i])
+          .row
+            actions.col-xs-12
+              = submit_tag '一括更新', class: 'btn btn-primary col-xs-2 col-xs-offset-10'

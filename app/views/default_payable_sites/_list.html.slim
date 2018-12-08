@@ -1,0 +1,14 @@
+table.table.table-hover#default_payable_site_table
+  tr
+    th = localize_attr(:contract_credit_category)
+    th = localize_attr(:site_designation_method)
+    th = 'サイト日数'
+  - if sites.present?
+    - sites.each do |site|
+      tr
+        td(width='200px') = localize_option(:contract_credit_category, site.contract_credit_category)
+        td(width='200px') = localize_option(:site_designation_method, site.site_designation_method)
+        td(width='240px') = site_date_to_s(site)
+  - else
+    tr
+      td colspan=3 = 'サイトが設定されていません。'

@@ -1,0 +1,43 @@
+table.table.table-striped
+  tbody
+    tr
+      th = Product.human_attribute_name(:code)
+      th = Product.human_attribute_name(:name)
+      th = Product.human_attribute_name(:bill_credit_used)
+      th = Product.human_attribute_name(:bill_debit_used)
+      th = Product.human_attribute_name(:ebill_credit_used)
+      th = Product.human_attribute_name(:ebill_debit_used)
+      th = Product.human_attribute_name(:factoring_credit_used)
+      th = Product.human_attribute_name(:factoring_debit_used)
+      th = Product.human_attribute_name(:account_receivable_used)
+      th = Product.human_attribute_name(:account_payable_used)
+      th = Product.human_attribute_name(:print_option_used)
+      th = Product.human_attribute_name(:extended)
+      th
+      th
+
+    - objects.each do |object|
+      tr class=('deleted' if object.deleted?)
+        td(width='120px') = object.code
+        td(width='120px') = object.name
+        td(width='120px' class='check_used') = t("admin.products.use_or_no_use.#{object.bill_credit_used ? 'use' : 'no_use'}")
+        td(width='120px' class='check_used') = t("admin.products.use_or_no_use.#{object.bill_debit_used ? 'use' : 'no_use'}")
+        td(width='120px' class='check_used') = t("admin.products.use_or_no_use.#{object.ebill_credit_used ? 'use' : 'no_use'}")
+        td(width='120px' class='check_used') = t("admin.products.use_or_no_use.#{object.ebill_debit_used ? 'use' : 'no_use'}")
+        td(width='120px' class='check_used') = t("admin.products.use_or_no_use.#{object.factoring_credit_used ? 'use' : 'no_use'}")
+        td(width='120px' class='check_used') = t("admin.products.use_or_no_use.#{object.factoring_debit_used ? 'use' : 'no_use'}")
+        td(width='120px' class='check_used') = t("admin.products.use_or_no_use.#{object.account_receivable_used ? 'use' : 'no_use'}") 
+        td(width='120px' class='check_used') = t("admin.products.use_or_no_use.#{object.account_payable_used ? 'use' : 'no_use'}")
+        td(width='120px' class='check_used') = t("admin.products.use_or_no_use.#{object.print_option_used ? 'use' : 'no_use'}")
+        td(width='120px' class='check_used') = t("admin.products.use_or_no_use.#{object.extended ? 'use' : 'no_use'}")
+
+        td(width='60px' align='center')
+          = link_to t('general.label.edit'), polymorphic_path([:admin, object], pickup_param.merge(action: :edit))
+        td
+          - unless object.deleted?
+            = link_to t('general.label.delete'), polymorphic_path([:admin, object], pickup_param), :method => :delete, :data => {:confirm => t('general.message.confirm_delete')}
+          - else
+            = t('general.label.deleted')
+
+div class='box-footer clearfix'
+  = paginate objects, remote: true

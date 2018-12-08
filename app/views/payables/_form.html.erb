@@ -1,0 +1,18 @@
+<div class="row"><div class="col-md-6">
+<div class="box box-primary"><div class="box-body">
+
+<%= form_for(object, url: polymorphic_path([object]), method: (object.new_record? ? :post : :put)) do |f| %>
+  <%= render :partial => "shared/errors", :locals => {:errors => object.errors} -%>
+
+  <div class="form-group">
+    <%= f.label :control_number %><br />
+    <%= f.text_field :control_number, autofocus: true, class: "form-control" %>
+  </div>
+
+  <div><%= f.submit t(object.new_record? ? '.create' : '.update'), class: 'btn btn-primary' %></div>
+<% end %><br />
+
+<%= link_to t('.back'), polymorphic_path([object.class.name.constantize]) %>
+
+</div></div>
+</div></div>

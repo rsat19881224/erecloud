@@ -1,0 +1,12 @@
+<%=
+if params.has_key? :content_title
+    params[:content_title]
+elsif I18n.exists? "titles.#{params[:controller].gsub('/', '.')}.#{params[:action]}"
+  t("titles.#{params[:controller].gsub('/', '.')}.#{params[:action]}")
+elsif I18n.exists? "titles.#{params[:controller].gsub('/', '.')}"
+  title = t("titles.#{params[:controller].gsub('/', '.')}")
+  title.instance_of?(Hash) ? t("titles.#{params[:controller].gsub('/', '.')}.default") : title
+else
+  t('site-name') + "(" + "titles.#{params[:controller].gsub('/', '.')}" + ")"
+end
+-%>

@@ -1,0 +1,1 @@
+$('#sub_account_table').html("<%= j(render partial: 'list', locals: {objects: instance_variable_get("@#{params[:controller].split('/').last}"),accounts: accounts, pickup_param: pickup_param, params_id: params_id}) %>")

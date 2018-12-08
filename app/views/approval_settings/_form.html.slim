@@ -1,0 +1,31 @@
+.row
+  .col-md-6 
+    div class='box box-primary'
+      .box-body
+        = form_for(object, url: polymorphic_path([object]), :html => {:class => "form-horizontal"}, method: (object.new_record? ? :post : :put)) do |f|
+          = render partial: 'shared/errors', locals: {errors: object.errors}
+          
+          div align="right"
+            = link_to t('.back'), polymorphic_path([object.class.name.constantize])
+          br
+
+          .form-group
+            = f.label :name, Menu.human_attribute_name(:name), class: 'col-xs-3 form-control-static'
+            .col-xs-4
+              = f.text_field :menu_id, value: object.menu.name, readonly: true, class: 'form-control'
+      
+          .form-group
+            = f.label :approval_type, class: 'col-xs-3 form-control-static'
+            .col-xs-4
+              = f.select :approval_type, ApprovalSetting.approval_type.options, {selected: object.approval_type}, autofocus: true, class: 'form-control'
+
+          .form-group
+            = f.label :one_phase_approval_skiped, class: 'col-xs-3 form-control-static'
+            .col-xs-9
+              = f.radio_button :one_phase_approval_skiped, true
+              = t('approval_settings.one_phase_approval_skiped.skip')
+              = f.radio_button :one_phase_approval_skiped, false
+              = t('approval_settings.one_phase_approval_skiped.no_skip')
+
+          div align="right"
+            = f.submit t(object.new_record? ? '.create' : '.update'), class: 'btn btn-primary'

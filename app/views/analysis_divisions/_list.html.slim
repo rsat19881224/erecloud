@@ -1,0 +1,22 @@
+table.table.table-striped#operating_item_table
+  tbody
+    tr
+      th = AnalysisDivision.human_attribute_name(:division_no)
+      th = AnalysisDivision.human_attribute_name(:used)
+      th = AnalysisDivision.human_attribute_name(:name)
+      th = AnalysisDivision.human_attribute_name(:abbreviation)
+      th = AnalysisDivision.human_attribute_name(:input_division)
+      th
+
+  - objects.each_with_index do |object,i|
+    tr 
+      td(width="160px") = AnalysisDivision.human_attribute_name(:division_no) + object.division_no.to_s
+      td(width="100px") = t("analysis_divisions.used.#{object.used ? 'use' : 'no_use'}")
+      td(width="100px") = object.name 
+      td(width="250px") = object.abbreviation 
+      td(width="200px") = object.human_input_division 
+      
+      td(width="60px" align="center") = link_to t('general.label.edit'), polymorphic_path([object], pickup_param.merge(action: :edit)) 
+
+div.box-footer.clearfix
+  = paginate objects, remote: true

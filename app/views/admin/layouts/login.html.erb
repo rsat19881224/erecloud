@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html class="bg-black">
+<head>
+  <title><%= t('admin.title') %></title>
+  <%= stylesheet_link_tag  'admin/application' %>
+  <%= javascript_include_tag 'admin/plain.js' %>
+  <%= csrf_meta_tags %>
+</head>
+<body class="bg-black">
+
+<%= yield %>
+
+</body>
+</html>

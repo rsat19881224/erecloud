@@ -1,0 +1,38 @@
+<div class="row"><div class="col-md-6">
+<div class="box box-primary"><div class="box-body">
+
+<%= form_for(object, url: polymorphic_path([:admin, object]), method: (object.new_record? ? :post : :put)) do |f| %>
+  <%= render :partial => "shared/errors", :locals => {:errors => object.errors} -%>
+
+  <div class="form-group">
+    <%= f.label :name %><br />
+    <%= f.text_field :name, autofocus: true, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :person_name_in_charge %><br />
+    <%= f.text_field :person_name_in_charge, autofocus: true, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :telephone_number %><br />
+    <%= f.text_field :telephone_number, autocomplete: "off", class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autocomplete: "off", class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :description %><br />
+    <%= f.text_area :description, autocomplete: "off", class: "form-control" %>
+  </div>
+
+  <div><%= f.submit t(object.new_record? ? '.create' : '.update'), class: 'btn btn-primary' %></div>
+<% end %><br />
+
+<%= link_to t('.back'), polymorphic_path([:admin, object.class.name.constantize]) %>
+
+</div></div>
+</div></div>

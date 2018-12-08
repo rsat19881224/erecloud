@@ -1,0 +1,33 @@
+- unless local_assigns.has_key? :modalid
+  - modalid = 'search_branch_modal_form'
+
+- unless local_assigns.has_key? :resultid
+  - resultid = 'search_branch_modal_result'
+
+.modal.fade id=(modalid)
+  .modal-dialog
+    .modal-content
+      .modal-header
+        h4(class='modal-title') = t('search_modal_titles.branch')
+        / マスタ用はcontroller_nameが呼ばれる
+        / 外部呼び出し時はtarget_controller_nameを指定してあげる
+        = search_form_for @branch_q, url: polymorphic_path([target_controller_name || controller_name, 'search_branch']), class: 'form-horizontal', remote: true do |f|
+          .form-group
+            = f.label :code, Branch.human_attribute_name(:code), class: 'col-sm-2 control-label'
+            .col-sm-10
+              = f.search_field :code_cont, class: 'form-control'
+          .form-group
+            = f.label :name, Branch.human_attribute_name(:name), class: 'col-sm-2 control-label'
+            .col-sm-10
+              = f.search_field :name_cont, class: 'form-control'
+          .form-group
+            = f.label :kana, Branch.human_attribute_name(:kana), class: 'col-sm-2 control-label'
+            .col-sm-10
+              = f.search_field :kana_cont, class: 'form-control'
+          .form-group
+            .col-sm-offset-2.col-sm-9
+              = f.submit t('general.label.search'), class: 'btn btn-primary'
+      .modal-body id=(resultid)
+        = render partial: 'shared/branches/search_result', locals: {modalid: resultid}
+      .modal-footer
+        button(type='button' class='btn btn-default' data-dismiss='modal') = t('general.label.close')

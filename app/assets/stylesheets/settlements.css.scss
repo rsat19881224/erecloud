@@ -1,0 +1,58 @@
+// Place all the styles related to the receivable::settlements controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.search_container .row {
+  margin-bottom: 20px;
+}
+.mr20 {
+  margin-right: 20px;
+}
+.margin_lr {
+  margin: 0 10px;
+}
+.container.search_container {
+  margin-top: 40px;
+}
+
+.result_container {
+  margin-top: 20px;
+}
+.result_container actions {
+  margin-top: 20px;
+}
+
+.result_container .row .header-height div {
+  height: 30px;
+}
+.result_container .row div[class*="vertical-middle"] {
+  padding-top: 10px;
+}
+.result_container .row .header .column-division {
+  padding-top: 0px;
+}
+
+.result_container .row div[class*="col-"] {
+  border: 1px solid #ddd;
+  padding: 1px 4px;
+  margin: 0px;
+  height: 45px;
+}
+.result_container .row [class*="col-"] .row {
+  margin: -2px -5px 0 -5px;
+}
+
+.result_container .row .header div {
+  padding-top: 10px;
+}
+.result_container .row .header div[class*="two-lines"],
+.result_container .row .header div[class*="row"] {
+  padding-top: 1px;
+}
+.result_container .row div[class*="two-lines-child"] {
+  padding-left: 4px;
+}
+
+.aggregate_label {
+  padding-right: 0px;
+}
+

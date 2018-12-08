@@ -1,0 +1,8 @@
+.col-xs-12
+  .box
+    .box-header
+      .box-tools
+        = render :partial => "shared/page_entries_info", :locals => {:entries => instance_variable_get("@#{params[:controller].split('/').last}") }
+
+    div class="box-body table-responsive no-padding" id="#{params[:controller].split('/').last.singularize}-list"
+      = render :partial => lookup_context.exists?("list", params[:controller], true) ? "list" : "shared/list", :locals => {:objects => instance_variable_get("@#{params[:controller].split('/').last}"), :pickup_param => @pickup_param}

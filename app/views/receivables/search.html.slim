@@ -1,0 +1,134 @@
+= search_form_for @q, url: result_receivables_path, method: :get do |f|
+
+  section.container.search_container
+    div
+      .row
+        .col-xs-2
+          label = "集計期間"
+        .col-xs-2
+          = select_tag :period_type_1, options_for_select(Settings.enumerize_options.receivables.period_types.map{|h| [t(h.name), h.id]}, selected: 1)
+        .col-xs-8
+          = search_field_tag :period_1_from, nil, disabled: true, class: :inputCalendars, autocomplete: :off
+          span.margin_lr ～
+          = search_field_tag :period_1_to, nil, disabled: true, class: :inputCalendars, autocomplete: :off
+      .row
+        .col-xs-2.col-xs-offset-2
+          =  select_tag :period_type_2, options_for_select(Settings.enumerize_options.receivables.period_types.map{|h| [t(h.name), h.id]}, selected: 1)
+        .col-xs-8
+          = search_field_tag :period_2_from, nil, disabled: true, class: :inputCalendars, autocomplete: :off
+          span.margin_lr ～
+          = search_field_tag :period_2_to, nil, disabled: true, class: :inputCalendars, autocomplete: :off
+    div
+      .row
+        .col-xs-2
+          label = "集計範囲"
+        .col-xs-2
+          = f.label :traders_code
+        .col-xs-8
+          = f.search_field :trader_id_gteq
+          span.margin_lr ～
+          = f.search_field :trader_id_lteq
+      .row
+        .col-xs-2.col-xs-offset-2
+          = f.label :residual_money
+        .col-xs-8
+          = f.search_field :residual_money_gteq
+          span.margin_lr ～
+          = f.search_field :residual_money_lteq
+      .row
+        .col-xs-2.col-xs-offset-2
+          = f.label :company_banks_code
+        .col-xs-8
+          = f.search_field :company_bank_id_gteq
+          span.margin_lr ～
+          = f.search_field :company_bank_id_eq
+      .row
+        .col-xs-2
+          label = "名称指定"
+        .col-xs-2
+          = select_tag :name_specified, options_for_select(Settings.enumerize_options.receivables.name_specified.map{|h| [t(h.name), h.id]}, selected: 1)
+        .col-xs-8
+          = search_field_tag :name_specified_words
+    div.mb20
+      .row.title_row
+        .col-xs-12
+          = check_box_tag :facts_check
+          = label_tag :facts_check, "てん末を指定する"
+      div#particulars-specified
+        .row
+          .col-xs-3.col-xs-offset-2
+            - StateCode.where(division: 1, ebill: ['発生', '譲渡', '割引', '決済', '取消']).order(:code).each do |state|
+              label
+                - if state.ebill == '決済'
+                  = check_box_tag('q[state_code_id_eq_any][]', state.code, false, {disabled: true})
+                - else
+                  = check_box_tag('q[state_code_id_eq_any][]', state.code)
+                = label_tag state.ebill, nil, class: 'mr15'
+
+          .col-xs-7
+            label
+              = check_box_tag('q[state_code_id_eq_any][]', 40 )
+              = label_tag '自社てん末', nil, class: 'mr15'
+              = select_tag :their_particulars, options_for_select(['指定なし'])
+
+        .row
+          .col-xs-2.col-xs-offset-2
+            = f.label :transfer_date
+          .col-xs-8
+            = search_field_tag :transfer_date_from, nil, class: :inputCalendars, autocomplete: :off
+            span.margin_lr ～
+            = search_field_tag :transfer_date_to, nil, class: :inputCalendars, autocomplete: :off
+        .row
+          .col-xs-2.col-xs-offset-2
+            = f.label :discount_date
+          .col-xs-8
+            = search_field_tag :discount_date_from, nil, class: :inputCalendars, autocomplete: :off
+            span.margin_lr ～
+            = search_field_tag :discount_date_to, nil, class: :inputCalendars,autocomplete: :off
+        .row
+          .col-xs-2.col-xs-offset-2
+            = f.label :transferee_code
+          .col-xs-8
+            = search_field_tag :transferee_trader_id_from
+            span.margin_lr ～
+            = search_field_tag :transferee_trader_id_to
+        .row
+          .col-xs-2.col-xs-offset-2
+            = f.label :transferee_name
+          .col-xs-8
+            = search_field_tag :transferee_name
+    div.mb20
+      .row.title_row
+        .col-xs-12
+          = check_box_tag :recording_institutions_check
+          = label_tag :recording_institutions_check, "記録機関を指定する"
+      div#recording-institutions-specified
+        .row
+          .col-xs-2.col-xs-offset-2
+            label = "記録機関"
+          .col-xs-8
+            =  f.collection_select :recording_institution_id_eq, RecordingInstitution.all, :code, :name, prompt: "記録機関を選んでください"
+        .row
+          .col-xs-2.col-xs-offset-2
+            = f.label :recording_institution_code
+          .col-xs-8
+            = f.search_field :recording_number_gteq
+            span.margin_lr ～
+            = f.search_field :recording_number_lteq
+        .row
+          .col-xs-2.col-xs-offset-2
+            = f.label :acquisition_division
+          .col-xs-2
+            label
+              = check_box_tag('q[acquisition_division_eq_any][]', 1 )
+              = label_tag '債務者請求方式'
+          .col-xs-6
+            label
+              = check_box_tag('q[acquisition_division_eq_any][]', 2 )
+              = label_tag '債権者請求方式'
+
+    div
+      .row
+       actions.col-xs-12
+        = submit_tag 'キャンセル', type: 'reset', class: 'btn btn-primary col-xs-2'
+        = f.submit '次へ', class: 'btn btn-primary col-xs-2 col-xs-offset-1'

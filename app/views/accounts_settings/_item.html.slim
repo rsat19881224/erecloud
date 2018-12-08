@@ -1,0 +1,38 @@
+.row
+  .col-md-6 
+    div class='box box-primary'
+      .box-body
+      
+      div align="left"
+        =button_link_to t('general.label.edit'), edit_accounts_setting_path
+      br
+
+      - @accounts_setting.tap do |item|
+        - %w(endorsement_ac_used discount_ac_used).each do |attr|
+          .form-group
+            = AccountsSetting.human_attribute_name(attr)
+            br
+            = t("accounts_settings.#{attr}.#{item.read_attribute(attr) ? 'use' : 'not_use'}")
+
+        .form-group
+          = AccountsSetting.human_attribute_name(:abridgment_method)
+          br
+          = t("accounts_settings.abridgment_method.#{item.abridgment_method}")
+
+        -  %w(remarks1_reflected remarks2_reflected remarks3_reflected).each do |attr|
+          .form-group
+            = AccountsSetting.human_attribute_name(attr)
+            br
+            = t("accounts_settings.#{attr}.#{item.read_attribute(attr) ? 'display' : 'not_display'}")
+
+        .form-group
+          = AccountsSetting.human_attribute_name(:payment_type)
+          br
+          = t("accounts_settings.payment_type.#{item.payment_type}")
+
+        - %w(notice_journal_made).each do |attr|
+          .form-group
+            = AccountsSetting.human_attribute_name(attr)
+            br
+            = t("accounts_settings.#{attr}.#{item.read_attribute(attr) ? 'use' : 'not_use'}")
+          br

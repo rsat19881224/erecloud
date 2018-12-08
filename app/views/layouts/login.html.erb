@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html class="bg-aqua">
+<head>
+  <title><%= t('title') %></title>
+  <%= stylesheet_link_tag  'application' %>
+  <%= javascript_include_tag 'plain.js' %>
+  <%= csrf_meta_tags %>
+</head>
+<body class="bg-aqua">
+
+<%= yield %>
+
+</body>
+</html>

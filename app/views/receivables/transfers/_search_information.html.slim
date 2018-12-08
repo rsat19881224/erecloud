@@ -1,0 +1,32 @@
+.row
+  .col-xs-2
+    label = '記録機関'
+  .col-xs-10
+    = @recording_institution
+.row
+  .col-xs-2
+    label = '自社取引銀行'
+  .col-xs-2
+    = @own_bank[0..1].join()
+  .col-xs-1
+    = @own_bank[2..3].join('-')
+  .col-xs-7
+    = t("enumerize.account_type.#{@own_bank[4]}")
+    = @own_bank[5]
+.row
+  .col-xs-2
+    label = '譲渡先'
+  .col-xs-10
+    = @instance.trader.name
+.row
+  .col-xs-2.col-xs-offset-2
+    = @transferee_bank.try(:fetch, :bank_name, '')
+    = @transferee_bank.try(:fetch, :branch_name, '')
+  .col-xs-1
+    = @instance.trader.bank_code + '-' + @instance.trader.branch_code
+  .col-xs-2
+    - account_type_name =  Settings.enumerize_options.receivables.account_types.map{|item| item[:name] if item[:id] == 1 }.compact.first.split('.').pop()
+    = t("selects.account_type.#{account_type_name}") + @instance.trader.account_number
+  .col-xs-5
+    = '利用者番号'
+    = @instance.trader.user_number

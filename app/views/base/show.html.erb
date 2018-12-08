@@ -1,0 +1,1 @@
+<%= render :partial => "item", :locals => {:object => instance_variable_get("@#{params[:controller].split('/').last.singularize}")} -%>

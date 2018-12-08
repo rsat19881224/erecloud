@@ -1,0 +1,9 @@
+#trader_search
+  #trader_search_form_table
+    = search_form_for @trader_q, url: search_traders_path, remote: true, html: {id: ''}  do |f|
+      = render partial: 'search_form', locals: {f: f}
+  #trader_search_result_table
+    = render partial: 'search_result', locals: {traders: @traders, search_kind: search_kind}
+
+- if search_kind == 'site'
+  #trader_site_modal

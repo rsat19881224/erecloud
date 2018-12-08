@@ -1,0 +1,142 @@
+#company_bank_id(data-company-bank-id="#{@company_bank.id}")
+
+.company-bank-button-group(align='right')
+  = link_to self.model.model_name.human + '一覧ヘ戻る', polymorphic_path(model), class: 'btn btn-primary'
+
+= form_for object, url: polymorphic_path([object]), method: (object.new_record? ? :post : :put) do |f|
+  = render :partial => "shared/errors", :locals => {:errors => object.errors}
+
+  .company-bank-content-group
+    table
+      tbody
+        tr
+          th.table-title(colspan=2)
+            = f.label '自社取引銀行設定'
+
+        tr
+          th
+            = f.label :code
+          td
+            = f.text_field :code, maxlength: 10, autofocus: true
+
+        tr
+          th
+            = f.label :name
+          td
+            = f.text_field :name, maxlength: 50, autofocus: true
+
+        tr
+          th
+            = f.label '銀行情報'
+          td
+            .fi-code
+              = f.label :bank_code
+              = f.text_field :bank_code, maxlength: 4, autofocus: true
+            .fi-name
+              = f.label :bank_name
+              = f.text_field :bank_name, autofocus: true
+            .fi-kana
+              = f.label :bank_kana
+              = f.text_field :bank_kana, autofocus: true
+
+        tr
+          th
+            = f.label '銀行支店情報'
+          td
+            .fi-code
+              = f.label :branch_code
+              = f.text_field :branch_code, maxlength: 3, autofocus: true
+            .fi-name
+              = f.label :branch_name
+              = f.text_field :branch_name, autofocus: true
+            .fi-kana
+              = f.label :branch_kana
+              = f.text_field :branch_kana, autofocus: true
+
+        tr
+          th
+            = f.label :account_type
+          td
+            - account_types = Settings.enumerize_options.company_bank.account_types
+            - account_types.each do |at|
+              label.radio-inline(id="account_type_#{at.id}")
+                - checked = (!object.new_record? && object.account_type == at.id) ? true : false
+                = f.radio_button :account_type, at.id, checked: checked, autofocus: true
+                = f.label t(at.name)
+
+        tr
+          th
+            = f.label :account_number
+          td
+            = f.text_field :account_number, maxlength: 7, autofocus: true
+
+        tr
+          th
+            = f.label :account_name_kana
+          td
+            = f.text_field :account_name_kana, autofocus: true
+
+        tr
+          th
+            = f.label :limit_discount_money
+          td
+            = f.number_field :limit_discount_money, maxlength: 11, autofocus: true
+
+    table
+      tbody
+        tr
+          th.table-title(colspan=2)
+            = f.label '自社取引銀行設定'
+
+        tr
+          th
+            = f.label :densai_user_number
+          td
+            = f.text_field :densai_user_number, maxlength: 9, autofocus: true
+
+        tr
+          th
+            = f.label :jemco_user_number
+          td
+            = f.text_field :jemco_user_number, maxlength: 7, autofocus: true
+
+        tr
+          th
+            = f.label :jemco_discount_financial_institution_user_number
+          td
+            = f.text_field :jemco_discount_financial_institution_user_number, maxlength: 7, autofocus: true
+
+        tr
+          th
+            = f.label :jemoco_is_indicate_present_guarantee
+          td
+            - true_checked = false; false_checked = false
+            - unless object.new_record?
+              - true_checked  =  object.jemoco_is_indicate_present_guarantee
+              - false_checked = !object.jemoco_is_indicate_present_guarantee
+            label.radio-inline#jemoco_is_indicate_present_guarantee_true
+              = f.radio_button :jemoco_is_indicate_present_guarantee, true, checked: true_checked, autofocus: true
+              = f.label '表示する'
+            label.radio-inline#jemoco_is_indicate_present_guarantee_false
+              = f.radio_button :jemoco_is_indicate_present_guarantee, false, checked: false_checked, autofocus: false
+              = f.label '表示しない'
+
+        tr
+          th
+            = f.label :mizuho_user_number
+          td
+            = f.text_field :mizuho_user_number, maxlength: 9, autofocus: true
+
+        tr
+          th
+            = f.label :smbc_user_number
+          td
+            = f.text_field :smbc_user_number, maxlength: 9, autofocus: true
+
+  .company-bank-button-group(align='right')
+    - cancel_button_id = object.new_record? ? 'company_bank_new_cancel' : 'company_bank_edit_cancel'
+    = f.button t(object.new_record? ? '.create' : '.update'), type: 'submit', class: 'btn btn-primary'
+    = f.button t('general.label.cancel')                    , type: 'button', class: 'btn btn-primary', id: cancel_button_id
+
+//= render partial: 'shared/banks/search_form'
+//= render partial: 'shared/branches/search_form'
